@@ -34,3 +34,6 @@ froiden-verify/
 resources/views/sections/custom_script.blade.php/
 demo_db_copy.sql
 database/maxmind/
+package.json
+composer.lock
+package-lock.json
