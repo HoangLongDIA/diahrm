@@ -191,7 +191,7 @@ class EmployeeController extends AccountBaseController
             $user->salutation = $request->salutation;
             $user->country_phonecode = $request->country_phonecode;
             $user->gender = $request->gender;
-            $user->locale = $request->locale;
+            $user->locale = $request->getLocale();
             $user->folk = $request->folk;
 
             $user->religion = $request->religion;
@@ -372,9 +372,9 @@ class EmployeeController extends AccountBaseController
         abort_403(!in_array('admin', user_roles()) && in_array('admin', $userRoles));
 
         abort_403(!($this->editPermission == 'all'
-            || ($this->editPermission == 'added' && $this->employee->employeeDetail->added_by == user()->id)
-            || ($this->editPermission == 'owned' && $this->employee->id == user()->id)
-            || ($this->editPermission == 'both' && ($this->employee->id == user()->id || $this->employee->employeeDetail->added_by == user()->id))
+            || ($this->editPermission == 'added' && $this->employee->employeeDetail->added_by == user()->getId())
+            || ($this->editPermission == 'owned' && $this->employee->id == user()->getId())
+            || ($this->editPermission == 'both' && ($this->employee->id == user()->getId() || $this->employee->employeeDetail->added_by == user()->getId()))
         ));
 
         $this->pageTitle = __('app.update') . ' ' . __('app.employee');
@@ -439,7 +439,7 @@ class EmployeeController extends AccountBaseController
         $user->salutation = $request->salutation;
         $user->country_phonecode = $request->country_phonecode;
         $user->gender = $request->gender;
-        $user->locale = $request->locale;
+        $user->locale = $request->getLocale();
 
         if ($request->status) {
             $lastDate = $request->last_date ? Carbon::createFromFormat($this->company->date_format, $request->last_date, $this->company->timezone) : null;
@@ -454,7 +454,7 @@ class EmployeeController extends AccountBaseController
             }
         }
 
-        if ($id != user()->id) {
+        if ($id != user()->getId()) {
             $user->login = $request->login;
         }
 
@@ -543,7 +543,7 @@ class EmployeeController extends AccountBaseController
             $employee->updateCustomFieldData($request->custom_fields_data);
         }
 
-        if (user()->id == $user->id) {
+        if (user()->getId() == $user->id) {
             session(['user' => $user]);
         }
 
@@ -559,7 +559,7 @@ class EmployeeController extends AccountBaseController
         $user = User::withoutGlobalScope(ActiveScope::class)->findOrFail($id);
         $this->deletePermission = user()->permission('delete_employees');
 
-        abort_403(!($this->deletePermission == 'all' || ($this->deletePermission == 'added' && $user->employeeDetail->added_by == user()->id)));
+        abort_403(!($this->deletePermission == 'all' || ($this->deletePermission == 'added' && $user->employeeDetail->added_by == user()->getId())));
 
 
         if ($user->hasRole('admin') && !in_array('admin', user_roles())) {
@@ -610,9 +610,9 @@ class EmployeeController extends AccountBaseController
 
         if (
             $this->viewPermission == 'all'
-            || ($this->viewPermission == 'added' && $this->employee->employeeDetail->added_by == user()->id)
-            || ($this->viewPermission == 'owned' && $this->employee->employeeDetail->user_id == user()->id)
-            || ($this->viewPermission == 'both' && ($this->employee->employeeDetail->user_id == user()->id || $this->employee->employeeDetail->added_by == user()->id))
+            || ($this->viewPermission == 'added' && $this->employee->employeeDetail->added_by == user()->getId())
+            || ($this->viewPermission == 'owned' && $this->employee->employeeDetail->user_id == user()->getId())
+            || ($this->viewPermission == 'both' && ($this->employee->employeeDetail->user_id == user()->getId() || $this->employee->employeeDetail->added_by == user()->getId()))
         ) {
 
             if ($tab == '') {  // Works for profile
@@ -834,18 +834,18 @@ class EmployeeController extends AccountBaseController
         $appreciations->join('awards', 'awards.id', '=', 'appreciations.award_id');
 
         if ($viewAppreciationPermission == 'added') {
-            $appreciations->where('appreciations.added_by', user()->id);
+            $appreciations->where('appreciations.added_by', user()->getId());
         }
 
         if ($viewAppreciationPermission == 'owned') {
-            $appreciations->where('appreciations.award_to', user()->id);
+            $appreciations->where('appreciations.award_to', user()->getId());
         }
 
         if ($viewAppreciationPermission == 'both') {
             $appreciations->where(function ($q) {
-                $q->where('appreciations.added_by', '=', user()->id);
+                $q->where('appreciations.added_by', '=', user()->getId());
 
-                $q->orWhere('appreciations.award_to', '=', user()->id);
+                $q->orWhere('appreciations.award_to', '=', user()->getId());
             });
         }
 
@@ -953,11 +953,11 @@ class EmployeeController extends AccountBaseController
         if (!empty($emails)) {
             foreach ($emails as $email) {
                 $invite = new UserInvitation();
-                $invite->user_id = user()->id;
+                $invite->user_id = user()->getId();
                 $invite->email = $email->value;
                 $invite->message = $request->message;
                 $invite->invitation_type = 'email';
-                $invite->invitation_code = sha1(time() . user()->id);
+                $invite->invitation_code = sha1(time() . user()->getId());
                 $invite->save();
             }
         }
@@ -973,9 +973,9 @@ class EmployeeController extends AccountBaseController
     public function createLink(CreateInviteLinkRequest $request)
     {
         $invite = new UserInvitation();
-        $invite->user_id = user()->id;
+        $invite->user_id = user()->getId();
         $invite->invitation_type = 'link';
-        $invite->invitation_code = sha1(time() . user()->id);
+        $invite->invitation_code = sha1(time() . user()->getId());
         $invite->email_restriction = (($request->allow_email == 'selected') ? $request->email_domain : null);
         $invite->save();
 
