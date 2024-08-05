@@ -24,7 +24,7 @@ $addDesignationPermission = user()->permission('add_designation');
 
 
                             </div>
-                            <div class="col-lg-2 col-md-3">
+                            <div class="col-lg-1 col-md-2">
                                 <x-forms.select fieldId="salutation" fieldName="salutation"
                                     :fieldLabel="__('modules.client.salutation')">
                                     <option value="">--</option>
@@ -33,7 +33,7 @@ $addDesignationPermission = user()->permission('add_designation');
                                     @endforeach
                                 </x-forms.select>
                             </div>
-                            <div class="col-lg-3 col-md-6">
+                            <div class="col-lg-4 col-md-7">
                                 <x-forms.text fieldId="name" :fieldLabel="__('modules.employees.employeeName')"
                                     fieldName="name" fieldRequired="true" :fieldPlaceholder="__('placeholders.name')">
                                 </x-forms.text>
