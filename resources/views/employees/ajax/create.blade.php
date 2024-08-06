@@ -35,7 +35,7 @@ $addDesignationPermission = user()->permission('add_designation');
                             </div>
                             <div class="col-lg-4 col-md-7">
                                 <x-forms.text fieldId="name" :fieldLabel="__('modules.employees.employeeName')"
-                                    fieldName="name" fieldRequired="true" :fieldPlaceholder="__('placeholders.name')">
+                                    fieldName="name" fieldRequired="true" >
                                 </x-forms.text>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -145,7 +145,7 @@ $addDesignationPermission = user()->permission('add_designation');
                             <option value="others">@lang('app.others')</option>
                         </x-forms.select>--}}
                         <x-forms.text fieldId="email" :fieldLabel="__('modules.employees.employeeEmail')"
-                                      fieldName="email" fieldRequired="true" :fieldPlaceholder="__('placeholders.email')">
+                                      fieldName="email" fieldRequired="true" >
                         </x-forms.text>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -382,7 +382,7 @@ $addDesignationPermission = user()->permission('add_designation');
 
                     <div class="col-md-12">
                         <x-forms.text fieldId="tags" :fieldLabel="__('app.skills')" fieldName="tags"
-                            :fieldPlaceholder="__('placeholders.skills')" />
+                            />
                     </div>
 
                     @if (function_exists('sms_setting') && sms_setting()->telegram_status)
@@ -441,9 +441,7 @@ $addDesignationPermission = user()->permission('add_designation');
                             fieldName="contract_end_date" :fieldPlaceholder="__('placeholders.date')"/>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
-                       chau
-                    </div>
+
 
                     <div class="col-lg-3 col-md-6 d-none marriage_date">
                         <x-forms.datepicker fieldId="marriage_anniversary_date" :fieldLabel="__('modules.employees.marriageAnniversaryDate')"
