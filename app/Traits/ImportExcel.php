@@ -47,7 +47,8 @@ trait ImportExcel
             $this->importMatchedColumns = $importMatchedColumns;
         }
 
-        $this->importSample = array_slice($excelData, 0, 5);
+        $this->importSample = $excelData;//array_slice($excelData, 0, 5);
+        //dd($this->importSample);
     }
 
     public function importJobProcess($request, $importClass, $importJobClass)
