@@ -14963,6 +14963,7 @@ label sup {
 }
 
 table h5 a {
+  font-family: sans-serif;
   color: #28313c;
 }
 table h5 a:hover {
@@ -15844,6 +15845,10 @@ input[type=number] {
     margin-top: 94px;
   }
 }
+.body {
+  font-family: Sans-Serif;
+}
+
 .login_section {
   min-height: calc(100vh - 56px);
 }
@@ -17162,6 +17167,7 @@ button.disabled, button:disabled {
 
 .f-13 {
   font-size: 13px;
+  font-family: Sans-Serif;
 }
 
 .f-14 {
