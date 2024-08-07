@@ -35,7 +35,9 @@
             <a class="d-none close-it" href="javascript:;" id="close-client-detail">
                 <i class="fa fa-times"></i>
             </a>
-
+            @if ($viewHRDashboard == 'all' && (in_array('employees', user_modules()) || in_array('leaves', user_modules()) || in_array('attendance', user_modules())))
+                <x-tab :href="route('dashboard.advanced').'?tab=hr'" :text="__('app.menu.hr')" class="hr" ajax="false"/>
+            @endif
             @if ($viewOverviewDashboard == 'all')
                 <x-tab :href="route('dashboard.advanced').'?tab=overview'" :text="__('modules.projects.overview')"
                        class="overview" ajax="false"/>
@@ -51,19 +53,17 @@
                        ajax="false"/>
             @endif
 
-            @if ($viewHRDashboard == 'all' && (in_array('employees', user_modules()) || in_array('leaves', user_modules()) || in_array('attendance', user_modules())))
-                <x-tab :href="route('dashboard.advanced').'?tab=hr'" :text="__('app.menu.hr')" class="hr" ajax="false"/>
-            @endif
 
-            @if (in_array('tickets', user_modules()) && $viewTicketDashboard == 'all')
+
+            {{--@if (in_array('tickets', user_modules()) && $viewTicketDashboard == 'all')
                 <x-tab :href="route('dashboard.advanced').'?tab=ticket'" :text="__('app.menu.ticket')" class="ticket"
                        ajax="false"/>
-            @endif
+            @endif--}}
 
-            @if ($viewFinanceDashboard == 'all' && (in_array('invoices', user_modules()) || in_array('estimates', user_modules()) || in_array('leads', user_modules())))
+            {{--@if ($viewFinanceDashboard == 'all' && (in_array('invoices', user_modules()) || in_array('estimates', user_modules()) || in_array('leads', user_modules())))
                 <x-tab :href="route('dashboard.advanced').'?tab=finance'" :text="__('app.menu.finance')" class="finance"
                        ajax="false"/>
-            @endif
+            @endif--}}
 
         </div>
 

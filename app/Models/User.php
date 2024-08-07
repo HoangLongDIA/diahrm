@@ -206,28 +206,28 @@ use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
  * @method static Builder|User whereTelegramUserId($value)
  * @method static Builder|User whereTrialEndsAt($value)
  * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
- * @property-read Collection<int, \App\Models\VisaDetail> $visa
- * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
- * @property-read Collection<int, \App\Models\VisaDetail> $visa
- * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
- * @property-read Collection<int, \App\Models\VisaDetail> $visa
- * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
- * @property-read Collection<int, \App\Models\VisaDetail> $visa
- * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
- * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa11
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs1
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa1
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs2
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa2
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs3
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa3
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs4
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa4
  * @property int|null $country_phonecode
  * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup
  * @property-read int|null $agent_group_count
  * @property-read mixed $mobile_with_phone_code
- * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
- * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs5
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa5
  * @method static Builder|User whereCountryPhonecode($value)
- * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup
+ * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup1
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs7
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa6
+ * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup2
  * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
- * @property-read Collection<int, \App\Models\VisaDetail> $visa
- * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup
- * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
- * @property-read Collection<int, \App\Models\VisaDetail> $visa
+ * @property-read Collection<int, \App\Models\VisaDetail> $visa7
  * @mixin \Eloquent
  */
 class User extends BaseModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
@@ -287,14 +287,14 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     {
         $gravatarHash = !is_null($this->email) ? md5(strtolower(trim($this->email))) : md5($this->id);
 
-        return ($this->image) ? asset_url_local_s3('avatar/' . $this->image) : 'https://www.gravatar.com/avatar/' . $gravatarHash . '.png?s=200&d=mp';
+        return ($this->image) ? asset_url_local_s3('avatar/' . $this->image) : asset('img/avatar.png');
     }
 
     public function maskedImageUrl(): Attribute
     {
         return Attribute::make(
             get: function () {
-                return ($this->image) ? $this->generateMaskedImageAppUrl('avatar/' . $this->image) : 'https://www.gravatar.com/avatar/' . md5($this->id) . '.png?s=200&d=mp';
+                return ($this->image) ? $this->generateMaskedImageAppUrl('avatar/' . $this->image) : asset('img/avatar.png');
             },
         );
 

@@ -4,10 +4,12 @@
         $universal = \Nwidart\Modules\Facades\Module::find('UniversalBundle');
         $plugins = \Froiden\Envato\Functions\EnvatoUpdate::plugins();
         $versionArray = [];
+        if($plugins = null){
+             foreach ($plugins as $value) {
+               $versionArray[$value['envato_id']] = $value['version'];
+             }
+        }
 
-      foreach ($plugins as $value) {
-           $versionArray[$value['envato_id']] = $value['version'];
-      }
 
       $version = $versionArray;
     @endphp

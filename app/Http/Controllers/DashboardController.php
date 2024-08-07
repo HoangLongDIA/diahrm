@@ -131,10 +131,18 @@ class DashboardController extends AccountBaseController
             case 'finance':
                 $this->financeDashboard();
                 break;
+            case 'overview':
+                $this->overviewDashboard();
+                break;
             default:
-                if (in_array('admin', user_roles()) || $this->sidebarUserPermissions['view_overview_dashboard'] == 4) {
+                /*if (in_array('admin', user_roles()) || $this->sidebarUserPermissions['view_overview_dashboard'] == 4) {
                     $this->activeTab = $tab ?: 'overview';
                     $this->overviewDashboard();
+
+                }*/
+                if ($this->sidebarUserPermissions['view_hr_dashboard'] == 4) {
+                    $this->activeTab = $tab ?: 'hr';
+                    $this->hrDashboard();
 
                 }
                 elseif ($this->sidebarUserPermissions['view_project_dashboard'] == 4) {
@@ -147,9 +155,9 @@ class DashboardController extends AccountBaseController
                     $this->clientDashboard();
 
                 }
-                elseif ($this->sidebarUserPermissions['view_hr_dashboard'] == 4) {
-                    $this->activeTab = $tab ?: 'hr';
-                    $this->hrDashboard();
+                elseif (in_array('admin', user_roles()) || $this->sidebarUserPermissions['view_overview_dashboard'] == 4) {
+                    $this->activeTab = $tab ?: 'overview';
+                    $this->overviewDashboard();
 
                 }
                 elseif ($this->sidebarUserPermissions['view_finance_dashboard'] == 4) {
@@ -191,11 +199,11 @@ class DashboardController extends AccountBaseController
         $this->weekEndDate = $this->weekStartDate->copy()->addDays(7);
         $this->weekPeriod = CarbonPeriod::create($this->weekStartDate, $this->weekStartDate->copy()->addDays(6)); // Get All Dates from start to end date
 
-        $this->dateWiseTimelogs = ProjectTimeLog::dateWiseTimelogs($timelogDate->toDateString(), user()->id);
-        $this->dateWiseTimelogBreak = ProjectTimeLogBreak::dateWiseTimelogBreak($timelogDate->toDateString(), user()->id);
+        $this->dateWiseTimelogs = ProjectTimeLog::dateWiseTimelogs($timelogDate->toDateString(), user()->getId());
+        $this->dateWiseTimelogBreak = ProjectTimeLogBreak::dateWiseTimelogBreak($timelogDate->toDateString(), user()->getId());
 
-        $this->weekWiseTimelogs = ProjectTimeLog::weekWiseTimelogs($this->weekStartDate->copy()->toDateString(), $this->weekEndDate->copy()->toDateString(), user()->id);
-        $this->weekWiseTimelogBreak = ProjectTimeLogBreak::weekWiseTimelogBreak($this->weekStartDate->toDateString(), $this->weekEndDate->toDateString(), user()->id);
+        $this->weekWiseTimelogs = ProjectTimeLog::weekWiseTimelogs($this->weekStartDate->copy()->toDateString(), $this->weekEndDate->copy()->toDateString(), user()->getId());
+        $this->weekWiseTimelogBreak = ProjectTimeLogBreak::weekWiseTimelogBreak($this->weekStartDate->toDateString(), $this->weekEndDate->toDateString(), user()->getId());
 
         $html = view('dashboard.employee.week_timelog', $this->data)->render();
 
@@ -205,7 +213,7 @@ class DashboardController extends AccountBaseController
     public function privateCalendar()
     {
         if (request()->filter) {
-            $employee_details = EmployeeDetails::where('user_id', user()->id)->first();
+            $employee_details = EmployeeDetails::where('user_id', user()->getId())->first();
             $employee_details->calendar_view = (request()->filter != false) ? request()->filter : null;
             $employee_details->save();
             session()->forget('user');
@@ -227,9 +235,9 @@ class DashboardController extends AccountBaseController
 
                 $model->where(function ($query) {
                     $query->whereHas('attendee', function ($query) {
-                        $query->where('user_id', user()->id);
+                        $query->where('user_id', user()->getId());
                     });
-                    $query->orWhere('added_by', user()->id);
+                    $query->orWhere('added_by', user()->getId());
                 });
 
                 $model->whereBetween('start_date_time', [$startDate->toDateString(), $endDate->toDateString()]);
@@ -257,7 +265,7 @@ class DashboardController extends AccountBaseController
                 // $holidays = Holiday::whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])->get();
                 $holidays = Holiday::whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
                     ->where(function ($query) use ($user) {
-                        $query->where('added_by', $user->id)
+                        $query->where('added_by', $user->getId())
                             ->orWhere(function ($subquery) use ($user) {
                                 $subquery->where(function ($q) use ($user) {
                                     $q->where('department_id_json', 'like', '%"' . $user->employeeDetails->department_id . '"%')
@@ -297,7 +305,7 @@ class DashboardController extends AccountBaseController
                 $tasks = Task::with('boardColumn')
                     ->where('board_column_id', '<>', $completedTaskColumn->id)
                     ->whereHas('users', function ($query) {
-                        $query->where('user_id', user()->id);
+                        $query->where('user_id', user()->getId());
                     })
                     ->where(function ($q) use ($startDate, $endDate) {
                         $q->whereBetween(DB::raw('DATE(tasks.`due_date`)'), [$startDate->toDateString(), $endDate->toDateString()]);
@@ -322,7 +330,7 @@ class DashboardController extends AccountBaseController
 
             if (in_array('tickets', $calendar_filter_array)) {
                 // tickets
-                $tickets = Ticket::where('user_id', user()->id)
+                $tickets = Ticket::where('user_id', user()->getId())
                     ->whereBetween(DB::raw('DATE(tickets.`updated_at`)'), [$startDate->toDateTimeString(), $endDate->endOfDay()->toDateTimeString()])->get();
 
                 foreach ($tickets as $key => $ticket) {

@@ -21,8 +21,12 @@
                 <span class="text-light-green position-absolute f-8 user-online"
                       title="@lang('modules.client.online')"><i class="fa fa-circle"></i></span>
             @endif
-            <img src="{{ $user->image_url }}" class="mr-2 taskEmployeeImg rounded-circle"
-                 alt="{{ $user->name }}" title="{{ $user->name }}">
+
+            @if($user->image_url)
+                    <img src="{{ $user->image_url }}" class="mr-2 taskEmployeeImg rounded-circle"
+                         alt="{{ $user->name }}" title="{{ $user->name }}">
+            @endif
+
         </a>
         <div class="media-body {{$user->status}} text-truncate">
 
