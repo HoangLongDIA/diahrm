@@ -205,7 +205,7 @@ use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
  * @method static Builder|User whereStripeId($value)
  * @method static Builder|User whereTelegramUserId($value)
  * @method static Builder|User whereTrialEndsAt($value)
- * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs111
  * @property-read Collection<int, \App\Models\VisaDetail> $visa11
  * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs1
  * @property-read Collection<int, \App\Models\VisaDetail> $visa1
@@ -226,7 +226,7 @@ use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
  * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs7
  * @property-read Collection<int, \App\Models\VisaDetail> $visa6
  * @property-read Collection<int, \App\Models\TicketGroup> $agentGroup2
- * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs
+ * @property-read Collection<int, \App\Models\ProjectTimeLog> $timeLogs222
  * @property-read Collection<int, \App\Models\VisaDetail> $visa7
  * @mixin \Eloquent
  */
@@ -556,7 +556,14 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     {
         return $this->hasMany(EmployeeDocument::class, 'user_id');
     }
-
+    public function exactName() :string
+    {
+        return $this->name;
+    }
+    public function exactUserid()
+    {
+        return $this->id;
+    }
     public function clientDocuments(): HasMany
     {
         return $this->hasMany(ClientDocument::class, 'user_id');

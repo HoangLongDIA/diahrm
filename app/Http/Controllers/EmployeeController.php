@@ -66,8 +66,7 @@ class EmployeeController extends AccountBaseController
 
             return $next($request);
         });
-        //$test11 = $this->employees;
-       // $test22=$test11;
+
     }
 
     /**

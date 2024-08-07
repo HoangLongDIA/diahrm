@@ -164,9 +164,9 @@
                         @lang('app.addEmployee')
                     </x-forms.link-primary>
 
-                    <x-forms.button-secondary class="mr-3 invite-member mb-2 mb-lg-0" icon="plus">
+                   {{-- <x-forms.button-secondary class="mr-3 invite-member mb-2 mb-lg-0" icon="plus">
                         @lang('app.inviteEmployee')
-                    </x-forms.button-secondary>
+                    </x-forms.button-secondary>--}}
                 @endif
 
                 @if ($addEmployeePermission == 'all')

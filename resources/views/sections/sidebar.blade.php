@@ -21,7 +21,7 @@
                         <div class="mb-0 position-relative pro-name">
                             <span class="bg-light-green rounded-circle"></span>
                             <p class="f-13 text-lightest mb-0" data-placement="bottom" data-toggle="tooltip"
-                                data-original-title="{{ user()->name }}">{{ user()->name }}</p>
+                                data-original-title="{{ user()->exactName() }}">{{ user()->exactName() }}</p>
                         </div>
                     </div>
                     <!-- SIDEBAR BRAND NAME END -->
@@ -50,15 +50,15 @@
             <div class="dropdown-menu dropdown-menu-right sidebar-brand-dropdown ml-3"
                 aria-labelledby="dropdownMenuLink" tabindex="0">
                 <div class="d-flex justify-content-between align-items-center profile-box">
-                    <a @if(!in_array('client', user_roles())) href="{{ route('employees.show', user()->id) }}" @endif >
+                    <a @if(!in_array('client', user_roles())) href="{{ route('employees.show', user()->exactUserid()) }}" @endif >
                             <div class="profileInfo d-flex align-items-center mr-1 flex-wrap">
                                 <div class="profileImg mr-2">
                                     <img class="h-100" src="{{ $user->image_url }}"
-                                        alt="{{ user()->name }}">
+                                        alt="{{ user()->exactName() }}">
                                 </div>
                                 <div class="ProfileData">
                                     <h3 class="f-15 f-w-500 text-dark" data-placement="bottom" data-toggle="tooltip"
-                                        data-original-title="{{ user()->name }}">{{ user()->name }}</h3>
+                                        data-original-title="{{ user()->exactName() }}">{{ user()->exactName() }}</h3>
                                     <p class="mb-0 f-12 text-dark-grey">{{ user()->employeeDetail->designation->name ?? '' }}</p>
                                 </div>
                         </div>
