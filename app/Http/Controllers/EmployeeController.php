@@ -371,9 +371,9 @@ class EmployeeController extends AccountBaseController
         abort_403(!in_array('admin', user_roles()) && in_array('admin', $userRoles));
 
         abort_403(!($this->editPermission == 'all'
-            || ($this->editPermission == 'added' && $this->employee->employeeDetail->added_by == user()->getId())
-            || ($this->editPermission == 'owned' && $this->employee->id == user()->getId())
-            || ($this->editPermission == 'both' && ($this->employee->id == user()->getId() || $this->employee->employeeDetail->added_by == user()->getId()))
+            || ($this->editPermission == 'added' && $this->employee->employeeDetail->added_by == user()->exactUserid())
+            || ($this->editPermission == 'owned' && $this->employee->id == user()->exactUserid())
+            || ($this->editPermission == 'both' && ($this->employee->id == user()->exactUserid() || $this->employee->employeeDetail->added_by == user()->exactUserid()))
         ));
 
         $this->pageTitle = __('app.update') . ' ' . __('app.employee');
@@ -453,7 +453,7 @@ class EmployeeController extends AccountBaseController
             }
         }
 
-        if ($id != user()->getId()) {
+        if ($id != user()->exactUserid()) {
             $user->login = $request->login;
         }
 
@@ -542,7 +542,7 @@ class EmployeeController extends AccountBaseController
             $employee->updateCustomFieldData($request->custom_fields_data);
         }
 
-        if (user()->getId() == $user->id) {
+        if (user()->exactUserid() == $user->id) {
             session(['user' => $user]);
         }
 
@@ -558,7 +558,7 @@ class EmployeeController extends AccountBaseController
         $user = User::withoutGlobalScope(ActiveScope::class)->findOrFail($id);
         $this->deletePermission = user()->permission('delete_employees');
 
-        abort_403(!($this->deletePermission == 'all' || ($this->deletePermission == 'added' && $user->employeeDetail->added_by == user()->getId())));
+        abort_403(!($this->deletePermission == 'all' || ($this->deletePermission == 'added' && $user->employeeDetail->added_by == user()->exactUserid())));
 
 
         if ($user->hasRole('admin') && !in_array('admin', user_roles())) {
@@ -609,9 +609,9 @@ class EmployeeController extends AccountBaseController
 
         if (
             $this->viewPermission == 'all'
-            || ($this->viewPermission == 'added' && $this->employee->employeeDetail->added_by == user()->getId())
-            || ($this->viewPermission == 'owned' && $this->employee->employeeDetail->user_id == user()->getId())
-            || ($this->viewPermission == 'both' && ($this->employee->employeeDetail->user_id == user()->getId() || $this->employee->employeeDetail->added_by == user()->getId()))
+            || ($this->viewPermission == 'added' && $this->employee->employeeDetail->added_by == user()->exactUserid())
+            || ($this->viewPermission == 'owned' && $this->employee->employeeDetail->user_id == user()->exactUserid())
+            || ($this->viewPermission == 'both' && ($this->employee->employeeDetail->user_id == user()->exactUserid() || $this->employee->employeeDetail->added_by == user()->exactUserid()))
         ) {
 
             if ($tab == '') {  // Works for profile
@@ -833,18 +833,18 @@ class EmployeeController extends AccountBaseController
         $appreciations->join('awards', 'awards.id', '=', 'appreciations.award_id');
 
         if ($viewAppreciationPermission == 'added') {
-            $appreciations->where('appreciations.added_by', user()->getId());
+            $appreciations->where('appreciations.added_by', user()->exactUserid());
         }
 
         if ($viewAppreciationPermission == 'owned') {
-            $appreciations->where('appreciations.award_to', user()->getId());
+            $appreciations->where('appreciations.award_to', user()->exactUserid());
         }
 
         if ($viewAppreciationPermission == 'both') {
             $appreciations->where(function ($q) {
-                $q->where('appreciations.added_by', '=', user()->getId());
+                $q->where('appreciations.added_by', '=', user()->exactUserid());
 
-                $q->orWhere('appreciations.award_to', '=', user()->getId());
+                $q->orWhere('appreciations.award_to', '=', user()->exactUserid());
             });
         }
 
@@ -952,11 +952,11 @@ class EmployeeController extends AccountBaseController
         if (!empty($emails)) {
             foreach ($emails as $email) {
                 $invite = new UserInvitation();
-                $invite->user_id = user()->getId();
+                $invite->user_id = user()->exactUserid();
                 $invite->email = $email->value;
                 $invite->message = $request->message;
                 $invite->invitation_type = 'email';
-                $invite->invitation_code = sha1(time() . user()->getId());
+                $invite->invitation_code = sha1(time() . user()->exactUserid());
                 $invite->save();
             }
         }
@@ -972,9 +972,9 @@ class EmployeeController extends AccountBaseController
     public function createLink(CreateInviteLinkRequest $request)
     {
         $invite = new UserInvitation();
-        $invite->user_id = user()->getId();
+        $invite->user_id = user()->exactUserid();
         $invite->invitation_type = 'link';
-        $invite->invitation_code = sha1(time() . user()->getId());
+        $invite->invitation_code = sha1(time() . user()->exactUserid());
         $invite->email_restriction = (($request->allow_email == 'selected') ? $request->email_domain : null);
         $invite->save();
 
