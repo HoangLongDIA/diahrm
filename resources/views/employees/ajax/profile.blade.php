@@ -18,6 +18,10 @@
 </style>
 @php
 
+
+$employee = isset($employee) ? $employee : new \App\Models\EmployeeDetails();
+$viewPermission = isset($viewPermission) ? $viewPermission : false;
+
 $showFullProfile = false;
 $employeeDetail = $employee->employeeDetail;
 if ($viewPermission == 'all'
@@ -115,7 +119,7 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
                                         <span>
                                             <label class="f-11 text-dark-grey mb-12 text-capitalize"
                                                 for="usr">@lang('modules.employees.hoursLogged')</label>
-                                            <p class="mb-0 f-18 f-w-500">{{ $hoursLogged }}</p>
+                                           {{-- <p class="mb-0 f-18 f-w-500">{{ $hoursLogged ? $hoursLogged  : '' }}</p>--}}
                                         </span>
                                         <span>
                                             <label class="f-11 text-dark-grey mb-12 text-capitalize"
@@ -234,7 +238,7 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
 
                             @endif
                         </x-cards.data>
-                       
+
 
                     </div>
 
@@ -296,37 +300,47 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
                         @if ($showFullProfile)
                             <div class="row">
                                 @if (in_array('attendance', user_modules()))
-                                    <div class="col-xl-6 col-sm-12 mb-4">
-                                        <x-cards.widget :title="__('modules.dashboard.lateAttendanceMark')"
-                                            :value="$lateAttendance" :info="__('modules.dashboard.thisMonth')"
-                                            icon="map-marker-alt" />
-                                    </div>
+                                    @if(isset($lateAttendance))
+                                        <div class="col-xl-6 col-sm-12 mb-4">
+                                            <x-cards.widget :title="__('modules.dashboard.lateAttendanceMark')"
+                                                :value="$lateAttendance" :info="__('modules.dashboard.thisMonth')"
+                                                icon="map-marker-alt" />
+                                        </div>
+                                    @endif
                                 @endif
                                 @if (in_array('leaves', user_modules()))
-                                    <div class="col-xl-6 col-sm-12 mb-4">
-                                        <x-cards.widget :title="__('modules.dashboard.leavesTaken')" :value="$leavesTaken"
-                                            :info="__('modules.dashboard.thisMonth')" icon="sign-out-alt" />
-                                    </div>
+                                    @if(isset($leavesTaken))
+                                        <div class="col-xl-6 col-sm-12 mb-4">
+                                            <x-cards.widget :title="__('modules.dashboard.leavesTaken')" :value="$leavesTaken"
+                                                :info="__('modules.dashboard.thisMonth')" icon="sign-out-alt" />
+                                        </div>
+                                        @endif
                                 @endif
                             </div>
                             <div class="row">
                                 @if (in_array('tasks', user_modules()))
-                                    <div class="col-md-12 mb-4">
-                                        <x-cards.data :title="__('app.menu.tasks')" padding="false">
-                                            <x-pie-chart id="task-chart" :labels="$taskChart['labels']"
-                                                :values="$taskChart['values']" :colors="$taskChart['colors']" height="250"
-                                                width="300" />
-                                        </x-cards.data>
-                                    </div>
+                                    @if(isset($taskChart))
+                                        <div class="col-md-12 mb-4">
+
+                                                <x-cards.data :title="__('app.menu.tasks')" padding="false">
+                                                    <x-pie-chart id="task-chart" :labels="$taskChart['labels']"
+                                                                 :values="$taskChart['values']" :colors="$taskChart['colors']" height="250"
+                                                                 width="300" />
+                                            </x-cards.data>
+                                        </div>
+                                    @endif
                                 @endif
                                 @if (in_array('tickets', user_modules()))
-                                    <div class="col-md-12 mb-4">
-                                        <x-cards.data :title="__('app.menu.tickets')" padding="false">
-                                            <x-pie-chart id="ticket-chart" :labels="$ticketChart['labels']"
-                                                :values="$ticketChart['values']" :colors="$ticketChart['colors']"
-                                                height="250" width="300" />
-                                        </x-cards.data>
-                                    </div>
+                                    @if(isset($ticketChart))
+                                            <div class="col-md-12 mb-4">
+                                                <x-cards.data :title="__('app.menu.tickets')" padding="false">
+                                                    <x-pie-chart id="ticket-chart" :labels="$ticketChart['labels']"
+                                                                 :values="$ticketChart['values']" :colors="$ticketChart['colors']"
+                                                                 height="250" width="300" />
+                                                </x-cards.data>
+                                            </div>
+                                    @endif
+
                                 @endif
                             </div>
                         @endif

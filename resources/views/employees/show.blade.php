@@ -146,7 +146,7 @@ if ($viewPermission == 'all'
         @include($view)
     </div>
 @endsection
-hhhheeeeeeeeeeelloss
+
 @push('scripts')
     <script>
         $("body").on("click", ".project-menu .ajax-tab", function(event) {
@@ -262,5 +262,5 @@ hhhheeeeeeeeeeelloss
                  More btn in projects menu End
         *******************************************************/
     </script>
-     
+
 @endpush

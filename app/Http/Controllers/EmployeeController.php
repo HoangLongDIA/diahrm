@@ -680,8 +680,8 @@ class EmployeeController extends AccountBaseController
             abort_403(($viewDocumentPermission == 'none'));
             $this->view = 'employees.ajax.documents';
             break;
-        case 'emergency-contacts1':
-            $this->view = 'employees.ajax.emergency-contacts1';
+        case 'emergency-contacts':
+            $this->view = 'employees.ajax.emergency-contacts';
             break;
         case 'training':
             $viewPermission = user()->permission('view_employee_training');
@@ -701,20 +701,8 @@ class EmployeeController extends AccountBaseController
             $this->view = 'employees.ajax.appreciations';
             break;
         case 'leaves-quota':
-            $this->employeeLeavesQuotas = $this->employee->leaveTypes;
-
-            $hasLeaveQuotas = false;
-            $totalLeaves = 0;
-
-            foreach ($this->employeeLeavesQuotas as $key => $leavesQuota) {
-                if (($leavesQuota->leaveType->leaveTypeCondition($leavesQuota->leaveType, $this->employee))) {
-                    $hasLeaveQuotas = true;
-                    $totalLeaves += $leavesQuota->leaves_remaining;
-                }
-            }
-
-            $this->hasLeaveQuotas = $hasLeaveQuotas;
-            $this->allowedLeaves = $totalLeaves;
+            //$this->hasLeaveQuotas = $hasLeaveQuotas;
+            //$this->allowedLeaves = $totalLeaves;
             $this->view = 'employees.ajax.leaves_quota';
             break;
         case 'shifts':
@@ -896,6 +884,21 @@ class EmployeeController extends AccountBaseController
         $dataTable = new TasksDataTable();
 
         return $dataTable->render('employees.show', $this->data);
+    }
+
+    public function bhxh()
+    {
+        $viewPermission = user()->permission('view_leaves_taken');
+        abort_403(!in_array($viewPermission, ['all']));
+
+        $tab = request('tab');
+        $this->activeTab = $tab ?: 'profile';
+        $this->leaveTypes = LeaveType::all();
+        $this->view = 'employees.ajax.leaves_quota';
+
+
+
+
     }
 
     public function leaves()

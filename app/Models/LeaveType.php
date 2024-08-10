@@ -190,7 +190,7 @@ class LeaveType extends BaseModel
             )
             && (
                 !is_null($leave->department)
-                && in_array($user->employeeDetail->department->id, json_decode($leave->department))
+                && in_array(isset($user->employeeDetail->department->id) ? $user->employeeDetail->department->id : 1 , json_decode($leave->department))
             )
             && (
                 !is_null($leave->designation)
