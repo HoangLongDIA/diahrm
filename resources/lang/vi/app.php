@@ -22,6 +22,7 @@ return [
   'dragAndDrop' => 'Kéo thả',
   'restructure' => 'tái cơ cấu',
   'name' => 'Tên',
+    'SoBHXH'=>'Số BHXH',
   'email' => 'E-mail',
   'slack' => 'chùng xuống',
   'pushNotification' => 'Thông báo đẩy',

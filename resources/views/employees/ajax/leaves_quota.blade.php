@@ -11,7 +11,7 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
         <!-- Add Task Export Buttons Start -->
         <div class="d-flex justify-content-between action-bar mb-3">
             <x-forms.link-primary
-                class="mr-3 float-left emergency-contacts-btn"
+                class="mr-3 float-left emergency-contacts-btn bhxh-btn"
                 link="javascript:;"
                 icon="plus">
                 @lang('app.createNew')
@@ -32,23 +32,57 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
                     <table class="table table-bordered" id="example">
                         <thead class="">
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>Relationship</th>
-                            <th class="text-right"></th>
+                            <th>Số BHXH</th>
+                            <th>Tháng Bắt Đầu</th>
+                            <th>Năm bắt Đầu</th>
+                            <th>Số Thẻ</th>
+
+                            <th>MadkyKCB</th>
+                            <th>Từ </th>
+                            <th>Đến </th>
+                            <th>Thời gian BHTN</th>
+
+                            <th>Từ Tháng</th>
+                            <th>Năm </th>
+                            <th>Phụ cấp Khu vực</th>
+
+
+                            <th>Mã số TNCN</th>
+                            <th>Số người PT</th>
+                            <th></th>
+                            <th></th>
+
+
                         </tr>
                         </thead>
-                        <tbody><tr class="tableRow1">
-                            <td>Test</td>
-                            <td>Test@gmail.com</td>
-                            <td>111111</td>
-                            <td>Test</td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-primary">Edit information</button>
-                                <button type="button" class="btn btn-danger">Remove</button>
-                            </td>
-                        </tr>
+                        <tbody>
+                        @foreach($insurances as $item)
+                            <tr class="tableRow1">
+                                <td>Số BHXH</td>
+                                <td>Tháng Bắt Đầu</td>
+                                <td>Năm bắt Đầu</td>
+                                <td>Số Thẻ</td>
+
+                                <td>MadkyKCB</td>
+                                <td>NbdTheYT</td>
+                                <td>NktTheYT</td>
+                                <td>TgiaBHTN</td>
+
+                                <td>ThgBdBHTN</td>
+                                <td>NBdBHTN</td>
+                                <td>PCKVBHXH</td>
+                                <td>MSTtncn</td>
+                                <td>SoNgPgPt</td>
+                                <td class="text-right"><button type="button" class="btn btn-success">Xem Quá Trình</button></td>
+
+
+                                <td class="text-left">
+                                    <button type="button" class="btn btn-primary">Edit </button>
+                                    <button type="button" class="btn btn-danger">Remove</button>
+                                </td>
+                            </tr>
+                        @endforeach
+
                         </tbody>
                     </table>
                 </div>
@@ -59,8 +93,8 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
 </div>
 
 <script>
-    $('body').on('click', '.emergency-contacts-btn', function () {
-        var url = "{{ route('emergency-contacts.create') }}?user_id=" + "{{ $employee->id }}";
+    $('body').on('click', '.bhxh-btn', function () {
+        var url = "{{ route('insurances.create') }}?user_id=" + "{{ $employee->id }}";
 
         $(MODAL_LG + ' ' + MODAL_HEADING).html('...');
         $.ajaxModal(MODAL_LG, url);

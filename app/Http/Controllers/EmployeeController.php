@@ -703,6 +703,9 @@ class EmployeeController extends AccountBaseController
         case 'leaves-quota':
             //$this->hasLeaveQuotas = $hasLeaveQuotas;
             //$this->allowedLeaves = $totalLeaves;
+
+            $this->insurances = DB::table('user_insurances')->where('user_id', $id)->get();
+            //dd($this->insurances);
             $this->view = 'employees.ajax.leaves_quota';
             break;
         case 'shifts':

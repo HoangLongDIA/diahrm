@@ -23,6 +23,7 @@ return array(
     'dragAndDrop' => 'Drag & Drop',
     'restructure' => 'restructure',
     'name' => 'Name',
+    'SoBHXH' => 'BHXH Number',
     'email' => 'Email',
     'slack' => 'Slack',
     'pushNotification' => 'Push Notification',

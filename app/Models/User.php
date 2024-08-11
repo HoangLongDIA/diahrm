@@ -199,6 +199,8 @@ use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
  * @property-read int|null $time_logs_count
  * @property-read Collection<int, \App\Models\VisaDetail> $visa
  * @property-read int|null $visa_count
+ * @property-read  Collection<int, \App\Models\Insurances $insurances
+ * @property-read int|null $insurance_count
  * @method static Builder|User onlyEmployee()
  * @method static Builder|User wherePmLastFour($value)
  * @method static Builder|User wherePmType($value)
@@ -572,6 +574,10 @@ class User extends BaseModel implements AuthenticatableContract, AuthorizableCon
     public function visa(): HasMany
     {
         return $this->hasMany(VisaDetail::class, 'user_id');
+    }
+    public function insurances(): HasMany
+    {
+        return $this->hasMany(Insurances::class);
     }
 
     public function timeLogs(): HasMany

@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
   'dashboard' => [
     'totalClients' => 'Tổng số khách hàng',
@@ -2013,6 +2013,9 @@ return [
     'editEmergencyContact' => 'Chỉnh sửa liên hệ khẩn cấp',
     'addNewEmergencyContact' => 'Thêm liên hệ khẩn cấp mới',
   ],
+    'insurances'=>array(
+        'addNewInsurance' => 'Thêm mới thông tin BHXH',
+    ),
   'invoiceExport' => 'Hóa đơn',
   'taskShortCode' => 'Mã ngắn',
   'taskCode' => 'Mã số',

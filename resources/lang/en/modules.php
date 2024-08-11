@@ -2018,6 +2018,9 @@ return array(
         'editEmergencyContact' => 'Edit Emergency Contact',
         'addNewEmergencyContact' => 'Add New Emergency Contact',
     ),
+    'insurances'=>array(
+        'addNewInsurance' => 'Add New Social Insurance',
+    ),
     'invoiceExport' => 'Invoice',
     'taskShortCode' => 'Short Code',
     'taskCode' => 'Code',

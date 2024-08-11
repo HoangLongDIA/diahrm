@@ -15953,7 +15953,7 @@ input[type=number] {
   font-weight: 400;
   position: relative;
   padding: 0px 6px 0px;
-  height: auto;
+  /*height: auto;*/
 }
 .form-control:focus, .form-control:hover {
   border-color: #28313C;

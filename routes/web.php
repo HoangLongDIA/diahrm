@@ -192,6 +192,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
     Route::resource('employee-visa', EmployeeVisaController::class);
 
     Route::resource('emergency-contacts', EmergencyContactController::class);
+    Route::get('insurances/add', [
+        \App\Http\Controllers\InsuranceController::class,
+        'create'
+    ])->name('insurances.create');
+    Route::post('insurances/add', [
+        \App\Http\Controllers\InsuranceController::class,
+        'store'
+    ])->name('insurances.store');
+
+
 
     Route::get('employee-docs/download/{id}', [EmployeeDocController::class, 'download'])->name('employee-docs.download');
     Route::resource('employee-docs', EmployeeDocController::class);
