@@ -10612,6 +10612,7 @@ h3 {
 
 .page-heading h2 {
   line-height: 1.17;
+  font-family: sans-serif;
 }
 
 .page-header-right {
@@ -17167,7 +17168,7 @@ button.disabled, button:disabled {
 
 .f-13 {
   font-size: 13px;
-  font-family: Sans-Serif;
+  font-family: sans-serif;
 }
 
 .f-14 {
@@ -17176,6 +17177,7 @@ button.disabled, button:disabled {
 
 .f-15 {
   font-size: 15px !important;
+  font-family: sans-serif;
 }
 
 .f-16 {
