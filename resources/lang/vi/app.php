@@ -15,7 +15,7 @@ return [
   'type' => 'Kiểu',
   'lateHalfday' => 'Nửa Ngày, Hiện Tại(Muộn)',
   'addNew' => 'Thêm mới',
-  'edit' => 'Biên tập',
+  'edit' => 'Chỉnh Sửa',
   'defaultStatus' => 'Trạng thái mặc định',
   'id' => 'Nhận dạng',
   'hierarchy' => 'Hệ thống cấp bậc',

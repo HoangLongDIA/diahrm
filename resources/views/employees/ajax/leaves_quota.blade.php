@@ -56,36 +56,61 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($insurances as $item)
-                            <tr class="tableRow1">
-                                <td>Số BHXH</td>
-                                <td>Tháng Bắt Đầu</td>
-                                <td>Năm bắt Đầu</td>
-                                <td>Số Thẻ</td>
+                            @foreach($insurances as $item)
+                                <tr class="tableRow1">
+                                    <td>{{ $item->SoBHXH }}</td>
+                                    <td>{{ $item->ThgBHXH }}</td>
+                                    <td>{{ $item->NmBHXH }}</td>
+                                    <td>{{ $item->SotheBHXH	 }}</td>
 
-                                <td>MadkyKCB</td>
-                                <td>NbdTheYT</td>
-                                <td>NktTheYT</td>
-                                <td>TgiaBHTN</td>
+                                    <td>{{ $item->MadkyKCB	 }}</td>
+                                    <td>{{ $item->NbdTheYT	 }}</td>
+                                    <td>{{ $item->NktTheYT	 }}</td>
+                                    <td>{{ $item->TgiaBHTN	 }}</td>
 
-                                <td>ThgBdBHTN</td>
-                                <td>NBdBHTN</td>
-                                <td>PCKVBHXH</td>
-                                <td>MSTtncn</td>
-                                <td>SoNgPgPt</td>
-                                <td class="text-right"><button type="button" class="btn btn-success">Xem Quá Trình</button></td>
+                                    <td>{{ $item->ThgBdBHTN	 }}</td>
+                                    <td>{{ $item->NBdBHTN	 }}</td>
+                                    <td>{{ $item->PCKVBHXH	 }}</td>
+                                    <td>{{ $item->MSTtncn	 }}</td>
+                                    <td>{{ $item->SoNgPgPt	 }}</td>
+                                    <td class="text-right"><button type="button" class="btn btn-info" style="height: 30px;font-size: small">Xem Quá Trình</button></td>
 
 
-                                <td class="text-left">
-                                    <button type="button" class="btn btn-primary">Edit </button>
-                                    <button type="button" class="btn btn-danger">Remove</button>
-                                </td>
-                            </tr>
-                        @endforeach
+                                    <td >
+                                        <div class="task_view">
+
+                                            <div class="dropdown">
+                                                <a class="task_view_more d-flex align-items-center justify-content-center dropdown-toggle" type="link"
+                                                   id="dropdownMenuLink-{{ $item->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="viewport">
+                                                    <i class="icon-options-vertical icons"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-' . $contact->id . '" tabindex="0">
+
+
+
+                                                    <a class="dropdown-item edit-insurance" href="javascript:;" data-contact-id="{{ $item->id }}">
+                                                        <i class="fa fa-edit mr-2"></i>
+                                                        @lang('app.edit')
+                                                    </a>
+
+                                                    <a class="dropdown-item delete-table-row" href="javascript:;" data-row-id="{{ $item->id }}">
+                                                        <i class="fa fa-trash mr-2"></i>
+                                                        @lang('app.delete')
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
 
                         </tbody>
                     </table>
                 </div>
+
+            </div>
+            <div class="card-footer pt-2">
+                   {{ $insurances->onEachSide(2)->links() }}
             </div>
         </div>
         <!-- Task Box End -->
@@ -95,6 +120,16 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
 <script>
     $('body').on('click', '.bhxh-btn', function () {
         var url = "{{ route('insurances.create') }}?user_id=" + "{{ $employee->id }}";
+
+        $(MODAL_LG + ' ' + MODAL_HEADING).html('...');
+        $.ajaxModal(MODAL_LG, url);
+    });
+    //Show Information of Insurances
+    $('body').on('click', '.edit-insurance', function() {
+        var id = $(this).data('contact-id');
+
+        var url = "{{ route('insurances.edit', ':id') }}";
+        url = url.replace(':id', id);
 
         $(MODAL_LG + ' ' + MODAL_HEADING).html('...');
         $.ajaxModal(MODAL_LG, url);

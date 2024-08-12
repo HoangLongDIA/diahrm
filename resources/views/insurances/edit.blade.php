@@ -15,7 +15,9 @@
                             <div class="col-md-3 col-sm-3">
                                 <x-forms.text fieldId="SoBHXH" :fieldLabel="__('app.SoBHXH')"
                                               fieldName="SoBHXH" fieldRequired="true"
-                                              :fieldPlaceholder="__('Số BHXH : 333338899')">
+                                              :fieldPlaceholder="__('Số BHXH : 333338899')"
+                                              :fieldValue="$insurance->SoBHXH"
+                                >
                                 </x-forms.text>
                             </div>
                             <div class="col-md-3 col-sm-3">
@@ -69,7 +71,7 @@
                             <div class="col-md-3 col-sm-3">
                                 <x-forms.text :fieldLabel="__('Thời gian BHTN')" fieldName="TgiaBHTN"
                                               fieldId="TgiaBHTN" :fieldPlaceholder="__('1 năm')"
-                                              />
+                                />
                             </div>
                             <div class="col-md-3 col-sm-3">
                                 <x-forms.select fieldId="ThgBdBHTN" fieldName="ThgBdBHTN"
@@ -126,29 +128,29 @@
             ...datepickerConfig
         });
 
-    $('#save-contact').click(function () {
-        /*const url = "{{ route('emergency-contacts.store') }}";*/
-        const url = "{{ route('insurances.store') }}";
+        $('#save-contact').click(function () {
+            /*const url = "{{ route('emergency-contacts.store') }}";*/
+            const url = "{{ route('insurances.store') }}";
 
-        $.easyAjax({
-            url: url,
-            container: '#save-insurance-form',
-            type: "POST",
-            disableButton: true,
-            buttonSelector: "#save-contact",
-            data: $('#save-insurance-form').serialize(),
-            success: function (response) {
-                if (response.message === 'ok') {
-                   /* $('#example tbody').html(response.html);
-                    $(MODAL_LG).modal('hide');*/
-                    window.location.reload();
+            $.easyAjax({
+                url: url,
+                container: '#save-insurance-form',
+                type: "POST",
+                disableButton: true,
+                buttonSelector: "#save-contact",
+                data: $('#save-insurance-form').serialize(),
+                success: function (response) {
+                    if (response.message === 'ok') {
+                        /* $('#example tbody').html(response.html);
+                         $(MODAL_LG).modal('hide');*/
+                        window.location.reload();
+                    }
+                    else{
+                        alert("Có lỗi xảy ra");
+                    }
                 }
-                else{
-                    alert("Có lỗi xảy ra");
-                }
-            }
-        })
-    });
+            })
+        });
 
     });
 </script>

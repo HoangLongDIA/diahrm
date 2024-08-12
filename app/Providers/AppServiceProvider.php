@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Company;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Carbon\CarbonInterval;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Cashier\Cashier;
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Cashier::useCustomerModel(Company::class);
+        Paginator::useBootstrap();
 
         if (config('app.redirect_https')) {
             \URL::forceScheme('https');

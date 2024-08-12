@@ -6,6 +6,7 @@ use App\Http\Requests\Insurances\StoreInsuranceRequest;
 use App\Models\Insurances;
 use Illuminate\Http\Request;
 use App\Helper\Reply;
+use Illuminate\Support\Facades\DB;
 use function Psl\Type\resource;
 
 class InsuranceController extends AccountBaseController
@@ -60,5 +61,23 @@ class InsuranceController extends AccountBaseController
 
         /*return Reply::successWithData(__('messages.employeeEmergencyContact'), ['html' => $html]);*/
 
+    }
+    public function edit($id)
+    {
+        /*$this->managePermission = user()->permission('manage_emergency_contact');
+
+        abort_403 (
+            !($this->managePermission == 'all'
+                || ($emergencyContact->added_by == user()->id)
+                || ($emergencyContact->user_id == user()->id)
+            )
+        );*/
+        $this->userId = request()->user_id ? request()->user_id : null;
+        $this->pageTitle = __('Chỉnh Sửa Thông Tin BHXH');
+        $insurances = DB::table('user_insurances')->where('id', $id)->first();
+        //dd($insurance);
+        $this->insurance =  $insurances;
+
+        return view('insurances.edit', $this->data)->render();
     }
 }

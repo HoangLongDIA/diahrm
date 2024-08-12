@@ -127,7 +127,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
 
     Route::get('account-unverified', [DashboardController::class, 'accountUnverified'])->name('account_unverified');
     Route::get('checklist', [DashboardController::class, 'checklist'])->name('checklist');
-    Route::get('dashboard', [DashboardController::class, 'advancedDashboard'])->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('dashboard-advanced', [DashboardController::class, 'advancedDashboard'])->name('dashboard.advanced');
     Route::post('dashboard/widget/{dashboardType}', [DashboardController::class, 'widget'])->name('dashboard.widget');
     Route::post('dashboard/week-timelog', [DashboardController::class, 'weekTimelog'])->name('dashboard.week_timelog');
@@ -196,6 +196,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
         \App\Http\Controllers\InsuranceController::class,
         'create'
     ])->name('insurances.create');
+    Route::get('insurances/{id}/edit', [
+        \App\Http\Controllers\InsuranceController::class,
+        'edit'
+    ])->name('insurances.edit');
     Route::post('insurances/add', [
         \App\Http\Controllers\InsuranceController::class,
         'store'
