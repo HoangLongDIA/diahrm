@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Insurances extends BaseModel
 {
-    use HasCompany;
+    use HasFactory;
     protected $table = 'user_insurances';
     protected $fillable=[
         'SoBHXH',

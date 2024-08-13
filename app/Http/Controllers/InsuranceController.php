@@ -80,4 +80,44 @@ class InsuranceController extends AccountBaseController
 
         return view('insurances.edit', $this->data)->render();
     }
+
+    public function update(StoreInsuranceRequest $request, $id)
+    {
+        try
+        {
+
+            //dd($request->NbdTheYT);
+            $insurances = Insurances::where('id', $id)->first();
+            //dd($insurances);
+            //$insurances->user_id = $request->user_id;
+            $insurances->SoBHXH = $request->SoBHXH;
+            $insurances->ThgBHXH = $request->ThgBHXH;
+            $insurances->NmBHXH = $request->NmBHXH;
+            $insurances->SotheBHXH = $request->SotheBHXH;
+            $insurances->MadkyKCB = $request->MadkyKCB;
+            $insurances->NbdTheYT = companyToYmd($request->NbdTheYT);
+            $insurances->NktTheYT = companyToYmd($request->NktTheYT);
+            $insurances->TgiaBHTN = $request->TgiaBHTN;
+            $insurances->ThgBdBHTN = $request->ThgBdBHTN;
+            $insurances->NBdBHTN = $request->NBdBHTN;
+            $insurances->PCKVBHXH = $request->PCKVBHXH;
+            $insurances->QTrBHXH = $request->QTrBHXH;
+            $insurances->MSTtncn = $request->MSTtncn;
+            $insurances->SoNgPgPt = $request->SoNgPgPt;
+            $insurances->save();
+          /*  DB::table('user_insurances')
+                ->where('id', $id)
+                ->update(['title' => "Updated Title"]);*/
+            return response()->json([
+                'message' => 'ok'
+            ]);
+        }
+        catch (\Exception $ex)
+                {
+
+                    return response()->json([
+                        'message' => $ex
+                    ]) ;
+                }
+        }
 }
