@@ -10,12 +10,14 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
 
         <!-- Add Task Export Buttons Start -->
         <div class="d-flex justify-content-between action-bar mb-3">
-            <x-forms.link-primary
-                class="mr-3 float-left emergency-contacts-btn bhxh-btn"
-                link="javascript:;"
-                icon="plus">
-                @lang('app.createNew')
-            </x-forms.link-primary>
+            @if ($addClientPermission == 'all' || $addClientPermission == 'added' || $addClientPermission == 'both')
+                <x-forms.link-primary
+                    class="mr-3 float-left emergency-contacts-btn bhxh-btn"
+                    link="javascript:;"
+                    icon="plus">
+                    @lang('app.createNew')
+                </x-forms.link-primary>
+            @endif
         </div>
 
 
@@ -111,20 +113,22 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
                                                    id="dropdownMenuLink-{{ $item->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="viewport">
                                                     <i class="icon-options-vertical icons"></i>
                                                 </a>
-                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-' . $contact->id . '" tabindex="0">
+                                                @if ($addClientPermission == 'all' || $addClientPermission == 'added' || $addClientPermission == 'both')
+                                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-' . $contact->id . '" tabindex="0">
 
 
 
-                                                    <a class="dropdown-item edit-insurance" href="javascript:;" data-contact-id="{{ $item->id }}">
-                                                        <i class="fa fa-edit mr-2"></i>
-                                                        @lang('app.edit')
-                                                    </a>
+                                                        <a class="dropdown-item edit-insurance" href="javascript:;" data-contact-id="{{ $item->id }}">
+                                                            <i class="fa fa-edit mr-2"></i>
+                                                            @lang('app.edit')
+                                                        </a>
 
-                                                    <a class="dropdown-item delete-table-row" href="javascript:;" data-row-id="{{ $item->id }}">
-                                                        <i class="fa fa-trash mr-2"></i>
-                                                        @lang('app.delete')
-                                                    </a>
-                                                </div>
+                                                        <a class="dropdown-item delete-table-row" href="javascript:;" data-row-id="{{ $item->id }}">
+                                                            <i class="fa fa-trash mr-2"></i>
+                                                            @lang('app.delete')
+                                                        </a>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>

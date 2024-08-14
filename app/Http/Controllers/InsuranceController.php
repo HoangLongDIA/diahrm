@@ -14,6 +14,10 @@ class InsuranceController extends AccountBaseController
     //Create New BHXH
     public function create()
     {
+        $viewPermission = user()->permission('view_clients');
+        $this->addClientPermission = user()->permission('add_clients');
+        abort_403(!in_array($viewPermission, ['all', 'added', 'both']));
+
         $this->pageTitle = __('app.addContact');
 
         $this->userId = request()->user_id ? request()->user_id : null;
@@ -23,6 +27,9 @@ class InsuranceController extends AccountBaseController
 
     public function store(StoreInsuranceRequest $request)
     {
+        $viewPermission = user()->permission('view_clients');
+        $this->addClientPermission = user()->permission('add_clients');
+        abort_403(!in_array($viewPermission, ['all', 'added', 'both']));
         try
         {
             //dd($request->NbdTheYT);
@@ -72,6 +79,10 @@ class InsuranceController extends AccountBaseController
                 || ($emergencyContact->user_id == user()->id)
             )
         );*/
+        $viewPermission = user()->permission('view_clients');
+        $this->addClientPermission = user()->permission('add_clients');
+        abort_403(!in_array($viewPermission, ['all', 'added', 'both']));
+
         $this->userId = request()->user_id ? request()->user_id : null;
         $this->pageTitle = __('Chỉnh Sửa Thông Tin BHXH');
         $insurances = DB::table('user_insurances')->where('id', $id)->first();
@@ -83,6 +94,9 @@ class InsuranceController extends AccountBaseController
 
     public function update(StoreInsuranceRequest $request, $id)
     {
+        $viewPermission = user()->permission('view_clients');
+        $this->addClientPermission = user()->permission('add_clients');
+        abort_403(!in_array($viewPermission, ['all', 'added', 'both']));
         try
         {
 
@@ -123,7 +137,10 @@ class InsuranceController extends AccountBaseController
         }
         public function destroy($id)
         {
-            $this->managePermission = user()->permission('manage_emergency_contact');
+
+            $viewPermission = user()->permission('view_clients');
+            $this->addClientPermission = user()->permission('add_clients');
+            abort_403(!in_array($viewPermission, ['all', 'added', 'both']));
             $insurance = Insurances::where('id',$id)->first();
             /*abort_403 (
                 !($this->managePermission == 'all'
