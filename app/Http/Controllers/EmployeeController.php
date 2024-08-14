@@ -704,7 +704,7 @@ class EmployeeController extends AccountBaseController
             //$this->hasLeaveQuotas = $hasLeaveQuotas;
             //$this->allowedLeaves = $totalLeaves;
 
-            $this->insurances = DB::table('user_insurances')->where('user_id', $id)->orderByDesc('id')->paginate(2)->withQueryString();
+            $this->insurances = DB::table('user_insurances')->where('user_id', $id)->orderByDesc('updated_at')->paginate(2)->withQueryString();
             //dd($this->insurances);
             $this->view = 'employees.ajax.leaves_quota';
             break;

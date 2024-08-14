@@ -2015,6 +2015,7 @@ return [
   ],
     'insurances'=>array(
         'addNewInsurance' => 'Thêm mới thông tin BHXH',
+        'editInsurance' => 'Sửa thông tin BHXH',
     ),
   'invoiceExport' => 'Hóa đơn',
   'taskShortCode' => 'Mã ngắn',

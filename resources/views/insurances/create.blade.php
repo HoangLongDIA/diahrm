@@ -139,8 +139,8 @@
             data: $('#save-insurance-form').serialize(),
             success: function (response) {
                 if (response.message === 'ok') {
-                   /* $('#example tbody').html(response.html);
-                    $(MODAL_LG).modal('hide');*/
+                   /* $('#example tbody').html(response.html);*/
+                    $(MODAL_LG).modal('hide');
                     window.location.reload();
                 }
                 else{

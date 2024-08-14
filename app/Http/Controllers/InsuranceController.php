@@ -104,6 +104,7 @@ class InsuranceController extends AccountBaseController
             $insurances->QTrBHXH = $request->QTrBHXH;
             $insurances->MSTtncn = $request->MSTtncn;
             $insurances->SoNgPgPt = $request->SoNgPgPt;
+            $insurances->updated_at = date('Y-m-d H:i:s');
             $insurances->save();
           /*  DB::table('user_insurances')
                 ->where('id', $id)
@@ -119,5 +120,28 @@ class InsuranceController extends AccountBaseController
                         'message' => $ex
                     ]) ;
                 }
+        }
+        public function destroy($id)
+        {
+            $this->managePermission = user()->permission('manage_emergency_contact');
+            $insurance = Insurances::where('id',$id)->first();
+            /*abort_403 (
+                !($this->managePermission == 'all'
+                    || ($insurance->user_id == user()->id)
+                )
+            );*/
+            try
+            {
+                $insurance->delete();
+                return response()->json([
+                    'message' => 'ok'
+                ]) ;
+            }
+            catch (\Exception $ex)
+            {
+                return response()->json([
+                    'message' => $ex
+                ]) ;
+            }
         }
 }

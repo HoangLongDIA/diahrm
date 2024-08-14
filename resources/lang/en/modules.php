@@ -2020,6 +2020,7 @@ return array(
     ),
     'insurances'=>array(
         'addNewInsurance' => 'Add New Social Insurance',
+        'editInsurance' => 'Edit Social Insurance information',
     ),
     'invoiceExport' => 'Invoice',
     'taskShortCode' => 'Short Code',

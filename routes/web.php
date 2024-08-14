@@ -213,6 +213,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             \App\Http\Controllers\InsuranceController::class,
             'update'
         ])->name('insurances.update');
+    //Delete Insurances
+        Route::delete('insurances/{id}',[
+            \App\Http\Controllers\InsuranceController::class,
+            'destroy'
+        ])->name('insurances.destroy');
 
     Route::get('employee-docs/download/{id}', [EmployeeDocController::class, 'download'])->name('employee-docs.download');
     Route::resource('employee-docs', EmployeeDocController::class);

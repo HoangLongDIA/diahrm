@@ -73,7 +73,34 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
                                     <td>{{ $item->PCKVBHXH	 }}</td>
                                     <td>{{ $item->MSTtncn	 }}</td>
                                     <td>{{ $item->SoNgPgPt	 }}</td>
-                                    <td class="text-right"><button type="button" class="btn btn-info" style="height: 30px;font-size: small">Xem Quá Trình</button></td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-info" style="height: 30px;font-size: small"  data-toggle="modal" data-target="#exampleModalCenter">
+                                            Xem Quá Trình
+                                        </button>
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Quá trình tham gia BHXH</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                         <textarea rows="5" cols="60" style="overflow-y: scroll;height: 100px;resize: none;">{{ $item->QTrBHXH }}
+                                                        </textarea>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </td>
 
 
                                     <td >
@@ -134,6 +161,57 @@ $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
         $(MODAL_LG + ' ' + MODAL_HEADING).html('...');
         $.ajaxModal(MODAL_LG, url);
     });
+    //Delete Insurances
+    $('body').on('click', '.delete-table-row', function() {
+        var id = $(this).data('row-id');
+        Swal.fire({
+            title: "@lang('messages.sweetAlertTitle')",
+            text: "@lang('messages.recoverRecord')",
+            icon: 'warning',
+            showCancelButton: true,
+            focusConfirm: false,
+            confirmButtonText: "@lang('messages.confirmDelete')",
+            cancelButtonText: "@lang('app.cancel')",
+            customClass: {
+                confirmButton: 'btn btn-primary mr-3',
+                cancelButton: 'btn btn-secondary'
+            },
+            showClass: {
+                popup: 'swal2-noanimation',
+                backdrop: 'swal2-noanimation'
+            },
+            buttonsStyling: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var url = "{{ route('insurances.destroy', ':id') }}";
+                url = url.replace(':id', id);
+
+                var token = "{{ csrf_token() }}";
+
+                $.easyAjax({
+                    type: 'POST',
+                    url: url,
+                    blockUI: true,
+                    data: {
+                        '_token': token,
+                        '_method': 'DELETE'
+                    },
+                    success: function(response) {
+                        if (response.message == "ok") {
+                            window.location.reload();
+                        }else{
+                            alert("Có Lỗi Xảy ra");
+                        }
+                    }
+                });
+            }
+        });
+    });
+    function showQtrBhxh(msg)
+    {
+
+    }
+
 </script>
 
 

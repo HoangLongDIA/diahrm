@@ -1,6 +1,6 @@
 <x-form id="save-insurance-form">
     <div class="modal-header">
-        <h5 class="modal-title">@lang('modules.insurances.addNewInsurance')</h5>
+        <h5 class="modal-title">@lang('modules.insurances.editInsurance')</h5>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     </div>
     <div class="modal-body">
@@ -129,6 +129,7 @@
 </x-form>
 <script>
     $(document).ready(function() {
+        //quillImageLoad('#QTrBHXH');
         datepicker('#NbdTheYT', {
             position: 'bl',
             maxDate: new Date(),
@@ -155,6 +156,7 @@
                     if (response.message === 'ok') {
                         /* $('#example tbody').html(response.html);
                          $(MODAL_LG).modal('hide');*/
+                        
                         window.location.reload();
                     }
                     else{
