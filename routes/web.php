@@ -218,6 +218,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             \App\Http\Controllers\InsuranceController::class,
             'destroy'
         ])->name('insurances.destroy');
+    //Labor Contract Section
+    /////////////////////////////////////////
+        Route::get('laborcontract/add', [
+            \App\Http\Controllers\LaborContractController::class,
+            'create'
+        ])->name('laborcontract.create');
+        Route::post('laborcontract/add', [
+            \App\Http\Controllers\LaborContractController::class,
+            'store'
+        ])->name('laborcontract.store');
+    /// End labor Contact Section
 
     Route::get('employee-docs/download/{id}', [EmployeeDocController::class, 'download'])->name('employee-docs.download');
     Route::resource('employee-docs', EmployeeDocController::class);

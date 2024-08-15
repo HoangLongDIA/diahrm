@@ -1,7 +1,6 @@
 @php
 $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
 @endphp
-
     <!-- ROW START -->
 <div class="row py-0 py-md-0 py-lg-3">
     <div class="col-lg-12 col-md-12 mb-4 mb-xl-0 mb-lg-4">

@@ -51,6 +51,18 @@ if ($viewPermission == 'all'
                     <li>
                         <x-tab :href="route('employees.show', $employee->id)" :text="__('modules.employees.profile')" class="profile" />
                     </li>
+                    @if (in_array('leaves', user_modules()) && ($viewLeavePermission == 'all' || ($viewLeavePermission == 'owned' || $viewLeavePermission == 'both') && $employee->id == user()->id ))
+                        <li>
+                            <x-tab :href="route('employees.show', $employee->id) . '?tab=leaves'" :text="__('app.menu.leaves')" ajax="false" class="leaves" />
+                        </li>
+
+                        <li>
+                            <x-tab :href="route('employees.show', $employee->id) . '?tab=leaves-quota'" :text="__('app.menu.leavesQuota')" class="leaves-quota" />
+                        </li>
+                        <li>
+                            <x-tab :href="route('employees.show', $employee->id) . '?tab=labor-contract'" :text="__('app.menu.laborContract')" class="labor-contract" />
+                        </li>
+                    @endif
 
                     @if ($viewEmployeeProjects == 'all' && in_array('projects', user_modules()))
                         <li>
@@ -68,15 +80,7 @@ if ($viewPermission == 'all'
                             <x-tab :href="route('employees.show', $employee->id) . '?tab=salary'" :text="__('app.menu.salary')" ajax="false" class="salary" />
                         </li>
                     @endif
-                    @if (in_array('leaves', user_modules()) && ($viewLeavePermission == 'all' || ($viewLeavePermission == 'owned' || $viewLeavePermission == 'both') && $employee->id == user()->id ))
-                        <li>
-                            <x-tab :href="route('employees.show', $employee->id) . '?tab=leaves'" :text="__('app.menu.leaves')" ajax="false" class="leaves" />
-                        </li>
 
-                    <li>
-                        <x-tab :href="route('employees.show', $employee->id) . '?tab=leaves-quota'" :text="__('app.menu.leavesQuota')" class="leaves-quota" />
-                    </li>
-                    @endif
 
                     @if ($viewEmployeeTimelogs == 'all' && in_array('timelogs', user_modules()))
                         <li>

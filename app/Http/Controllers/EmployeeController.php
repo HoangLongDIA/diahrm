@@ -709,6 +709,11 @@ class EmployeeController extends AccountBaseController
             //dd($this->insurances);
             $this->view = 'employees.ajax.leaves_quota';
             break;
+        case 'labor-contract':
+            $this->addClientPermission = user()->permission('add_clients');
+            $this->laborContract = DB::table('labor_contracts')->where('user_id', $id)->first();
+            $this->view = 'employees.ajax.labor_contract';
+            break;
         case 'shifts':
             abort_403(user()->permission('view_shift_roster') != 'all' || !in_array('attendance', user_modules()));
             $this->view = 'employees.ajax.shifts';
