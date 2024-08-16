@@ -48,10 +48,10 @@
                        ajax="false"/>
             @endif
 
-            @if (in_array('clients', user_modules()) && $viewClientDashboard == 'all')
-                <x-tab :href="route('dashboard.advanced').'?tab=client'" :text="__('app.client')" class="client"
-                       ajax="false"/>
-            @endif
+{{--            @if (in_array('clients', user_modules()) && $viewClientDashboard == 'all')--}}
+{{--                <x-tab :href="route('dashboard.advanced').'?tab=client'" :text="__('app.client')" class="client"--}}
+{{--                       ajax="false"/>--}}
+{{--            @endif--}}
 
 
 
