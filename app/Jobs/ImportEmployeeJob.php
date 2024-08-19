@@ -49,7 +49,7 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle()
     {
-        if ($this->isColumnExists('name') && $this->isColumnExists('email') && $this->isEmailValid($this->getColumnValue('email'))) {
+        if ($this->isColumnExists('hoten') && $this->isColumnExists('email') && $this->isEmailValid($this->getColumnValue('email'))) {
 
             $user = User::where('email', $this->getColumnValue('email'))->first();
 
@@ -59,31 +59,55 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
                 return;
             }
 
-            $employeeDetails = EmployeeDetails::where('employee_id', $this->getColumnValue('employee_id'))->first();
+            $employeeDetails = EmployeeDetails::where('employee_id', $this->getColumnValue('manv'))->first();
 
             if ($employeeDetails) {
                 $this->failJobWithMessage(__('messages.duplicateEntryForEmployeeId') . $this->getColumnValue('employee_id'));
             }
             else {
+
                 DB::beginTransaction();
                 try {
                     $user = new User();
                     $user->company_id = $this->company?->id;
-                    $user->name = $this->getColumnValue('name');
+
+                    $user->name = $this->getColumnValue('hoten');
+                    $user->manv = $this->getColumnValue('manv');
+                    //$user->gender = $this->getColumnValue('gtinh');
+
+                    $user->folk = $this->getColumnValue('dantoc');
+                    $user->religion = $this->getColumnValue('tongiao');
+                    $user->tempAddress = $this->getColumnValue('tamtru');
+
                     $user->email = $this->getColumnValue('email');
                     $user->password = bcrypt(123456);
-                    $user->mobile = $this->isColumnExists('mobile') ? $this->getColumnValue('mobile') : null;
-                    $user->gender = $this->isColumnExists('gender') ? strtolower($this->getColumnValue('gender')) : null;
+
+                    $user->mobile = $this->isColumnExists('mobil') ? $this->getColumnValue('mobil') : null;
+                    $user->gender = $this->isColumnExists('gtinh') ? strtolower($this->getColumnValue('gtinh')) : null;
+
                     $user->save();
 
                     if ($user->id) {
+
                         $employee = new EmployeeDetails();
                         $employee->company_id = $this->company?->id;
                         $employee->user_id = $user->id;
-                        $employee->address = $this->isColumnExists('address') ? $this->getColumnValue('address') : null;
-                        $employee->employee_id = $this->isColumnExists('employee_id') ? $this->getColumnValue('employee_id') : (EmployeeDetails::max('id') + 1);
-                        $employee->joining_date = $this->isColumnExists('joining_date') ? Carbon::createFromFormat('Y-m-d', $this->getColumnValue('joining_date')) : null;
-                        $employee->hourly_rate = $this->isColumnExists('hourly_rate') ? preg_replace('/[^0-9.]/', '', $this->getColumnValue('hourly_rate')) : null;
+
+                        //$time_input = strtotime($this->getColumnValue('ngaysinh'));
+                        //dd($this->getColumnValue('ngaysinh'));
+                        //$employee->date_of_birth = getdate($time_input);
+                        if($this->getColumnValue('qhvochong') == 'COGIADINH' || $this->getColumnValue('qhvochong') == 'COGADINH'){
+                            $employee->marital_status = 'engaged';
+                        }else{
+                            $employee->marital_status = 'single';
+                        }
+
+
+                        $employee->address = $this->isColumnExists('thuongtru') ? $this->getColumnValue('thuongtru') : null;
+
+                        $employee->employee_id = $this->isColumnExists('manv') ? $this->getColumnValue('manv') : (EmployeeDetails::max('id') + 1);
+                        //$employee->joining_date = $this->isColumnExists('joining_date') ? Carbon::createFromFormat('Y-m-d', $this->getColumnValue('joining_date')) : null;
+                        //$employee->hourly_rate = $this->isColumnExists('hourly_rate') ? preg_replace('/[^0-9.]/', '', $this->getColumnValue('hourly_rate')) : null;
                         $employee->save();
                     }
 
@@ -93,9 +117,11 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
                     $this->logSearchEntry($user->id, $user->name, 'employees.show', 'employee', $user->company_id);
                     DB::commit();
                 } catch (InvalidFormatException $e) {
+
                     DB::rollBack();
                     $this->failJob(__('messages.invalidDate'));
                 } catch (Exception $e) {
+
                     DB::rollBack();
                     $this->failJobWithMessage($e->getMessage());
                 }

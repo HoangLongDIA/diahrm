@@ -48,6 +48,18 @@ use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
  * @property boolean $cuucb
  * @property boolean $dqtv
  * @property  boolean $pccs
+ * @property string $manv
+ * @property string $trdohv
+ * @property string $ngnghiep
+ * @property string $sotruong
+ * @property string $dtpccc
+ * @property string $chuyenco
+ * @property boolean $ttxep
+ * @property boolean $pkhoild
+ * @property boolean $qh2126
+ * @property boolean $ctcuucb
+ * @property  boolean $cttuve
+ * @property  boolean $ctdangvien
  * @property string|null $two_factor_secret
  * @property string|null $two_factor_recovery_codes
  * @property string|null $remember_token

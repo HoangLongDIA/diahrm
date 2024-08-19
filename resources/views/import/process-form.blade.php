@@ -30,10 +30,10 @@
                 </div>
                 </div>
 
-                <div class="col-md-12 import-table" style="overflow-x: auto;">
+                <div class="col-md-12 import-table" style="overflow-x: auto;transform: rotate(180deg);">
                 <input type="hidden" name="file" value="{{ $file }}">
                 <input type="hidden" name="has_heading" value="{{ $hasHeading }}">
-                <table>
+                <table style="transform: rotate(180deg);">
                     <tbody>
                         <tr>
                         @forelse ($importSample[0] as $key => $item)
@@ -57,6 +57,7 @@
                                                         @lang('app.columnName')
                                                     </label>
                                                     <div id="selectOptionList_{{ $key }}">
+
                                                         <select class="form-control select-picker mb-2" id="columnName_{{ $key }}" name="columns[{{ $key }}]">
                                                             <option value="">@lang("app.selectAColumn")</option>
                                                             @if (!empty($heading) && collect($columns)->whereIn('id', $heading[$key])->first())

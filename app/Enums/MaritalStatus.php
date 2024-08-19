@@ -13,6 +13,7 @@ enum MaritalStatus: string
     case Separate = 'separate';
     case Divorced = 'divorced';
     case Engaged = 'engaged';
+
     // phpcs:enable
 
     // This method is used to display the enum value in the user interface.
