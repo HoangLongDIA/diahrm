@@ -60,6 +60,7 @@ use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
  * @property boolean $ctcuucb
  * @property  boolean $cttuve
  * @property  boolean $ctdangvien
+ * @property string $chucdanh
  * @property string|null $two_factor_secret
  * @property string|null $two_factor_recovery_codes
  * @property string|null $remember_token

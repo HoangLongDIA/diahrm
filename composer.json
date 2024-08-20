@@ -59,6 +59,7 @@
         "paragonie/random_compat": "^9.99",
         "paypal/rest-api-sdk-php": "dev-laravel10",
         "pcinaglia/laraupdater": "^1.0",
+        "phpoffice/phpspreadsheet": "*",
         "psr/http-factory-implementation": "*",
         "pusher/pusher-php-server": "^7.2",
         "quickbooks/v3-php-sdk": "^6.1",
