@@ -248,6 +248,7 @@ return array(
         'slackUsername' => 'Slack Member ID',
         'joiningDate' => 'Joining Date',
         'workAnniversary' => 'Work Anniversary',
+        'maritalstatus1' => 'Marital status',
         'joineeAndWorkAnniversary' => 'Today\'s Joinings & Work Anniversary',
         'gender' => 'Gender',
         'title' => 'Select Employee',

@@ -128,6 +128,7 @@ return [
     'appreciation' => 'Sự đánh giá',
     'joiningVsAttrition' => 'Tham gia Vs Tiêu hao',
     'workAnniversary' => 'Kỷ niệm làm việc',
+      'maritalstatus1'=> 'Tình Trạng hôn nhân',
     'joinedToday' => 'Đã tham gia hôm nay',
     'ticket' => 'Vé',
     'noticePeriodDuration' => 'Thời hạn thông báo',

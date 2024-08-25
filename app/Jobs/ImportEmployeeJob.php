@@ -55,7 +55,7 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
             $user = User::where('email', $this->getColumnValue('email'))->first();
 
             if ($user) {
-                $this->failJobWithMessage(__('messages.duplicateEntryForEmail') . $this->getColumnValue('email'));
+                $this->failJobWithMessage(__('Check lại Email của ') . $this->getColumnValue('hoten'));
 
                 return;
             }
@@ -63,7 +63,7 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
             $employeeDetails = EmployeeDetails::where('employee_id', $this->getColumnValue('manv'))->first();
 
             if ($employeeDetails) {
-                $this->failJobWithMessage(__('messages.duplicateEntryForEmployeeId') . $this->getColumnValue('employee_id'));
+                $this->failJobWithMessage(__('Check lại ID bị trùng của') . $this->getColumnValue('manv').$this->getColumnValue('hoten'));
             }
             else {
 
@@ -79,7 +79,9 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
                     $user->folk = $this->getColumnValue('dantoc');
                     $user->religion = $this->getColumnValue('tongiao');
                     $user->tempAddress = $this->getColumnValue('tamtru');
-                    $user->tempAddress = $this->isColumnExists('sotruong') ? $this->getColumnValue('sotruong'):'';
+                    $user->trdohv = $this->getColumnValue('trdohv');
+                    $user->educationLevel = $this->getColumnValue('trdovh');
+                    $user->sotruong = $this->isColumnExists('sotruong') ? $this->getColumnValue('sotruong'):'';
 
                    /* if($this->getColumnValue('email') != "0" || $this->getColumnValue('email')!= "")
                     {

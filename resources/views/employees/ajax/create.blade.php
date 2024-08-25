@@ -238,9 +238,9 @@ $addDesignationPermission = user()->permission('add_designation');
                                     id="employee_educationLevel" data-live-search="true">
 
 
-                                    <option value="12">Phổ Thông 12/12</option>
-                                  <option value="university">Đại học</option>
-                                  <option value="postgraduate">Cao Học</option>
+                                    <option value="12:12">12/12</option>
+                                  <option value="10:10">10/10</option>
+                                  <option value="khac">khac</option>
 
                             </select>
 
