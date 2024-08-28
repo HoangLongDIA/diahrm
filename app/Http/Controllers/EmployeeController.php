@@ -427,7 +427,24 @@ class EmployeeController extends AccountBaseController
 
         $user = User::withoutGlobalScope(ActiveScope::class)->findOrFail($id);
         $user->name = $request->name;
+        $user->religion = $request->religion;
+        $user->folk = $request->folk;
         $user->email = $request->email;
+        $user->primaryJob = $request->primaryJob;
+        $user->chucdanh = $request->background;
+        $user->educationLevel = $request->educationLevel;
+        $user->trdohv = $request->trdohv;
+        $user->tempAddress = $request->tempAddress;
+        $user->dtpccc = $request->dtpccc;
+        $user->chuyenco = $request->chuyenco;
+        $user->ctdangvien = $request->ctdangvien;
+        $user->ctcuucb = $request->ctcuucb;
+        $user->ttxep = $request->ttxep;
+        $user->cttuve = $request->cttuve;
+        $user->sotruong = $request->sotruong;
+        $user->pkhoild = $request->pkhoild;
+        $user->qh2126 = $request->qh2126;
+        //chauuu
 
         if ($request->password != '') {
             $user->password = bcrypt($request->password);
