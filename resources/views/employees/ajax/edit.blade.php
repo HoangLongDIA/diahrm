@@ -467,7 +467,7 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
     </div>
 </div>
 
-<script src="{{ asset('vendor/jquery/tagify.min.js') }}"></script>
+{{--<script src="{{ asset('vendor/jquery/tagify.min.js') }}"></script>--}}
 @if (function_exists('sms_setting') && sms_setting()->telegram_status)
     <script src="{{ asset('vendor/jquery/clipboard.min.js') }}"></script>
 @endif
@@ -498,35 +498,35 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
             ...datepickerConfig
         });
 
-        datepicker('#probation_end_date', {
-            position: 'bl',
-            ...datepickerConfig
-        });
+        // datepicker('#probation_end_date', {
+        //     position: 'bl',
+        //     ...datepickerConfig
+        // });
 
-        datepicker('#notice_period_start_date', {
-            position: 'bl',
-            ...datepickerConfig
-        });
+        // datepicker('#notice_period_start_date', {
+        //     position: 'bl',
+        //     ...datepickerConfig
+        // });
 
-        datepicker('#notice_period_end_date', {
-            position: 'bl',
-            ...datepickerConfig
-        });
+        // datepicker('#notice_period_end_date', {
+        //     position: 'bl',
+        //     ...datepickerConfig
+        // });
 
-        datepicker('#marriage_anniversary_date', {
-            position: 'bl',
-            ...datepickerConfig
-        });
+        // datepicker('#marriage_anniversary_date', {
+        //     position: 'bl',
+        //     ...datepickerConfig
+        // });
 
         datepicker('#internship_end_date', {
             position: 'bl',
             ...datepickerConfig
         });
 
-        datepicker('#contract_end_date', {
-            position: 'bl',
-            ...datepickerConfig
-        });
+        // datepicker('#contract_end_date', {
+        //     position: 'bl',
+        //     ...datepickerConfig
+        // });
 
         var employment_type = $('#employment_type').val();
         if(employment_type == 'internship') {
@@ -556,26 +556,26 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
             }
         });
 
-        var input = document.querySelector('input[name=tags]'),
-            // init Tagify script on the above inputs
-            tagify = new Tagify(input, {
-                whitelist: {!! json_encode($skills) !!},
-            });
+        {{--var input = document.querySelector('input[name=tags]'),--}}
+        {{--    // init Tagify script on the above inputs--}}
+        {{--    tagify = new Tagify(input, {--}}
+        {{--        whitelist: {!! json_encode($skills) !!},--}}
+        {{--    });--}}
 
         var marital_status = $('#marital_status').val();
-        if(marital_status == '{{ \App\Enums\MaritalStatus::Married->value }}') {
-            $('.marriage_date').removeClass('d-none');
-        }
+        {{--if(marital_status == '{{ \App\Enums\MaritalStatus::Married->value }}') {--}}
+        {{--    $('.marriage_date').removeClass('d-none');--}}
+        {{--}--}}
 
-        $('#marital_status').change(function(){
-            var value = $(this).val();
-            if(value == '{{ \App\Enums\MaritalStatus::Married->value }}') {
-                $('.marriage_date').removeClass('d-none');
-            }
-            else {
-                $('.marriage_date').addClass('d-none');
-            }
-        })
+        {{--$('#marital_status').change(function(){--}}
+        {{--    var value = $(this).val();--}}
+        {{--    if(value == '{{ \App\Enums\MaritalStatus::Married->value }}') {--}}
+        {{--        $('.marriage_date').removeClass('d-none');--}}
+        {{--    }--}}
+        {{--    else {--}}
+        {{--        $('.marriage_date').addClass('d-none');--}}
+        {{--    }--}}
+        {{--})--}}
 
         $('#save-form').click(function() {
             const url = "{{ route('employees.update', $employee->id) }}";
