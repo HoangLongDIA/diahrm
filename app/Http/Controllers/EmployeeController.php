@@ -17,7 +17,9 @@ use App\Http\Requests\Admin\Employee\StoreRequest;
 use App\Http\Requests\Admin\Employee\UpdateRequest;
 use App\Http\Requests\User\CreateInviteLinkRequest;
 use App\Http\Requests\User\InviteEmailRequest;
+use App\Imports\EmployeeBhxhImport;
 use App\Imports\EmployeeImport;
+use App\Jobs\ImportEmployeeBhHdJob;
 use App\Jobs\ImportEmployeeJob;
 use App\Models\Appreciation;
 use App\Models\Attendance;
@@ -1056,6 +1058,21 @@ class EmployeeController extends AccountBaseController
 
         return view('employees.create', $this->data);
     }
+    public function importMember2()
+    {
+        $this->pageTitle = __('app.importExcel') . ' ' . __('app.employee');
+
+        $addPermission = user()->permission('add_employees');
+        abort_403(!in_array($addPermission, ['all', 'added']));
+
+        $this->view = 'employees.ajax.importmore';
+
+        if (request()->ajax()) {
+            return $this->returnAjax($this->view);
+        }
+
+        return view('employees.create', $this->data);
+    }
 
     public function importStore(ImportRequest $request)
     {
@@ -1066,9 +1083,25 @@ class EmployeeController extends AccountBaseController
         return Reply::successWithData(__('messages.importUploadSuccess'), ['view' => $view]);
     }
 
+    public function importStore2(ImportRequest $request)
+    {
+        $this->importFileProcess($request, EmployeeBhxhImport::class);
+
+        $view = view('employees.ajax.import_progress2', $this->data)->render();
+
+        return Reply::successWithData(__('messages.importUploadSuccess'), ['view' => $view]);
+    }
+
     public function importProcess(ImportProcessRequest $request)
     {
         $batch = $this->importJobProcess($request, EmployeeImport::class, ImportEmployeeJob::class);
+
+        return Reply::successWithData(__('messages.importProcessStart'), ['batch' => $batch]);
+    }
+
+    public function importProcess2(ImportProcessRequest $request)
+    {
+        $batch = $this->importJobProcess($request, EmployeeBhxhImport::class, ImportEmployeeBhHdJob::class);
 
         return Reply::successWithData(__('messages.importProcessStart'), ['batch' => $batch]);
     }

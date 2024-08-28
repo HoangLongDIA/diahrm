@@ -174,6 +174,10 @@
                                             icon="file-upload">
                         @lang('app.importExcel')
                     </x-forms.link-secondary>
+                        <x-forms.link-secondary :link="route('employees.import2')" class="mr-3 openRightModal mb-2 mb-lg-0 d-none d-lg-block"
+                                                icon="file-upload">
+                            Update more information...
+                        </x-forms.link-secondary>
                 @endif
             </div>
 

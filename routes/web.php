@@ -180,9 +180,18 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
     Route::get('employees/byDepartment/{id}', [EmployeeController::class, 'byDepartment'])->name('employees.by_department');
     Route::get('employees/invite-member', [EmployeeController::class, 'inviteMember'])->name('employees.invite_member');
     Route::get('employees/import', [EmployeeController::class, 'importMember'])->name('employees.import');
+    //Add more Information
+    Route::get('employees/import2', [EmployeeController::class, 'importMember2'])->name('employees.import2');
+    //Add more Information
     Route::post('employees/import', [EmployeeController::class, 'importStore'])->name('employees.import.store');
+    Route::post('employees/import2', [EmployeeController::class, 'importStore2'])->name('employees.import.store2');
+
     Route::post('employees/import/process', [EmployeeController::class, 'importProcess'])->name('employees.import.process');
+    Route::post('employees/import/process2', [EmployeeController::class, 'importProcess2'])->name('employees.import.process2');
     Route::get('import/process/{name}/{id}', [ImportController::class, 'getImportProgress'])->name('import.process.progress');
+
+
+    //Route::get('import/process/{name}/{id}', [ImportController::class, 'getImportProgress'])->name('import.process.progress');
 
     Route::get('employees/import/exception/{name}', [ImportController::class, 'getQueueException'])->name('import.process.exception');
     Route::post('employees/send-invite', [EmployeeController::class, 'sendInvite'])->name('employees.send_invite');
