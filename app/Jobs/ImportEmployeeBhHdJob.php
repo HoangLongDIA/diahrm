@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\EmployeeDetails;
+use App\Models\Insurances;
 use App\Models\Role;
 use App\Models\UniversalSearch;
 use App\Models\User;
@@ -49,9 +50,90 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
      */
     public function handle()
     {
-        dd($this->getColumnValue('hoten'));
-        $this->failJob(__('messages.invalidData'));
-//        if ($this->isColumnExists('hoten') && $this->isColumnExists('email')) {
+
+        $nbdyt = $this->getColumnValue('nbdtheyt');
+        $time_input_nbdyt  = Date::excelToDateTimeObject($this->getColumnValue('nbdtheyt'));
+        $result = $time_input_nbdyt->format('d-m-Y');
+        //$insurancesNbdTheYT = companyToYmd($time_input_nbdyt);
+        if($nbdyt){
+
+            $insurancesNbdTheYT = companyToYmd($result);
+            $enrollment_date = date_create_from_format("m-d-Y", "12-31-2012")->format("Y-m-d");
+        }
+
+
+        if ($this->isColumnExists('manv') && $this->isColumnExists('email')) {
+            $employeeDetails = EmployeeDetails::where('employee_id', $this->getColumnValue('manv'))->first();
+            if ($employeeDetails){
+               // $user = User::where('email', $this->getColumnValue('email'))->first();
+
+
+                    $insurances = Insurances::where('SoBHXH', $this->getColumnValue('sobhxh'))->first();
+                    DB::beginTransaction();
+                    try{
+                        if($insurances){
+                            //$insurances->user_id = $user->id;
+                            $insurances->SoBHXH = $this->getColumnValue('sobhxh');
+                            $insurances->ThgBHXH = $this->getColumnValue('thgbhxh');
+                            $insurances->NmBHXH = $this->getColumnValue('nmbhxh');
+                            $insurances->SotheBHXH = $this->getColumnValue('sothebhxh');
+                            $insurances->MadkyKCB = $this->getColumnValue('madkykcb');
+                            if(isset($insurancesNbdTheYT)){
+                                $insurances->NbdTheYT = $insurancesNbdTheYT;
+                                $insurances->NktTheYT = $enrollment_date;
+                            }
+
+                            $insurances->TgiaBHTN = $this->getColumnValue('tgiabhtn');
+                            $insurances->ThgBdBHTN = $this->getColumnValue('thgbdbhtn');
+                            $insurances->NBdBHTN =  $this->getColumnValue('nbdbhtn');
+                            $insurances->PCKVBHXH = $this->getColumnValue('pckvbhxh');
+                            $insurances->QTrBHXH = $this->getColumnValue('qtrbhxh');
+                            $insurances->MSTtncn = $this->getColumnValue('msttncn');
+                            $insurances->SoNgPgPt = $this->getColumnValue('songpgpt');
+                            $insurances->updated_at = date('Y-m-d H:i:s');
+                            // $insurances->save();
+                        }else{
+                            $insurances = new Insurances();
+                            $insurances->user_id  = $employeeDetails->user_id;
+                            $insurances->SoBHXH = $this->getColumnValue('sobhxh');
+                            $insurances->ThgBHXH = $this->getColumnValue('thgbhxh');
+                            $insurances->NmBHXH = $this->getColumnValue('nmbhxh');
+                            $insurances->SotheBHXH = $this->getColumnValue('sothebhxh');
+                            $insurances->MadkyKCB = $this->getColumnValue('madkykcb');
+                            if(isset($insurancesNbdTheYT)){
+                                $insurances->NbdTheYT = $insurancesNbdTheYT;
+                                $insurances->NktTheYT = $enrollment_date;
+                            }
+
+                            $insurances->TgiaBHTN = $this->getColumnValue('tgiabhtn');
+                            $insurances->ThgBdBHTN = $this->getColumnValue('thgbdbhtn');
+                            $insurances->NBdBHTN =  $this->getColumnValue('nbdbhtn');
+                            $insurances->PCKVBHXH = $this->getColumnValue('pckvbhxh');
+                            $insurances->QTrBHXH = $this->getColumnValue('qtrbhxh');
+                            $insurances->MSTtncn = $this->getColumnValue('msttncn');
+                            $insurances->SoNgPgPt = $this->getColumnValue('songpgpt');
+                            // $insurances->save();
+                        }
+                        //$this->logSearchEntry($insurances->SoBHXH, $insurances->SoBHXH, 'employees.show', 'employee', $user->company_id);
+                        DB::commit();
+                    }catch (InvalidFormatException $e){
+                        //dd($e->getMessage());
+                        DB::rollBack();
+                        $this->failJobWithMessage($e->getMessage());
+                    }catch (\Exception $e){
+                        //dd($e->getMessage());
+                        DB::rollBack();
+                        $this->failJobWithMessage($e->getMessage());
+                    }
+
+
+
+            }
+            else
+            {
+                //dd($this->getColumnValue('manv'));
+                $this->failJobWithMessage(__('Ma Nv khong ton tai  của') . $this->getColumnValue('manv') . $this->getColumnValue('hoten'));
+            }
 //
 //            $user = User::where('email', $this->getColumnValue('email'))->first();
 //
@@ -164,5 +246,6 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
 //        else {
 //            $this->failJob(__('messages.invalidData'));
 //        }
+        }
     }
 }

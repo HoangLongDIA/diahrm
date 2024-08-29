@@ -13,6 +13,7 @@ class EmployeeBhxhImport implements ToArray
             //Them manv
             array('id' => 'manv', 'name' => __('Mã Nhân Viên'), 'required' => 'Yes',),
             array('id' => 'hoten', 'name' => __('Họ và Tên'), 'required' => 'Yes',),
+            array('id' => 'email', 'name' => __('modules.employees.employeeEmail'), 'required' => 'Yes',),
             array('id' => 'sobhxh', 'name' => __('sobhxh'), 'required' => 'Yes',),
             array('id' => 'thgbhxh', 'name' => __('thgbhxh'), 'required' => 'Yes',),
             array('id' => 'nmbhxh', 'name' => __('nmbhxh'), 'required' => 'Yes',),
@@ -47,7 +48,8 @@ class EmployeeBhxhImport implements ToArray
             array('id' => 'mucpccv', 'name' => __('mucpccv'), 'required' => 'Yes',),
             array('id' => 'hesopckv', 'name' => __('hesopckv'), 'required' => 'Yes',),
             array('id' => 'hesopctn', 'name' => __('hesopctn'), 'required' => 'Yes',),
-            array('id' => 'hesopcdh', 'name' => __('hesopcdh'), 'required' => 'Yes',),
+            array('id' => 'msttncn', 'name' => __('msttncn'), 'required' => 'Yes',),
+            array('id' => 'songpgpt', 'name' => __('SoNgPgPt'), 'required' => 'Yes',),
 
 
 
