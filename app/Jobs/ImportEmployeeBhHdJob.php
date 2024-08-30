@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\EmployeeDetails;
 use App\Models\Insurances;
+use App\Models\LaborContract;
 use App\Models\Role;
 use App\Models\UniversalSearch;
 use App\Models\User;
@@ -51,10 +52,28 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
     public function handle()
     {
 
+        if (str_contains($this->getColumnValue('ngaynhan'), '/')) {
+            $str_ngaynhan = str_replace('/', '-', $this->getColumnValue('ngaynhan'));
+
+        }
         $nbdyt = $this->getColumnValue('nbdtheyt');
         $time_input_nbdyt  = Date::excelToDateTimeObject($this->getColumnValue('nbdtheyt'));
         $result = $time_input_nbdyt->format('d-m-Y');
-        //$insurancesNbdTheYT = companyToYmd($time_input_nbdyt);
+        if($this->getColumnValue('ngaybdhd')){
+            $time_input_nbdhdld  = Date::excelToDateTimeObject($this->getColumnValue('ngaybdhd'));
+            $result_nbdhdld = $time_input_nbdhdld->format('d-m-Y');
+
+        }
+        if($this->getColumnValue('ngayhhhd')){
+            $time_input_nhhdld  = Date::excelToDateTimeObject($this->getColumnValue('ngayhhhd'));
+            $result_nhhhdld = $time_input_nhhdld->format('d-m-Y');
+        }
+        if($this->getColumnValue('tgtinhl')){
+            $time_input_tgtinhl  = Date::excelToDateTimeObject($this->getColumnValue('tgtinhl'));
+            $result_tgtinhl = $time_input_tgtinhl->format('d-m-Y');
+        }
+
+
         if($nbdyt){
 
             $insurancesNbdTheYT = companyToYmd($result);
@@ -69,6 +88,7 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
 
 
                     $insurances = Insurances::where('SoBHXH', $this->getColumnValue('sobhxh'))->first();
+                    $laborContract = LaborContract::where('user_id', $employeeDetails->user_id)->first();
                     DB::beginTransaction();
                     try{
                         if($insurances){
@@ -91,7 +111,13 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
                             $insurances->MSTtncn = $this->getColumnValue('msttncn');
                             $insurances->SoNgPgPt = $this->getColumnValue('songpgpt');
                             $insurances->updated_at = date('Y-m-d H:i:s');
-                            // $insurances->save();
+
+
+                            $insurances->save();
+                            //Phan Hop Dong Lao dong
+
+
+                            //End Phan hop Dong Lao Dong
                         }else{
                             $insurances = new Insurances();
                             $insurances->user_id  = $employeeDetails->user_id;
@@ -112,9 +138,61 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
                             $insurances->QTrBHXH = $this->getColumnValue('qtrbhxh');
                             $insurances->MSTtncn = $this->getColumnValue('msttncn');
                             $insurances->SoNgPgPt = $this->getColumnValue('songpgpt');
-                            // $insurances->save();
+                            $insurances->save();
+                        }
+                        //Phan hop Dong lao dong
+                        if($laborContract)
+                        {
+                            //$laborContract = new LaborContract();
+                            //$laborContract->user_id = !is_null($request->user_id) ? $request->user_id : user()->id;
+                            //$laborContract->add_id = user()->exactUserid();
+                            $laborContract->MAHDLD =  $this->getColumnValue('manv');
+                            $laborContract->HTLD =  $this->getColumnValue('htld');
+                            $laborContract->DVSDLD =  $this->getColumnValue('dvsdld');
+                            $laborContract->NguoiDD = $this->getColumnValue('nguoidd');
+                            $laborContract->NgayBDHD = isset($result_nbdhdld)?$result_nbdhdld:null;
+                            $laborContract->NgayHHHD = isset($result_nhhhdld)?$result_nhhhdld:null;
+                            $laborContract->Ngaynhan = isset($str_ngaynhan)?$str_ngaynhan : null;
+                            $laborContract->MaNgach = $this->getColumnValue('mangach');
+                            $laborContract->NgachL = $this->getColumnValue('ngachl');
+                            $laborContract->BacL = $this->getColumnValue('bacl');
+                            $laborContract->HesoL = $this->getColumnValue('hesol');
+                            $laborContract->TGtinhL = isset($result_tgtinhl)?$result_tgtinhl:null;
+                            $laborContract->HeSoPCCV = $this->getColumnValue('hesopccv');
+                            $laborContract->MucPCCV = $this->getColumnValue('mucpccv');
+                            $laborContract->HeSoPCKV = $this->getColumnValue('hesopckv');
+                            $laborContract->HeSoPCTN = $this->getColumnValue('hesopctn');
+                            $laborContract->HeSoPCDH = $this->getColumnValue('hesopcdh');
+                            $laborContract->Ghichu = $this->getColumnValue('ghichu');
+                            $laborContract->save();
+                        }
+                        else
+                        {
+                            $laborContract = new LaborContract();
+                            $laborContract->user_id = $employeeDetails->user_id;
+                            $laborContract->add_id = user()->exactUserid();
+                            $laborContract->MAHDLD =  $this->getColumnValue('manv');
+                            $laborContract->HTLD =  $this->getColumnValue('htld');
+                            $laborContract->DVSDLD =  $this->getColumnValue('dvsdld');
+                            $laborContract->NguoiDD = $this->getColumnValue('nguoidd');
+                            $laborContract->NgayBDHD = isset($result_nbdhdld)?$result_nbdhdld:null;
+                            $laborContract->NgayHHHD = isset($result_nhhhdld)?$result_nhhhdld:null;
+                            $laborContract->Ngaynhan = isset($str_ngaynhan)?$str_ngaynhan : null;
+                            $laborContract->MaNgach = $this->getColumnValue('mangach');
+                            $laborContract->NgachL = $this->getColumnValue('ngachl');
+                            $laborContract->BacL = $this->getColumnValue('bacl');
+                            $laborContract->HesoL = $this->getColumnValue('hesol');
+                            $laborContract->TGtinhL = isset($result_tgtinhl)?$result_tgtinhl:null;
+                            $laborContract->HeSoPCCV = $this->getColumnValue('hesopccv');
+                            $laborContract->MucPCCV = $this->getColumnValue('mucpccv');
+                            $laborContract->HeSoPCKV = $this->getColumnValue('hesopckv');
+                            $laborContract->HeSoPCTN = $this->getColumnValue('hesopctn');
+                            $laborContract->HeSoPCDH = $this->getColumnValue('hesopcdh');
+                            $laborContract->Ghichu = $this->getColumnValue('ghichu');
+                            $laborContract->save();
                         }
                         //$this->logSearchEntry($insurances->SoBHXH, $insurances->SoBHXH, 'employees.show', 'employee', $user->company_id);
+                        //dd($insurances);
                         DB::commit();
                     }catch (InvalidFormatException $e){
                         //dd($e->getMessage());
