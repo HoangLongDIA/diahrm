@@ -83,13 +83,27 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
                     $user->educationLevel = $this->getColumnValue('trdovh');
                     $user->sotruong = $this->isColumnExists('sotruong') ? $this->getColumnValue('sotruong'):'';
 
-                   /* if($this->getColumnValue('email') != "0" || $this->getColumnValue('email')!= "")
-                    {
-                        $user->email = $this->getColumnValue('email');
-                    }else
-                    {
-                        $user->email = "";
-                    }*/
+                    $user->CdanhHD = $this->getColumnValue('cdanhhd');
+                    $user->TENDV = $this->getColumnValue('tendv');
+                    $user->SoSLDCMND = $this->getColumnValue('sosldcmnd');
+                    if($this->getColumnValue('ngaycmnd')){
+                        $ngaycmnd  = Date::excelToDateTimeObject($this->getColumnValue('ngaycmnd'));
+                        $ngaycmnd1 = $ngaycmnd->format('d-m-Y');
+                    }
+
+                    $user->NgayCMND = isset($ngaycmnd1)?$ngaycmnd1:null;
+                    $user->NoiCMND = $this->getColumnValue('noicmnd');
+                    $user->Noisinh = $this->getColumnValue('noisinh');
+                    $user->QUEQUAN = $this->getColumnValue('quequan');
+                    $user->Xuatthan = $this->getColumnValue('xuatthan');
+                    $user->PhanLoaiNV = $this->getColumnValue('phanloainv');
+                    $user->QTCT = $this->getColumnValue('qtct');
+                    $user->MoiQH = $this->getColumnValue('moiqh');
+                    $user->Hotencha = $this->getColumnValue('hotencha');
+                    $user->Hotenme = $this->getColumnValue('hotenme');
+                    $user->HotenVC = $this->getColumnValue('hotenvc');
+                    $user->SoCon = $this->getColumnValue('socon');
+
 
                     $user->email = $this->getColumnValue('email');
 

@@ -61,6 +61,21 @@ use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
  * @property  boolean $cttuve
  * @property  boolean $ctdangvien
  * @property string $chucdanh
+ * @property string $CdanhHD
+ * @property string $TENDV
+ * @property string $SoSLDCMND
+ * @property string $NgayCMND
+ * @property string $NoiCMND
+ * @property string $Noisinh
+ * @property string $QUEQUAN
+ * @property string $Xuatthan
+ * @property string $PhanLoaiNV
+ * @property string $QTCT
+ * @property string $MoiQH
+ * @property string $Hotencha
+ * @property string $Hotenme
+ * @property string $HotenVC
+ * @property string $SoCon
  * @property string|null $two_factor_secret
  * @property string|null $two_factor_recovery_codes
  * @property string|null $remember_token

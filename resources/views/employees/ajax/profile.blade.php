@@ -273,17 +273,26 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
                     <div class="col-xl-5 col-lg-6 col-md-6">
 
                         @if ($showFullProfile)
-                            <x-cards.data class="mb-4" :title="__('modules.appreciations.appreciation')">
-                                @forelse ($employee->appreciationsGrouped as $item)
-                                <div class="float-left position-relative mb-2" style="width: 50px" data-toggle="tooltip" data-original-title="@if(isset($item->award->title)){{  $item->award->title }} @endif">
-                                    @if(isset($item->award->awardIcon->icon))
-                                        <x-award-icon :award="$item->award" />
-                                    @endif
-                                    <span class="position-absolute badge badge-secondary rounded-circle border-additional-grey appreciation-count">{{ $item->no_of_awards }}</span>
+                            <x-cards.data class="mb-4" :title="__('app.workHistory')"  >
+{{--                                @forelse ($employee->appreciationsGrouped as $item)--}}
+{{--                                <div class="float-left position-relative mb-2" style="width: 50px" data-toggle="tooltip" data-original-title="@if(isset($item->award->title)){{  $item->award->title }} @endif">--}}
+{{--                                    @if(isset($item->award->awardIcon->icon))--}}
+{{--                                        <x-award-icon :award="$item->award" />--}}
+{{--                                    @endif--}}
+{{--                                    <span class="position-absolute badge badge-secondary rounded-circle border-additional-grey appreciation-count">{{ $item->no_of_awards }}</span>--}}
+{{--                                </div>--}}
+{{--                                @empty--}}
+{{--                                    <x-cards.no-record icon="medal" :message="__('messages.noRecordFound')" />--}}
+{{--                                @endforelse--}}
+{{--                                <x-cards.data-row :label="__('Note')"--}}
+{{--                                                  :value="$employee->QTCT" />--}}
+                                <div class="col-12 px-0 pb-3 d-lg-flex d-md-flex d-block">
+
+{{--                                    <p class="mb-0 text-dark-grey f-14 w-100 text-wrap">{{ $employee->QTCT }}</p>--}}
+                                    <textarea rows="10" cols="100" style="border-style: none;border-color: Transparent;overflow: auto; ">{{  $employee->QTCT }}
+                                    </textarea>
                                 </div>
-                                @empty
-                                    <x-cards.no-record icon="medal" :message="__('messages.noRecordFound')" />
-                                @endforelse
+
                             </x-cards.data>
                         @endif
 
@@ -326,25 +335,25 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
                         </x-cards.data>
 
                         @if ($showFullProfile)
-                            <div class="row">
-                                @if (in_array('attendance', user_modules()))
-                                    @if(isset($lateAttendance))
-                                        <div class="col-xl-6 col-sm-12 mb-4">
-                                            <x-cards.widget :title="__('modules.dashboard.lateAttendanceMark')"
-                                                :value="$lateAttendance" :info="__('modules.dashboard.thisMonth')"
-                                                icon="map-marker-alt" />
-                                        </div>
-                                    @endif
-                                @endif
-                                @if (in_array('leaves', user_modules()))
-                                    @if(isset($leavesTaken))
-                                        <div class="col-xl-6 col-sm-12 mb-4">
-                                            <x-cards.widget :title="__('modules.dashboard.leavesTaken')" :value="$leavesTaken"
-                                                :info="__('modules.dashboard.thisMonth')" icon="sign-out-alt" />
-                                        </div>
-                                        @endif
-                                @endif
-                            </div>
+{{--                            <div class="row">--}}
+{{--                                @if (in_array('attendance', user_modules()))--}}
+{{--                                    @if(isset($lateAttendance))--}}
+{{--                                        <div class="col-xl-6 col-sm-12 mb-4">--}}
+{{--                                            <x-cards.widget :title="__('modules.dashboard.lateAttendanceMark')"--}}
+{{--                                                :value="$lateAttendance" :info="__('modules.dashboard.thisMonth')"--}}
+{{--                                                icon="map-marker-alt" />--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
+{{--                                @endif--}}
+{{--                                @if (in_array('leaves', user_modules()))--}}
+{{--                                    @if(isset($leavesTaken))--}}
+{{--                                        <div class="col-xl-6 col-sm-12 mb-4">--}}
+{{--                                            <x-cards.widget :title="__('modules.dashboard.leavesTaken')" :value="$leavesTaken"--}}
+{{--                                                :info="__('modules.dashboard.thisMonth')" icon="sign-out-alt" />--}}
+{{--                                        </div>--}}
+{{--                                        @endif--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
                             <div class="row">
                                 @if (in_array('tasks', user_modules()))
                                     @if(isset($taskChart))

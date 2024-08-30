@@ -44,7 +44,25 @@ class EmployeeImport implements ToArray
             array('id' => 'ghichuhd', 'name' => __('ghichuhd'), 'required' => 'Yes',),
             array('id' => 'cuucb', 'name' => __('cuucb'), 'required' => 'Yes',),
             array('id' => 'tuve', 'name' => __('tuve'), 'required' => 'Yes',),
-            array('id' => 'dangvien', 'name' => __('Đảng Viên'), 'required' => 'Yes',)
+            array('id' => 'dangvien', 'name' => __('Đảng Viên'), 'required' => 'Yes',),
+            //More Info
+            array('id' => 'cdanhhd', 'name' => __('cdanhhd'), 'required' => 'Yes',),
+            array('id' => 'tendv', 'name' => __('tendv'), 'required' => 'Yes',),
+            array('id' => 'sosldcmnd', 'name' => __('sosldcmnd'), 'required' => 'Yes',),
+            array('id' => 'ngaycmnd', 'name' => __('ngaycmnd'), 'required' => 'Yes',),
+            array('id' => 'noicmnd', 'name' => __('noicmnd'), 'required' => 'Yes',),
+            array('id' => 'noisinh', 'name' => __('noisinh'), 'required' => 'Yes',),
+            array('id' => 'quequan', 'name' => __('quequan'), 'required' => 'Yes',),
+            array('id' => 'xuatthan', 'name' => __('xuatthan'), 'required' => 'Yes',),
+            array('id' => 'phanloainv', 'name' => __('phanloainv'), 'required' => 'Yes',),
+            array('id' => 'qtct', 'name' => __('qtct'), 'required' => 'Yes',),
+            array('id' => 'moiqh', 'name' => __('moiqh'), 'required' => 'Yes',),
+            array('id' => 'hotencha', 'name' => __('hotencha'), 'required' => 'Yes',),
+            array('id' => 'hotenme', 'name' => __('hotenme'), 'required' => 'Yes',),
+            array('id' => 'hotenvc', 'name' => __('hotenvc'), 'required' => 'Yes',),
+            array('id' => 'socon', 'name' => __('socon'), 'required' => 'Yes',)
+
+
 
 
 //            array('id' => 'name', 'name' => __('modules.employees.employeeName'), 'required' => 'Yes',),

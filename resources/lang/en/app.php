@@ -42,6 +42,7 @@ return array(
     'completion' => 'Completion',
     'address' => 'Address',
     'tempaddress' => 'Temporary Address',
+    'workHistory' => 'Work History',
     'completed' => 'Completed',
     'failed' => 'Failed',
     'dueDate' => 'Due Date',

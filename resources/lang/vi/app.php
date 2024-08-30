@@ -41,6 +41,7 @@ return [
   'completion' => 'Hoàn thành',
   'address' => 'Địa chỉ',
     'tempaddress'=>'Địa Chỉ Tạm Trú',
+    'workHistory' => 'Quá Trình Công tác',
   'completed' => 'Hoàn thành',
   'failed' => 'Thất bại',
   'dueDate' => 'Ngày đáo hạn',
