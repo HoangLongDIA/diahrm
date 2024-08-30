@@ -15859,7 +15859,7 @@ input[type=number] {
   padding: 12px 0px;
 }
 .login_header img {
-  max-height: 32px;
+  max-height: 58px;
 }
 .login_header h3 {
   font-size: 21px;
@@ -17017,7 +17017,7 @@ button.disabled, button:disabled {
 }
 
 .bg-grey {
-  background-color: #e8eef3;
+  background-image: url("/img/bg.jpg");
 }
 
 .bg-light-grey {
