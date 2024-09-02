@@ -65,7 +65,7 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
                                             <button class="btn f-14 px-0 py-0 text-dark-grey dropdown-toggle"
                                                 type="button" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false">
-                                                <i class="fa fa-ellipsis-h"></i>
+                                                <i class="fa fa-edit"></i>
                                             </button>
 
                                             <div class="dropdown-menu dropdown-menu-right border-grey rounded b-shadow-4 p-0"
@@ -105,28 +105,32 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
 
                             @if ($showFullProfile)
                                 <div class="card-footer bg-white border-top-grey pl-0">
-                                    <div class="d-flex flex-wrap justify-content-between">
-                                        <span>
-                                            <label class="f-11 text-dark-grey mb-12 text-capitalize"
-                                                for="usr">@lang('app.openTasks')</label>
-                                            <p class="mb-0 f-18 f-w-500">{{ $employee->open_tasks_count }}</p>
-                                        </span>
-                                        <span>
-                                            <label class="f-11 text-dark-grey mb-12 text-capitalize"
-                                                for="usr">@lang('app.menu.projects')</label>
-                                            <p class="mb-0 f-18 f-w-500">{{ $employee->member_count }}</p>
-                                        </span>
-                                        <span>
-                                            <label class="f-11 text-dark-grey mb-12 text-capitalize"
-                                                for="usr">@lang('modules.employees.hoursLogged')</label>
-                                           {{-- <p class="mb-0 f-18 f-w-500">{{ $hoursLogged ? $hoursLogged  : '' }}</p>--}}
-                                        </span>
-                                        <span>
-                                            <label class="f-11 text-dark-grey mb-12 text-capitalize"
-                                                for="usr">@lang('app.menu.tickets')</label>
-                                            <p class="mb-0 f-18 f-w-500">{{ $employee->agents_count }}</p>
-                                        </span>
+                                    <div class="col-12 px-0 pb-3 d-lg-flex d-md-flex d-block">
+                                        <p class="mb-0 text-lightest f-14 w-30 text-capitalize">{{  $employee->CdanhHD }}</p>
+
                                     </div>
+{{--                                    <div class="d-flex flex-wrap justify-content-between">--}}
+{{--                                        <span>--}}
+{{--                                            <label class="f-11 text-dark-grey mb-12 text-capitalize"--}}
+{{--                                                for="usr">@lang('app.openTasks')</label>--}}
+{{--                                            <p class="mb-0 f-18 f-w-500">{{ $employee->open_tasks_count }}</p>--}}
+{{--                                        </span>--}}
+{{--                                        <span>--}}
+{{--                                            <label class="f-11 text-dark-grey mb-12 text-capitalize"--}}
+{{--                                                for="usr">@lang('app.menu.projects')</label>--}}
+{{--                                            <p class="mb-0 f-18 f-w-500">{{ $employee->member_count }}</p>--}}
+{{--                                        </span>--}}
+{{--                                        <span>--}}
+{{--                                            <label class="f-11 text-dark-grey mb-12 text-capitalize"--}}
+{{--                                                for="usr">@lang('modules.employees.hoursLogged')</label>--}}
+{{--                                           --}}{{-- <p class="mb-0 f-18 f-w-500">{{ $hoursLogged ? $hoursLogged  : '' }}</p>--}}
+{{--                                        </span>--}}
+{{--                                        <span>--}}
+{{--                                            <label class="f-11 text-dark-grey mb-12 text-capitalize"--}}
+{{--                                                for="usr">@lang('app.menu.tickets')</label>--}}
+{{--                                            <p class="mb-0 f-18 f-w-500">{{ $employee->agents_count }}</p>--}}
+{{--                                        </span>--}}
+{{--                                    </div>--}}
                                 </div>
                             @endif
                         </x-cards.user>
@@ -296,6 +300,30 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
                             </x-cards.data>
                         @endif
 
+                        <x-cards.data class="mb-4" :title="__('app.licenseEmployee')"  >
+                            <x-cards.data-row :label="__('CMND/CCCD')"
+                                              :value="$employee->SoSLDCMND" />
+                            <x-cards.data-row :label="__('Ngày Cấp')"
+                                              :value="$employee->NgayCMND" />
+                            <x-cards.data-row :label="__('Nơi Cấp')"
+                                              :value="$employee->NoiCMND" />
+                            <x-cards.data-row :label="__('Nơi Sinh')"
+                                              :value="$employee->Noisinh" />
+                            <x-cards.data-row :label="__('Quê Quán')"
+                                              :value="$employee->QUEQUAN" />
+                            <x-cards.data-row :label="__('Xuất Thân')"
+                                              :value="$employee->Xuatthan" />
+                        </x-cards.data>
+                            <x-cards.data class="mb-4" :title="__('app.familyMember')"  >
+                                <x-cards.data-row :label="__('Họ Và Tên Cha')"
+                                                  :value="$employee->Hotencha" />
+                                <x-cards.data-row :label="__('Họ Và Tên Mẹ')"
+                                                  :value="$employee->Hotenme" />
+                                <x-cards.data-row :label="__('Họ Và tên Vợ/Chồng')"
+                                                  :value="$employee->HotenVC" />
+                                <x-cards.data-row :label="__('Số Con')"
+                                                  :value="$employee->SoCon" />
+                            </x-cards.data>
                         <x-cards.data class="mb-4">
                             <div class="d-flex justify-content-between">
                                     <div class="col-6">

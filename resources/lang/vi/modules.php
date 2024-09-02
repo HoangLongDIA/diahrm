@@ -252,7 +252,7 @@ return [
     'title' => 'Chọn nhân viên',
     'role' => 'Vai trò',
     'lastDate' => 'Ngày thoát',
-    'employeeId' => 'Mã hiệu công nhân',
+    'employeeId' => 'Mã nhân viên',
     'chooseDepartment' => 'Chọn khoa',
     'chooseDesignation' => 'Chọn chức vụ',
     'chooseStatus' => 'Chọn trạng thái',
@@ -2009,7 +2009,7 @@ return [
   ],
   'makeDefaultImage' => 'Đặt mặc định',
   'emergencyContact' => [
-    'emergencyContact' => 'Liên hệ khẩn cấp',
+    'emergencyContact' => 'Người Liên Hệ',
     'viewEmergencyContact' => 'Xem liên hệ khẩn cấp',
     'editEmergencyContact' => 'Chỉnh sửa liên hệ khẩn cấp',
     'addNewEmergencyContact' => 'Thêm liên hệ khẩn cấp mới',

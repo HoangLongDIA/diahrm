@@ -1,113 +1,116 @@
 <!-- ROW START -->
-<div class="row py-0 py-md-0 py-lg-3">
-    <div class="col-lg-12 col-md-12 mb-4 mb-xl-0 mb-lg-4">
+<div class="row py-0 py-md-0 py-lg-2">
+    <div class="col-lg-12 col-md-12 mt-2 mb-xl-0 mb-lg-4">
 
 
 
     <!-- Add Task Export Buttons Start -->
-    <div class="d-flex justify-content-between action-bar mb-3">
-        @if ($addClientPermission == 'all' || $addClientPermission == 'added' || $addClientPermission == 'both')
-            <x-forms.link-primary
-                class="mr-3 float-left emergency-contacts-btn hdld-btn"
-                link="javascript:;"
-                icon="plus">
-                @lang('app.createNew')
-            </x-forms.link-primary>
-        @endif
-    </div>
-
-
-    <div class="card bg-white border-0 b-shadow-4">
-        <div class="card-header bg-white border-0 text-capitalize d-flex justify-content-between pt-4">
-            <h4 class="f-18 f-w-500 mb-0 text-center" style="font-family: sans-serif">Thông Tin Về Hợp Đồng Lao Động</h4>
-        </div>
-
-        <div class="card-body pt-2 ">
-            <div class="table-responsive">
-                @if($laborContract !=null)
-
-                        <table class="table table-bordered" id="example">
-
-                            <tr style="font-family: sans-serif">
-                                <td class="text-right"><b>Mã Hợp Đồng Lao Động :</b> </td>
-                                <td class="text-left"> {{ $laborContract->MAHDLD }}</td>
-                                <td class="text-right"><b>Loại Hợp Đồng :</b> </td>
-                                <td class="text-left">{{ $laborContract->HTLD }}</td>
-                                <td class="text-right"><b>Đơn Vị Sử Dụng:</b> </td>
-                                <td class="text-left">{{ $laborContract->DVSDLD }}</td>
-                                <td class="text-center"><b>Lãnh Đạo:</b> </td>
-                                <td class="text-left">{{ $laborContract->NguoiDD }}</td>
-
-
-
-                            </tr>
-                            <tr style="font-family: sans-serif">
-                                <td class="text-right"><b>Ngày bắt đầu Hợp Đồng :</b> </td>
-                                <td class="text-left"> {{ $laborContract->NgayBDHD }}</td>
-                                <td class="text-right"><b>Ngày hết hạn Hợp Đồng:</b> </td>
-                                <td class="text-left">{{ $laborContract->NgayHHHD }}</td>
-                                <td class="text-right"><b>Ngày Bắt Đầu Đi làm:</b> </td>
-                                <td class="text-left">{{ $laborContract->Ngaynhan }}</td>
-                                <td class="text-right"><b>Ngày Bắt Đầu Tính Lương:</b> </td>
-                                <td class="text-left">{{ $laborContract->TGtinhL }}</td>
-
-
-
-                            </tr>
-                            <tr style="font-family: sans-serif">
-                                <td class="text-right"><b>Mã ngạch lao động :</b> </td>
-                                <td class="text-left"> {{ $laborContract->MaNgach }}</td>
-                                <td class="text-right"><b>Ngạch Lương:</b> </td>
-                                <td class="text-left">{{ $laborContract->NgachL }}</td>
-                                <td class="text-right"><b>Bậc Lương :</b> </td>
-                                <td class="text-left">{{ $laborContract->BacL }}</td>
-                                <td class="text-right"><b>Hệ Số Lương CD :</b> </td>
-                                <td class="text-left">{{ $laborContract->HesoL }}</td>
-
-
-
-                            </tr>
-                            <tr style="font-family: sans-serif">
-                                <td class="text-right"><b>Mức Lương :</b> </td>
-                                <td class="text-left"> {{ $laborContract->MucL }}</td>
-                                <td class="text-right"><b>Hệ số PCCV:</b> </td>
-                                <td class="text-left">{{ $laborContract->HeSoPCCV }}</td>
-                                <td class="text-right"><b>Mức PCCV :</b> </td>
-                                <td class="text-left">{{ $laborContract->MucPCCV }}</td>
-                                <td class="text-right"><b>Hệ Số Phụ Cấp Khu Vực :</b> </td>
-                                <td class="text-left">{{ $laborContract->HeSoPCKV }}</td>
-
-
-
-                            </tr>
-                            <tr style="font-family: sans-serif">
-                                <td class="text-right"><b>Hệ Số Phụ Cấp Thâm Niên :</b> </td>
-                                <td class="text-left">{{ $laborContract->HeSoPCTN }}</td>
-                                <td class="text-right"><b>Hệ Số PCDH :</b> </td>
-                                <td class="text-left">{{ $laborContract->HeSoPCDH }}</td>
-                                <td class="text-right"><b>Thông tin liên Quan</b></td>
-                                <td class="text-left" colspan="3">{{ $laborContract->Ghichu }}</td>
-
-
-
-
-                            </tr>
-                            <tr style="font-family: sans-serif" class="text-center">
-                                <td colspan="8"><button class="btn btn-info">In Hợp Đồng</button></td>
-                            </tr>
-
-                        </table>
-                @endif
+        <div class="d-flex justify-content-between action-bar">
+            <div id="table-actions" class="d-block d-lg-flex align-items-center">
+                @if ($addClientPermission == 'all' || $addClientPermission == 'added' || $addClientPermission == 'both')
+                    <x-forms.link-primary
+                        class="mr-3 float-left emergency-contacts-btn hdld-btn"
+                        link="javascript:;"
+                        icon="plus">
+                        Cập Nhật
+                    </x-forms.link-primary>
+                    <x-forms.link-secondary
+                        class="mr-3 float-left emergency-contacts-btn hdld-btn"
+                        link="javascript:;"
+                        icon="file-upload">
+                       In Hợp Đồng
+                    </x-forms.link-secondary>
             </div>
 
-        </div>
-        <div class="card-footer pt-2">
 
+            @endif
         </div>
+
+
+
+
+
     </div>
     <!-- Task Box End -->
+</div>
+<div class="d-lg-flex">
+    <div class="w-100 py-0 py-lg-3 py-md-0">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 mb-4 mb-xl-0 mb-lg-4 mb-md-0">
+                <div class="row">
+                    <div class="col-xl-7 col-md-6 mb-4 mb-lg-0">
+                        <x-cards.data :title="__('Thông Tin Hợp Đồng lao Động')">
+                            @if($laborContract !=null)
+                                <x-cards.data-row :label="__('Mã Hợp Đồng')"
+                                                  :value="$laborContract->MAHDLD" />
+                                <x-cards.data-row :label="__('Loại Hợp Đồng')"
+                                                  :value="$laborContract->HTLD" />
+                                <x-cards.data-row :label="__('Ngày Bắt Đầu Hợp Đồng')"
+                                                  :value="$laborContract->NgayBDHD" />
+
+                                <x-cards.data-row :label="__('Ngày Hết Hạn Hợp Đồng')"
+                                                  :value="$laborContract->NgayHHHD" />
+
+                                <x-cards.data-row :label="__('Mã Ngạch')"
+                                                  :value="$laborContract->MaNgach" />
+                                <x-cards.data-row :label="__('Ngạch Lương')"
+                                                  :value="$laborContract->NgachL" />
+                                <x-cards.data-row :label="__('Mức Lương')"
+                                                  :value="$laborContract->MucL" />
+                                <x-cards.data-row :label="__('HeSoPCCV')"
+                                                  :value="$laborContract->HeSoPCCV" />
+                                <x-cards.data-row :label="__('HeSoPCTN')"
+                                                  :value="$laborContract->HeSoPCTN" />
+                                <x-cards.data-row :label="__('HeSoPCDH')"
+                                                  :value="$laborContract->HeSoPCDH" />
+
+                            @endif
+
+
+                        </x-cards.data>
+                    </div>
+                    <div class="col-xl-5 col-lg-6 col-md-6">
+                        <x-cards.data class="mb-4" :title="__('Đơn Vị Sử Dụng lao Động')"  >
+                            @if($laborContract !=null)
+                                <x-cards.data-row :label="__('Đơn Vị Sử Dụng lao Động')"
+                                                  :value="$laborContract->DVSDLD" />
+                                <x-cards.data-row :label="__('Người ký kết HĐ')"
+                                                  :value="$laborContract->NguoiDD" />
+                                <x-cards.data-row :label="__('Ngày đi làm')"
+                                                  :value="$laborContract->Ngaynhan" />
+                                <x-cards.data-row :label="__('Ngày tính lương')"
+                                                  :value="$laborContract->TGtinhL" />
+                                <x-cards.data-row :label="__('Bậc lương')"
+                                                  :value="$laborContract->BacL" />
+                                <x-cards.data-row :label="__('Hệ Số lương')"
+                                                  :value="$laborContract->HesoL" />
+                                <x-cards.data-row :label="__('MucPCCV')"
+                                                  :value="$laborContract->MucPCCV" />
+                                <x-cards.data-row :label="__('Hệ số phụ cấp khu vực')"
+                                                  :value="$laborContract->HeSoPCCV" />
+                                <x-cards.data-row :label="__('Ghi Chú hợp đồng')"
+                                                  :value="$laborContract->Ghichu" />
+
+
+                            @endif
+                                <div class="col-12 px-0 pb-3 d-lg-flex d-md-flex d-block">
+                                    <p class="mb-0 text-lightest f-14 w-30 text-capitalize">    </p>
+                                    <p class="mb-0 text-dark-grey f-14 w-70 text-wrap"></p>
+                                </div>
+                                <div class="col-12 px-0 pb-3 d-lg-flex d-md-flex d-block">
+                                    <p class="mb-0 text-lightest f-14 w-30 text-capitalize">    </p>
+                                    <p class="mb-0 text-dark-grey f-14 w-70 text-wrap"></p>
+                                </div>
+
+                        </x-cards.data>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
+</div>
+
+
 <script>
     $('body').on('click', '.hdld-btn', function () {
         var url = "{{ route('laborcontract.create') }}?user_id=" + "{{ $employee->id }}";

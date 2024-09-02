@@ -54,6 +54,8 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
 
         if (str_contains($this->getColumnValue('ngaynhan'), '/')) {
             $str_ngaynhan = str_replace('/', '-', $this->getColumnValue('ngaynhan'));
+            $newformat_ngaynhan = new \DateTime();
+            $n_ngaynhan = $newformat_ngaynhan->createFromFormat('d-m-Y', $str_ngaynhan);
 
         }
         $nbdyt = $this->getColumnValue('nbdtheyt');
@@ -61,16 +63,16 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
         $result = $time_input_nbdyt->format('d-m-Y');
         if($this->getColumnValue('ngaybdhd')){
             $time_input_nbdhdld  = Date::excelToDateTimeObject($this->getColumnValue('ngaybdhd'));
-            $result_nbdhdld = $time_input_nbdhdld->format('d-m-Y');
+            //$result_nbdhdld = $time_input_nbdhdld->format('d-m-Y');
 
         }
         if($this->getColumnValue('ngayhhhd')){
             $time_input_nhhdld  = Date::excelToDateTimeObject($this->getColumnValue('ngayhhhd'));
-            $result_nhhhdld = $time_input_nhhdld->format('d-m-Y');
+            //$result_nhhhdld = $time_input_nhhdld->format('d-m-Y');
         }
         if($this->getColumnValue('tgtinhl')){
             $time_input_tgtinhl  = Date::excelToDateTimeObject($this->getColumnValue('tgtinhl'));
-            $result_tgtinhl = $time_input_tgtinhl->format('d-m-Y');
+            //$result_tgtinhl = $time_input_tgtinhl->format('d-m-Y');
         }
 
 
@@ -150,14 +152,14 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
                             $laborContract->HTLD =  $this->getColumnValue('htld');
                             $laborContract->DVSDLD =  $this->getColumnValue('dvsdld');
                             $laborContract->NguoiDD = $this->getColumnValue('nguoidd');
-                            $laborContract->NgayBDHD = isset($result_nbdhdld)?$result_nbdhdld:null;
-                            $laborContract->NgayHHHD = isset($result_nhhhdld)?$result_nhhhdld:null;
-                            $laborContract->Ngaynhan = isset($str_ngaynhan)?$str_ngaynhan : null;
+                            $laborContract->NgayBDHD = isset($time_input_nbdhdld)? ($time_input_nbdhdld) : null;
+                            $laborContract->NgayHHHD = isset($time_input_nhhdld)?($time_input_nhhdld):null;
+                            $laborContract->Ngaynhan = isset($n_ngaynhan)?($n_ngaynhan) : null;
                             $laborContract->MaNgach = $this->getColumnValue('mangach');
                             $laborContract->NgachL = $this->getColumnValue('ngachl');
                             $laborContract->BacL = $this->getColumnValue('bacl');
                             $laborContract->HesoL = $this->getColumnValue('hesol');
-                            $laborContract->TGtinhL = isset($result_tgtinhl)?$result_tgtinhl:null;
+                            $laborContract->TGtinhL = isset($time_input_tgtinhl)?($time_input_tgtinhl):null;
                             $laborContract->HeSoPCCV = $this->getColumnValue('hesopccv');
                             $laborContract->MucPCCV = $this->getColumnValue('mucpccv');
                             $laborContract->HeSoPCKV = $this->getColumnValue('hesopckv');
@@ -175,14 +177,14 @@ class ImportEmployeeBhHdJob implements ShouldQueue, ShouldBeUnique
                             $laborContract->HTLD =  $this->getColumnValue('htld');
                             $laborContract->DVSDLD =  $this->getColumnValue('dvsdld');
                             $laborContract->NguoiDD = $this->getColumnValue('nguoidd');
-                            $laborContract->NgayBDHD = isset($result_nbdhdld)?$result_nbdhdld:null;
-                            $laborContract->NgayHHHD = isset($result_nhhhdld)?$result_nhhhdld:null;
-                            $laborContract->Ngaynhan = isset($str_ngaynhan)?$str_ngaynhan : null;
+                            $laborContract->NgayBDHD = isset($time_input_nbdhdld)?($time_input_nbdhdld):null;
+                            $laborContract->NgayHHHD = isset($time_input_nhhdld)?($time_input_nhhdld):null;
+                            $laborContract->Ngaynhan = isset($n_ngaynhan)?($n_ngaynhan) : null;
                             $laborContract->MaNgach = $this->getColumnValue('mangach');
                             $laborContract->NgachL = $this->getColumnValue('ngachl');
                             $laborContract->BacL = $this->getColumnValue('bacl');
                             $laborContract->HesoL = $this->getColumnValue('hesol');
-                            $laborContract->TGtinhL = isset($result_tgtinhl)?$result_tgtinhl:null;
+                            $laborContract->TGtinhL = isset($time_input_tgtinhl)?($time_input_tgtinhl):null;
                             $laborContract->HeSoPCCV = $this->getColumnValue('hesopccv');
                             $laborContract->MucPCCV = $this->getColumnValue('mucpccv');
                             $laborContract->HeSoPCKV = $this->getColumnValue('hesopckv');
