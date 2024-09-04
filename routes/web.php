@@ -237,6 +237,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
             \App\Http\Controllers\LaborContractController::class,
             'store'
         ])->name('laborcontract.store');
+        Route::get('laborcontract/{id}/edit', [
+            \App\Http\Controllers\LaborContractController::class,
+            'edit'
+        ])->name('laborcontract.edit');
     /// End labor Contact Section
 
     Route::get('employee-docs/download/{id}', [EmployeeDocController::class, 'download'])->name('employee-docs.download');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LaborContract\StoreLaborContractRequest;
 use App\Models\LaborContract;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LaborContractController extends Controller
 {
@@ -67,4 +68,17 @@ class LaborContractController extends Controller
             ]) ;
         }
     }
+    public function edit($id)
+    {
+        $viewPermission = user()->permission('view_clients');
+        $this->addClientPermission = user()->permission('add_clients');
+        abort_403(!in_array($viewPermission, ['all', 'added', 'both']));
+        $this->userId = request()->user_id ? request()->user_id : null;
+        $this->addId = user()->id;
+        $this->pageTitle = __('Chỉnh Sửa Thông Tin Hợp Đồng');
+        $laborContract = DB::table('labor_contracts')->where('id', $id)->first();
+        $this->laborcontract = $laborContract;
+        return view('labor.edit', $this->data)->render();
+    }
+
 }

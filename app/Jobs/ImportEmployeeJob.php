@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\EmployeeDetails;
 use App\Models\Role;
+use App\Models\Team;
 use App\Models\UniversalSearch;
 use App\Models\User;
 use App\Traits\ExcelImportable;
@@ -84,7 +85,8 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
                     $user->sotruong = $this->isColumnExists('sotruong') ? $this->getColumnValue('sotruong'):'';
 
                     $user->CdanhHD = $this->getColumnValue('cdanhhd');
-                    $user->TENDV = $this->getColumnValue('tendv');
+                    //$user->TENDV = $this->getColumnValue('tendv');
+
                     $user->SoSLDCMND = $this->getColumnValue('sosldcmnd');
                     if($this->getColumnValue('ngaycmnd')){
                         $ngaycmnd  = Date::excelToDateTimeObject($this->getColumnValue('ngaycmnd'));
@@ -148,7 +150,10 @@ class ImportEmployeeJob implements ShouldQueue, ShouldBeUnique
                         }else{
                             $employee->marital_status = 'single';
                         }
-
+                        $department = Team::where('team_name', $this->getColumnValue('tendv'))->first();
+                        if(isset($department)){
+                            $employee->department_id = $department->id;
+                        }
 
                         $employee->address = $this->isColumnExists('thuongtru') ? $this->getColumnValue('thuongtru') : null;
                         $employee->about_me = $this->isColumnExists('ghichuhd') ? $this->getColumnValue('ghichuhd') : '';
