@@ -730,7 +730,8 @@ class EmployeeController extends AccountBaseController
             break;
         case 'labor-contract':
             $this->addClientPermission = user()->permission('add_clients');
-            $this->laborContract = DB::table('labor_contracts')->where('user_id', $id)->first();
+            //$this->laborContract = DB::table('labor_contracts')->where('user_id', $id)->first();
+            $this->laborContracts = DB::table('labor_contracts')->where('user_id', $id)->orderByDesc('updated_at')->paginate(2)->withQueryString();
             $this->view = 'employees.ajax.labor_contract';
             break;
         case 'shifts':

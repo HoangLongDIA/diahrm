@@ -1,115 +1,155 @@
-<!-- ROW START -->
-<div class="row py-0 py-md-0 py-lg-2">
-    <div class="col-lg-12 col-md-12 mt-2 mb-xl-0 mb-lg-4">
+@php
+    $updateLeaveQuotaPermission = user()->permission('update_leaves_quota');
+@endphp
+    <!-- ROW START -->
+<div class="row py-0 py-md-0 py-lg-3">
+    <div class="col-lg-12 col-md-12 mb-4 mb-xl-0 mb-lg-4">
 
 
 
-    <!-- Add Task Export Buttons Start -->
-        <div class="d-flex justify-content-between action-bar">
-            <div id="table-actions" class="d-block d-lg-flex align-items-center">
-                @if ($addClientPermission == 'all' || $addClientPermission == 'added' || $addClientPermission == 'both')
-                    <x-forms.link-primary
-                        class="mr-3 float-left emergency-contacts-btn hdld-btn"
-                        link="javascript:;"
-                        icon="plus">
-                        Cập Nhật
-                    </x-forms.link-primary>
-                    <x-forms.link-secondary
-                        class="mr-3 float-left emergency-contacts-btn hdld-btn"
-                        link="javascript:;"
-                        icon="file-upload">
-                       In Hợp Đồng
-                    </x-forms.link-secondary>
-            </div>
-
-
+        <!-- Add Task Export Buttons Start -->
+        <div class="d-flex justify-content-between action-bar mb-3">
+            @if ($addClientPermission == 'all' || $addClientPermission == 'added' || $addClientPermission == 'both')
+                <x-forms.link-primary
+                    class="mr-3 float-left emergency-contacts-btn hdld-btn"
+                    link="javascript:;"
+                    icon="plus">
+                    @lang('app.createNew')
+                </x-forms.link-primary>
             @endif
         </div>
 
 
+        <div class="card bg-white border-0 b-shadow-4">
+            <div class="card-header bg-white border-0 text-capitalize d-flex justify-content-between pt-4">
+                <h4 class="f-18 f-w-500 mb-0"> Danh Sách Hợp Đồng</h4>
 
 
 
-    </div>
-    <!-- Task Box End -->
-</div>
-<div class="d-lg-flex">
-    <div class="w-100 py-0 py-lg-3 py-md-0">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 mb-4 mb-xl-0 mb-lg-4 mb-md-0">
-                <div class="row">
-                    <div class="col-xl-7 col-md-6 mb-4 mb-lg-0">
-                        <x-cards.data :title="__('Thông Tin Hợp Đồng lao Động')">
-                            @if($laborContract !=null)
-                                <x-cards.data-row :label="__('Mã Hợp Đồng')"
-                                                  :value="$laborContract->MAHDLD" />
-                                <x-cards.data-row :label="__('Loại Hợp Đồng')"
-                                                  :value="$laborContract->HTLD" />
-                                <x-cards.data-row :label="__('Ngày Bắt Đầu Hợp Đồng')"
-                                                  :value="$laborContract->NgayBDHD" />
+            </div>
 
-                                <x-cards.data-row :label="__('Ngày Hết Hạn Hợp Đồng')"
-                                                  :value="$laborContract->NgayHHHD" />
+            <div class="card-body pt-2 ">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="example">
+                        <thead class="">
+                        <tr>
+                            <th>Mã HDLD</th>
+                            <th>Loại</th>
+                            <th>Người Tuyển Dụng</th>
+                            <th>Ngày Bắt đầu HĐ</th>
 
-                                <x-cards.data-row :label="__('Mã Ngạch')"
-                                                  :value="$laborContract->MaNgach" />
-                                <x-cards.data-row :label="__('Ngạch Lương')"
-                                                  :value="$laborContract->NgachL" />
-                                <x-cards.data-row :label="__('Mức Lương')"
-                                                  :value="$laborContract->MucL" />
-                                <x-cards.data-row :label="__('HeSoPCCV')"
-                                                  :value="$laborContract->HeSoPCCV" />
-                                <x-cards.data-row :label="__('HeSoPCTN')"
-                                                  :value="$laborContract->HeSoPCTN" />
-                                <x-cards.data-row :label="__('HeSoPCDH')"
-                                                  :value="$laborContract->HeSoPCDH" />
+                            <th>Ngày Hết Hạn HĐ</th>
+                            <th>Ngày vào làm </th>
+                            <th>Mã Ngạch </th>
+                            <th>Ngạch Lương</th>
 
-                            @endif
+                            <th>Bậc</th>
+                            <th>Hệ số </th>
+                            <th>Ngày Tính L</th>
 
 
-                        </x-cards.data>
-                    </div>
-                    <div class="col-xl-5 col-lg-6 col-md-6">
-                        <x-cards.data class="mb-4" :title="__('Đơn Vị Sử Dụng lao Động')"  >
-                            @if($laborContract !=null)
-                                <x-cards.data-row :label="__('Đơn Vị Sử Dụng lao Động')"
-                                                  :value="$laborContract->DVSDLD" />
-                                <x-cards.data-row :label="__('Người ký kết HĐ')"
-                                                  :value="$laborContract->NguoiDD" />
-                                <x-cards.data-row :label="__('Ngày đi làm')"
-                                                  :value="$laborContract->Ngaynhan" />
-                                <x-cards.data-row :label="__('Ngày tính lương')"
-                                                  :value="$laborContract->TGtinhL" />
-                                <x-cards.data-row :label="__('Bậc lương')"
-                                                  :value="$laborContract->BacL" />
-                                <x-cards.data-row :label="__('Hệ Số lương')"
-                                                  :value="$laborContract->HesoL" />
-                                <x-cards.data-row :label="__('MucPCCV')"
-                                                  :value="$laborContract->MucPCCV" />
-                                <x-cards.data-row :label="__('Hệ số phụ cấp khu vực')"
-                                                  :value="$laborContract->HeSoPCCV" />
-                                <x-cards.data-row :label="__('Ghi Chú hợp đồng')"
-                                                  :value="$laborContract->Ghichu" />
+                            <th>Mức Lương</th>
+                            <th>PCCV</th>
+                            <th>PCKV</th>
+                            <th>PCTN</th>
+                            <th>PCDH</th>
 
 
-                            @endif
-                                <div class="col-12 px-0 pb-3 d-lg-flex d-md-flex d-block">
-                                    <p class="mb-0 text-lightest f-14 w-30 text-capitalize">    </p>
-                                    <p class="mb-0 text-dark-grey f-14 w-70 text-wrap"></p>
-                                </div>
-                                <div class="col-12 px-0 pb-3 d-lg-flex d-md-flex d-block">
-                                    <p class="mb-0 text-lightest f-14 w-30 text-capitalize">    </p>
-                                    <p class="mb-0 text-dark-grey f-14 w-70 text-wrap"></p>
-                                </div>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($laborContracts as $item)
+                            <tr class="tableRow1">
+                                <td>{{ $item->MAHDLD }}</td>
+                                <td>{{ $item->HTLD }}</td>
+                                <td>{{ $item->NguoiDD }}</td>
+                                <td>{{ $item->NgayBDHD	 }}</td>
 
-                        </x-cards.data>
-                    </div>
+                                <td>{{ $item->NgayHHHD	 }}</td>
+                                <td>{{ $item->Ngaynhan	 }}</td>
+                                <td>{{ $item->MaNgach	 }}</td>
+                                <td>{{ $item->NgachL	 }}</td>
+
+                                <td>{{ $item->BacL	 }}</td>
+                                <td>{{ $item->HesoL	 }}</td>
+                                <td>{{ $item->TGtinhL	 }}</td>
+                                <td>{{ $item->MucL	 }}</td>
+                                <td>{{ $item->MucPCCV	 }}</td>
+                                <td>{{ $item->HeSoPCKV	 }}</td>
+                                <td>{{ $item->HeSoPCTN	 }}</td>
+                                <td>{{ $item->HeSoPCDH	 }}</td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-info" style="font-family: sans-serif;height: 30px;font-size: small"  data-toggle="modal" data-target="#exampleModalCenter">
+                                        IN HỢP ĐỒNG
+                                    </button>
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">No</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                         <textarea rows="5" cols="60" style="overflow-y: scroll;height: 100px;resize: none;">{{ $item->Ghichu }}
+                                                        </textarea>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </td>
+
+
+                                <td >
+                                    <div class="task_view">
+
+                                        <div class="dropdown">
+                                            <a class="task_view_more d-flex align-items-center justify-content-center dropdown-toggle" type="link"
+                                               id="dropdownMenuLink-{{ $item->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="viewport">
+                                                <i class="icon-options-vertical icons"></i>
+                                            </a>
+                                            @if ($addClientPermission == 'all' || $addClientPermission == 'added' || $addClientPermission == 'both')
+                                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink-' . $contact->id . '" tabindex="0">
+
+
+
+                                                    <a class="dropdown-item edit-insurance" href="javascript:;" data-contact-id="{{ $item->id }}">
+                                                        <i class="fa fa-edit mr-2"></i>
+                                                        @lang('app.edit')
+                                                    </a>
+
+                                                    <a class="dropdown-item delete-table-row" href="javascript:;" data-row-id="{{ $item->id }}">
+                                                        <i class="fa fa-trash mr-2"></i>
+                                                        @lang('app.delete')
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
                 </div>
+
+            </div>
+            <div class="card-footer pt-2">
+                {{ $laborContracts->onEachSide(2)->links() }}
             </div>
         </div>
+        <!-- Task Box End -->
     </div>
 </div>
-
 
 <script>
     $('body').on('click', '.hdld-btn', function () {
@@ -118,5 +158,65 @@
         $(MODAL_LG + ' ' + MODAL_HEADING).html('...');
         $.ajaxModal(MODAL_LG, url);
     });
+    //Show Information of Insurances
+    $('body').on('click', '.edit-insurance', function() {
+        var id = $(this).data('contact-id');
+
+        var url = "{{ route('laborcontract.edit', ':id') }}";
+        url = url.replace(':id', id);
+
+        $(MODAL_LG + ' ' + MODAL_HEADING).html('...');
+        $.ajaxModal(MODAL_LG, url);
+    });
+    //Delete Insurances
+    {{--$('body').on('click', '.delete-table-row', function() {--}}
+    {{--    var id = $(this).data('row-id');--}}
+    {{--    Swal.fire({--}}
+    {{--        title: "@lang('messages.sweetAlertTitle')",--}}
+    {{--        text: "@lang('messages.recoverRecord')",--}}
+    {{--        icon: 'warning',--}}
+    {{--        showCancelButton: true,--}}
+    {{--        focusConfirm: false,--}}
+    {{--        confirmButtonText: "@lang('messages.confirmDelete')",--}}
+    {{--        cancelButtonText: "@lang('app.cancel')",--}}
+    {{--        customClass: {--}}
+    {{--            confirmButton: 'btn btn-primary mr-3',--}}
+    {{--            cancelButton: 'btn btn-secondary'--}}
+    {{--        },--}}
+    {{--        showClass: {--}}
+    {{--            popup: 'swal2-noanimation',--}}
+    {{--            backdrop: 'swal2-noanimation'--}}
+    {{--        },--}}
+    {{--        buttonsStyling: false--}}
+    {{--    }).then((result) => {--}}
+    {{--        if (result.isConfirmed) {--}}
+    {{--            var url = "{{ route('insurances.destroy', ':id') }}";--}}
+    {{--            url = url.replace(':id', id);--}}
+
+    {{--            var token = "{{ csrf_token() }}";--}}
+
+    {{--            $.easyAjax({--}}
+    {{--                type: 'POST',--}}
+    {{--                url: url,--}}
+    {{--                blockUI: true,--}}
+    {{--                data: {--}}
+    {{--                    '_token': token,--}}
+    {{--                    '_method': 'DELETE'--}}
+    {{--                },--}}
+    {{--                success: function(response) {--}}
+    {{--                    if (response.message == "ok") {--}}
+    {{--                        window.location.reload();--}}
+    {{--                    }else{--}}
+    {{--                        alert("Có Lỗi Xảy ra");--}}
+    {{--                    }--}}
+    {{--                }--}}
+    {{--            });--}}
+    {{--        }--}}
+    {{--    });--}}
+    {{--});--}}
+
+
 </script>
+
+
 
