@@ -123,6 +123,26 @@ class LaborContractController extends Controller
         ]) ;
         }
     }
+    public function destroy($id)
+    {
+        $viewPermission = user()->permission('view_clients');
+        $this->addClientPermission = user()->permission('add_clients');
+        abort_403(!in_array($viewPermission, ['all', 'added', 'both']));
+        $laborContract = LaborContract::where('id', $id)->first();
+        try
+        {
+            $laborContract->delete();
+            return response()->json([
+                'message' => 'ok'
+            ]) ;
+        }
+        catch (\Exception $ex)
+        {
+            return response()->json([
+                'message' => $ex
+            ]) ;
+        }
+    }
 
 
 }
