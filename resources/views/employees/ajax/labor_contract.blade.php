@@ -33,26 +33,26 @@
                     <table class="table table-bordered" id="example">
                         <thead class="">
                         <tr>
-                            <th>Mã HDLD</th>
-                            <th>Loại</th>
-                            <th>Người Tuyển Dụng</th>
-                            <th>Ngày Bắt đầu HĐ</th>
+                            <th style="font-size: 11px">Mã HDLD</th>
+                            <th style="font-size: 11px">Loại</th>
+                            <th style="font-size: 11px">Người Tuyển Dụng</th>
+                            <th style="font-size: 11px">Ngày Bắt đầu HĐ</th>
 
-                            <th>Ngày Hết Hạn HĐ</th>
-                            <th>Ngày vào làm </th>
-                            <th>Mã Ngạch </th>
-                            <th>Ngạch Lương</th>
+                            <th style="font-size: 11px">Ngày Hết Hạn HĐ</th>
+                            <th style="font-size: 11px">Ngày vào làm </th>
+                            <th style="font-size: 11px">Mã Ngạch </th>
+                            <th style="font-size: 11px">Ngạch Lương</th>
 
-                            <th>Bậc</th>
-                            <th>Hệ số </th>
-                            <th>Ngày Tính L</th>
+                            <th style="font-size: 11px">Bậc</th>
+                            <th style="font-size: 11px">Hệ số </th>
+                            <th style="font-size: 11px">Ngày Tính L</th>
 
 
-                            <th>Mức Lương</th>
-                            <th>PCCV</th>
-                            <th>PCKV</th>
-                            <th>PCTN</th>
-                            <th>PCDH</th>
+                            <th style="font-size: 11px">Mức Lương</th>
+                            <th style="font-size: 11px">PCCV</th>
+                            <th style="font-size: 11px">PCKV</th>
+                            <th style="font-size: 11px">PCTN</th>
+                            <th style="font-size: 11px">PCDH</th>
 
 
                         </tr>
@@ -79,9 +79,7 @@
                                 <td>{{ $item->HeSoPCTN	 }}</td>
                                 <td>{{ $item->HeSoPCDH	 }}</td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-info" style="font-family: sans-serif;height: 30px;font-size: small"  data-toggle="modal" data-target="#exampleModalCenter">
-                                        IN HỢP ĐỒNG
-                                    </button>
+
                                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">

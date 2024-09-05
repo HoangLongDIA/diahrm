@@ -293,7 +293,7 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
                                 <div class="col-12 px-0 pb-3 d-lg-flex d-md-flex d-block">
 
 {{--                                    <p class="mb-0 text-dark-grey f-14 w-100 text-wrap">{{ $employee->QTCT }}</p>--}}
-                                    <textarea rows="10" cols="100" style="border-style: none;border-color: Transparent;overflow: auto; ">{{  $employee->QTCT }}
+                                    <textarea rows="10" cols="100" style="border-style: none;border-color: Transparent;overflow: auto; color: #99A5B5 ">{{  $employee->QTCT }}
                                     </textarea>
                                 </div>
 
