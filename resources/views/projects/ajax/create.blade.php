@@ -116,29 +116,29 @@
 {{--                        @endif--}}
 {{--                    </div>--}}
 
-                    @if ($addProjectNotePermission == 'all' || $addProjectNotePermission == 'added')
-                        <div class="col-md-12 col-lg-12">
-                            <div class="form-group my-3">
-                                <x-forms.label class="my-3" fieldId="project_summary"
-                                               :fieldLabel="__('modules.projects.projectSummary')">
-                                </x-forms.label>
-                                <div id="project_summary">{!! $projectTemplate->project_summary ?? '' !!}{!! ($project) ? $project->project_summary : '' !!}</div>
-                                <textarea name="project_summary" id="project_summary-text"
-                                          class="d-none">{!! $projectTemplate->project_summary ?? '' !!}{!! ($project) ? $project->project_summary : '' !!}</textarea>
-                            </div>
-                        </div>
-                    @else
-                        <div class="col-md-12 col-lg-12">
-                            <div class="form-group my-3">
-                                <x-forms.label class="my-3" fieldId="project_summary"
-                                               :fieldLabel="__('modules.projects.projectSummary')">
-                                </x-forms.label>
-                                <div id="project_summary">{!! $projectTemplate->project_summary ?? '' !!}{!! ($project) ? $project->project_summary : '' !!}</div>
-                                <textarea name="project_summary" id="project_summary-text"
-                                          class="d-none">{!! $projectTemplate->project_summary ?? '' !!} {!! ($project) ? $project->project_summary : '' !!}</textarea>
-                            </div>
-                        </div>
-                    @endif
+{{--                    @if ($addProjectNotePermission == 'all' || $addProjectNotePermission == 'added')--}}
+{{--                        <div class=" d-none col-md-12 col-lg-12">--}}
+{{--                            <div class="form-group my-3">--}}
+{{--                                <x-forms.label class=" my-3" fieldId="project_summary"--}}
+{{--                                               :fieldLabel="__('modules.projects.projectSummary')">--}}
+{{--                                </x-forms.label>--}}
+{{--                                <div id="project_summary">{!! $projectTemplate->project_summary ?? '' !!}{!! ($project) ? $project->project_summary : '' !!}</div>--}}
+{{--                                <textarea name="project_summary" id="project_summary-text"--}}
+{{--                                          class="d-none">{!! $projectTemplate->project_summary ?? '' !!}{!! ($project) ? $project->project_summary : '' !!}</textarea>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        <div class=" d-none col-md-12 col-lg-12">--}}
+{{--                            <div class="form-group my-3">--}}
+{{--                                <x-forms.label class="my-3" fieldId="project_summary"--}}
+{{--                                               :fieldLabel="__('modules.projects.projectSummary')">--}}
+{{--                                </x-forms.label>--}}
+{{--                                <div id="project_summary">{!! $projectTemplate->project_summary ?? '' !!}{!! ($project) ? $project->project_summary : '' !!}</div>--}}
+{{--                                <textarea name="project_summary" id="project_summary-text"--}}
+{{--                                          class="d-none">{!! $projectTemplate->project_summary ?? '' !!} {!! ($project) ? $project->project_summary : '' !!}</textarea>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
                     @if ($addProjectNotePermission == 'all' || $addProjectNotePermission == 'added')
 {{--                        <div class="col-md-12 col-lg-6">--}}
@@ -406,8 +406,8 @@
                 return selected + " {{ __('app.membersSelected') }} ";
             }
         });
-        var userValues = @json($userData);
-        quillMention(userValues, '#project_summary');
+        {{--var userValues = @json($userData);--}}
+        {{--quillMention(userValues, '#project_summary');--}}
 
         // if (add_project_note_permission == 'all' || add_project_note_permission == 'added') {
         //
@@ -445,8 +445,8 @@
         });
 
         $('#save-project-form').click(function () {
-            let note = document.getElementById('project_summary').children[0].innerHTML;
-            document.getElementById('project_summary-text').value = note;
+            // let note = document.getElementById('project_summary').children[0].innerHTML;
+            // document.getElementById('project_summary-text').value = note;
             var mention_user_id = $('#project_summary span[data-id]').map(function(){
                             return $(this).attr('data-id')
                         }).get();
