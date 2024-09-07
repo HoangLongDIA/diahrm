@@ -79,6 +79,7 @@
                         </x-forms.input-group>
                     </div>
 
+
                     @if (!in_array('client', user_roles()))
                         <div class="col-md-4">
                             <x-forms.label class="my-3" fieldId="department" :fieldLabel="__('app.department')">
@@ -94,6 +95,12 @@
                             </x-forms.input-group>
                         </div>
                     @endif
+                    <div class="col-md-4">
+                        <x-forms.number class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.projectBudget')"
+                                        fieldName="project_budget" fieldId="project_budget"
+                                        :fieldValue="$project ? $project->project_budget : ''"
+                                        :fieldPlaceholder="__('VND')"/>
+                    </div>
 
 {{--                    <div class="col-md-4 @if (!isset($client) && is_null($client)) py-3 @endif">--}}
 {{--                        @if (isset($client) && !is_null($client))--}}
@@ -193,7 +200,8 @@
 
                 </div>
 
-                <h4 class="mb-0 p-20 f-21 font-weight-normal text-capitalize border-top-grey">
+
+                <h4 class="d-none mb-0 p-20 f-21 font-weight-normal text-capitalize border-top-grey">
                     <a href="javascript:;" class="text-dark toggle-project-other-details"><i
                             class="fa fa-chevron-down"></i>
                         @lang('modules.client.clientOtherDetails')</a>
@@ -221,12 +229,7 @@
                         </x-forms.select>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <x-forms.number class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.projectBudget')"
-                                        fieldName="project_budget" fieldId="project_budget"
-                                        :fieldValue="$project ? $project->project_budget : ''"
-                                        :fieldPlaceholder="__('placeholders.price')"/>
-                    </div>
+
 
                     <div class="col-lg-4 col-md-6">
                         <x-forms.number class="mr-0 mr-lg-2 mr-md-2"
