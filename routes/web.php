@@ -283,6 +283,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'], function () {
         function () {
 
             Route::get('import', [ProjectController::class, 'importProject'])->name('projects.import');
+            Route::get('import1', [ProjectController::class, 'importProject1'])->name('projects.import1');
             Route::post('import', [ProjectController::class, 'importStore'])->name('projects.import.store');
             Route::post('import/process', [ProjectController::class, 'importProcess'])->name('projects.import.process');
 

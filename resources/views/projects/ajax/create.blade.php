@@ -95,22 +95,22 @@
                         </div>
                     @endif
 
-                    <div class="col-md-4 @if (!isset($client) && is_null($client)) py-3 @endif">
-                        @if (isset($client) && !is_null($client))
-                            <x-forms.label class="my-3" fieldId="client_id" :fieldLabel="__('app.client')">
-                            </x-forms.label>
+{{--                    <div class="col-md-4 @if (!isset($client) && is_null($client)) py-3 @endif">--}}
+{{--                        @if (isset($client) && !is_null($client))--}}
+{{--                            <x-forms.label class="my-3" fieldId="client_id" :fieldLabel="__('app.client')">--}}
+{{--                            </x-forms.label>--}}
 
-                            <input type="hidden" name="client_id" id="client_id" value="{{ $client->id }}">
-                            <input type="text" value="{{ $client->name_salutation }}"
-                                   class="form-control height-35 f-15 readonly-background" readonly>
-                        @else
-                            <x-client-selection-dropdown :clients="$clients" fieldRequired="false"
-                                                         :selected="request('default_client') ?? null"/>
-                        @endif
-                    </div>
+{{--                            <input type="hidden" name="client_id" id="client_id" value="{{ $client->id }}">--}}
+{{--                            <input type="text" value="{{ $client->name_salutation }}"--}}
+{{--                                   class="form-control height-35 f-15 readonly-background" readonly>--}}
+{{--                        @else--}}
+{{--                            <x-client-selection-dropdown :clients="$clients" fieldRequired="false"--}}
+{{--                                                         :selected="request('default_client') ?? null"/>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
 
                     @if ($addProjectNotePermission == 'all' || $addProjectNotePermission == 'added')
-                        <div class="col-md-12 col-lg-6">
+                        <div class="col-md-12 col-lg-12">
                             <div class="form-group my-3">
                                 <x-forms.label class="my-3" fieldId="project_summary"
                                                :fieldLabel="__('modules.projects.projectSummary')">
@@ -134,16 +134,16 @@
                     @endif
 
                     @if ($addProjectNotePermission == 'all' || $addProjectNotePermission == 'added')
-                        <div class="col-md-12 col-lg-6">
-                            <div class="form-group my-3">
-                                <x-forms.label class="my-3" fieldId="notes"
-                                               :fieldLabel="__('modules.projects.note')">
-                                </x-forms.label>
-                                <div id="notes">{!! $projectTemplate->notes ?? '' !!} {!! ($project) ? $project->notes : '' !!}</div>
-                                <textarea name="notes" id="notes-text"
-                                          class="d-none">{!! $projectTemplate->notes ?? '' !!} {!! ($project) ? $project->notes : '' !!}</textarea>
-                            </div>
-                        </div>
+{{--                        <div class="col-md-12 col-lg-6">--}}
+{{--                            <div class="form-group my-3">--}}
+{{--                                <x-forms.label class="my-3" fieldId="notes"--}}
+{{--                                               :fieldLabel="__('modules.projects.note')">--}}
+{{--                                </x-forms.label>--}}
+{{--                                <div id="notes">{!! $projectTemplate->notes ?? '' !!} {!! ($project) ? $project->notes : '' !!}</div>--}}
+{{--                                <textarea name="notes" id="notes-text"--}}
+{{--                                          class="d-none">{!! $projectTemplate->notes ?? '' !!} {!! ($project) ? $project->notes : '' !!}</textarea>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     @endif
 
                     @if ($addPublicProjectPermission == 'all')
@@ -202,14 +202,14 @@
                 <div class="row p-20 d-none" id="other-project-details">
                     @if ($addProjectFilePermission == 'all' || $addProjectFilePermission == 'added')
                         <div class="col-lg-12">
-                            <x-forms.file-multiple class="mr-0 mr-lg-2 mr-md-2"
+                            <x-forms.file-multiple class="mr-0 mr-lg-2 mr-md-2 d-none"
                                                    :fieldLabel="__('app.menu.addFile')" fieldName="file"
                                                    fieldId="file-upload-dropzone"/>
                             <input type="hidden" name="projectID" id="projectID">
                         </div>
                     @endif
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 d-none">
                         <x-forms.select fieldId="currency_id" :fieldLabel="__('modules.invoices.currency')"
                                         fieldName="currency_id" search="true">
                             @foreach ($currencies as $currency)
@@ -234,7 +234,7 @@
                                         fieldId="hours_allocated" :fieldPlaceholder="__('placeholders.hourEstimate')"/>
                     </div>
 
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-3 d-none">
                         <div class="form-group">
                             <div class="d-flex mt-5">
                                 <x-forms.checkbox fieldId="manual_timelog" :checked="($project ? $project->manual_timelog == 'enable' : ($projectTemplate ? $projectTemplate->manual_timelog == 'enable' : ''))" :fieldLabel="__('modules.projects.manualTimelog')"  fieldName="manual_timelog"/>
@@ -242,7 +242,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-3 d-none">
                         <div class="form-group">
                             <div class="d-flex mt-5">
                                 <x-forms.checkbox fieldId="miroboard_checkbox" :checked="($project ? $project->enable_miroboard : '')"
@@ -252,7 +252,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-6 {{!is_null($project) && $project->enable_miroboard ? '' : 'd-none'}}" id="miroboard_detail">
+                    <div class="d-none col-md-6 col-lg-6 {{!is_null($project) && $project->enable_miroboard ? '' : 'd-none'}}" id="miroboard_detail">
                         <div class="form-group my-3">
                             <div class="row">
                                 <div class="col-md-6 mt-6">
@@ -276,7 +276,7 @@
 
                     <input type = "hidden" name = "mention_user_ids" id = "mentionUserId" class ="mention_user_ids">
 
-                    <div class="col-md-6 col-lg-4" id="clientNotification">
+                    <div class="col-md-6 col-lg-4 d-none" id="clientNotification">
                         <div class="form-group">
                             <div class="d-flex mt-5">
                                 <x-forms.checkbox fieldId="client_task_notification" :checked="($project ? $project->allow_client_notification == 'enable' : '')"
@@ -406,10 +406,10 @@
         var userValues = @json($userData);
         quillMention(userValues, '#project_summary');
 
-        if (add_project_note_permission == 'all' || add_project_note_permission == 'added') {
-
-            quillImageLoad('#notes');
-        }
+        // if (add_project_note_permission == 'all' || add_project_note_permission == 'added') {
+        //
+        //     // quillImageLoad('#notes');
+        // }
 
 
         const dp1 = datepicker('#start_date', {
@@ -449,11 +449,11 @@
                         }).get();
             $('#mentionUserId').val(mention_user_id.join(','));
 
-            if (add_project_note_permission == 'all' || add_project_note_permission == 'added') {
-
-                note = document.getElementById('notes').children[0].innerHTML;
-                document.getElementById('notes-text').value = note;
-            }
+            // if (add_project_note_permission == 'all' || add_project_note_permission == 'added') {
+            //
+            //     note = document.getElementById('notes').children[0].innerHTML;
+            //     document.getElementById('notes-text').value = note;
+            // }
             const url = "{{ route('projects.store') }}";
             var data = $('#save-project-data-form').serialize() + "&projectID={{$project ? $project->id : ''}}";
 

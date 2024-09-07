@@ -200,9 +200,11 @@ class ProjectsDataTable extends BaseDataTable
 
         $datatables->editColumn('deadline', fn($row) => Common::dateColor($row->deadline));
 
-        $datatables->addColumn('client_name', fn($row) => $row->client?->name_salutation ?? '-');
-        $datatables->addColumn('client_email', fn($row) => $row->client?->email ?? '-');
-
+//        $datatables->addColumn('client_name', fn($row) => $row->client?->name_salutation ?? '-');
+//        $datatables->addColumn('client_email', fn($row) => $row->client?->email ?? '-');
+//        $datatables->editColumn('project_budget', fn($row) => __('app' . $row->status));
+        $datatables->addColumn('project_budget', fn($row) => __(' ' . number_format($row->project_budget).' VND'));
+//        $datatables->addColumn('project_budget', fn($row) => $row->project_budget);
         $datatables->addColumn('project_status', fn($row) => __('app' . $row->status));
         $datatables->editColumn('client_id', fn($row) => $row->client_id ? view('components.client', ['user' => $row->client]) : '');
         $datatables->addColumn('status', function ($row) use ($projectStatus) {
@@ -506,7 +508,8 @@ class ProjectsDataTable extends BaseDataTable
             __('modules.projects.projectMembers') => ['data' => 'name', 'name' => 'name', 'visible' => false, 'title' => __('modules.projects.projectMembers')],
             __('modules.projects.startDate') => ['data' => 'start_date', 'name' => 'start_date', 'title' => __('modules.projects.startDate'), 'width' => '12%'],
             __('app.deadline') => ['data' => 'deadline', 'name' => 'deadline', 'title' => __('app.deadline'), 'width' => '12%'],
-            __('app.client') => ['data' => 'client_id', 'name' => 'client_id', 'width' => '15%', 'exportable' => false, 'title' => __('app.client'), 'visible' => !in_array('client', user_roles())],
+            __('project_budget') => ['data' => 'project_budget', 'name' => 'project_budget', 'sortable' => false, 'title' => __('Kinh Phí Dự Kiến'), 'width' => '12%'],
+//            __('Project') => ['data' => 'project_budget,', 'name' => 'project_budget', 'width' => '15%', 'exportable' => false, 'title' => __('project_budget')],
             __('app.customers') => ['data' => 'client_name', 'name' => 'client_id', 'visible' => false, 'title' => __('app.customers')],
 
             __('app.client') . ' ' . __('app.email') => ['data' => 'client_email', 'name' => 'client_id', 'visible' => false, 'title' => __('app.client') . ' ' . __('app.email')],

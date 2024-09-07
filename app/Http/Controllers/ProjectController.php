@@ -1381,6 +1381,27 @@ class ProjectController extends AccountBaseController
         return view('projects.create', $this->data);
     }
 
+
+    public function importProject1()
+    {
+        $this->pageTitle = __('app.importExcel') . ' ' . __('app.menu.projects');
+
+        $this->addPermission = user()->permission('add_projects');
+        abort_403(!in_array($this->addPermission, ['all', 'added']));
+
+        $this->view = 'projects.ajax.importcategory';
+
+        if (request()->ajax()) {
+            return $this->returnAjax($this->view);
+        }
+
+        return view('projects.create', $this->data);
+    }
+
+
+
+
+
     public function importStore(ImportRequest $request)
     {
         $this->importFileProcess($request, ProjectImport::class);

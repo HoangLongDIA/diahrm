@@ -34,11 +34,11 @@
             <div class="select-status mw-120">
                 <x-forms.input-group>
                     <select class="select-picker form-control" multiple name="progress[]" id="progress" data-live-search="true" data-size="8">
-                        <option value="0-20" selected>0% - 20%</option>
-                        <option value="21-40" selected>21% - 40%</option>
-                        <option value="41-60" selected>41% - 60%</option>
-                        <option value="61-80" selected>61% - 80%</option>
-                        <option value="81-99" selected>81% - 99%</option>
+                        <option value="0-20">0% - 20%</option>
+                        <option value="21-40">21% - 40%</option>
+                        <option value="41-60">41% - 60%</option>
+                        <option value="61-80">61% - 80%</option>
+                        <option value="81-99">81% - 99%</option>
                         <option value="100-100" {{ request()->projects == 'all' ? 'selected' : ''}}>100%</option>
                     </select>
                 </x-forms.input-group>
@@ -201,14 +201,19 @@ $deleteProjectPermission = user()->permission('delete_projects');
                         @lang('app.addProject')
                     </x-forms.link-primary>
                 @endif
-                @if ($viewProjectTemplatePermission == 'all' || in_array($manageProjectTemplatePermission , ['added', 'all']))
-                    <x-forms.link-secondary :link="route('project-template.index')"
-                        class="mr-3 mb-2 mb-lg-0 mb-md-0 float-left" icon="layer-group">
-                        @lang('app.menu.projectTemplate')
+{{--                @if ($viewProjectTemplatePermission == 'all' || in_array($manageProjectTemplatePermission , ['added', 'all']))--}}
+{{--                    <x-forms.link-secondary :link="route('project-template.index')"--}}
+{{--                        class="mr-3 mb-2 mb-lg-0 mb-md-0 float-left" icon="layer-group">--}}
+{{--                        @lang('app.menu.projectTemplate')--}}
+{{--                    </x-forms.link-secondary>--}}
+{{--                @endif--}}
+
+
+                @if ($addProjectPermission == 'all' || $addProjectPermission == 'added' || $addProjectPermission == 'both')
+                    <x-forms.link-secondary :link="route('projects.import1')" class="mr-3 float-left mb-2 mb-lg-0 mb-md-0 d-none d-lg-block" icon="file-upload">
+                        Import Project Category
                     </x-forms.link-secondary>
                 @endif
-
-
                 @if ($addProjectPermission == 'all' || $addProjectPermission == 'added' || $addProjectPermission == 'both')
                     <x-forms.link-secondary :link="route('projects.import')" class="mr-3 float-left mb-2 mb-lg-0 mb-md-0 d-none d-lg-block" icon="file-upload">
                         @lang('app.importExcel')
