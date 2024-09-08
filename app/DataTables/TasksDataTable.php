@@ -159,35 +159,35 @@ class TasksDataTable extends BaseDataTable
             return implode(',', $members);
         });
 
-        if (in_array('timelogs', user_modules())) {
-
-            $datatables->addColumn(
-                'timer', function ($row) {
-                    if ($row->boardColumn->slug == 'completed' || is_null($row->is_task_user)) {
-                        return null;
-                    }
-
-                    if (is_null($row->userActiveTimer)) {
-                        return '<a href="javascript:;" class="text-primary btn border f-15 start-timer" data-task-id="' . $row->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.startTimer') . '"><i class="bi bi-play-circle-fill"></i></a>';
-                    }
-
-                    $timerButtons = '<div class="btn-group" role="group">';
-
-                    if (is_null($row->userActiveTimer->activeBreak)) {
-                        $timerButtons .= '<a href="javascript:;" class="text-secondary btn border f-15 pause-timer" data-time-id="' . $row->userActiveTimer->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.pauseTimer') . '"><i class="bi bi-pause-circle-fill"></i></a>';
-                        $timerButtons .= '<a href="javascript:;" class="text-secondary btn border f-15 stop-timer" data-time-id="' . $row->userActiveTimer->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.stopTimer') . '"><i class="bi bi-stop-circle-fill"></i></a>';
-                        $timerButtons .= '</div>';
-
-                        return $timerButtons;
-                    }
-
-                    $timerButtons .= '<a href="javascript:;" class="text-secondary btn border f-15 resume-timer" data-time-id="' . $row->userActiveTimer->activeBreak->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.resumeTimer') . '"><i class="bi bi-play-circle-fill"></i></a>';
-                    $timerButtons .= '<a href="javascript:;" class="text-secondary btn border f-15 stop-timer" data-time-id="' . $row->userActiveTimer->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.stopTimer') . '"><i class="bi bi-stop-circle-fill"></i></a>';
-                    $timerButtons .= '</div>';
-
-                    return $timerButtons;
-                });
-        }
+//        if (in_array('timelogs', user_modules())) {
+//
+//            $datatables->addColumn(
+//                'timer', function ($row) {
+//                    if ($row->boardColumn->slug == 'completed' || is_null($row->is_task_user)) {
+//                        return null;
+//                    }
+//
+//                    if (is_null($row->userActiveTimer)) {
+//                        return '<a href="javascript:;" class="text-primary btn border f-15 start-timer" data-task-id="' . $row->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.startTimer') . '"><i class="bi bi-play-circle-fill"></i></a>';
+//                    }
+//
+//                    $timerButtons = '<div class="btn-group" role="group">';
+//
+//                    if (is_null($row->userActiveTimer->activeBreak)) {
+//                        $timerButtons .= '<a href="javascript:;" class="text-secondary btn border f-15 pause-timer" data-time-id="' . $row->userActiveTimer->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.pauseTimer') . '"><i class="bi bi-pause-circle-fill"></i></a>';
+//                        $timerButtons .= '<a href="javascript:;" class="text-secondary btn border f-15 stop-timer" data-time-id="' . $row->userActiveTimer->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.stopTimer') . '"><i class="bi bi-stop-circle-fill"></i></a>';
+//                        $timerButtons .= '</div>';
+//
+//                        return $timerButtons;
+//                    }
+//
+//                    $timerButtons .= '<a href="javascript:;" class="text-secondary btn border f-15 resume-timer" data-time-id="' . $row->userActiveTimer->activeBreak->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.resumeTimer') . '"><i class="bi bi-play-circle-fill"></i></a>';
+//                    $timerButtons .= '<a href="javascript:;" class="text-secondary btn border f-15 stop-timer" data-time-id="' . $row->userActiveTimer->id . '" data-toggle="tooltip" data-original-title="' . __('modules.timeLogs.stopTimer') . '"><i class="bi bi-stop-circle-fill"></i></a>';
+//                    $timerButtons .= '</div>';
+//
+//                    return $timerButtons;
+//                });
+//        }
 
         $datatables->editColumn('clientName', fn($row) => $row->clientName ?: '--');
         $datatables->addColumn('task', fn($row) => $row->heading);
@@ -592,12 +592,12 @@ class TasksDataTable extends BaseDataTable
                 'searchable' => false,
             ],
             __('app.id') => ['data' => 'id', 'name' => 'id', 'title' => __('app.id'), 'visible' => false],
-            __('modules.taskCode') => ['data' => 'short_code', 'name' => 'task_short_code', 'title' => __('modules.taskCode')]
+//            __('modules.taskCode') => ['data' => 'short_code', 'name' => 'task_short_code', 'title' => __('modules.taskCode')]
         ];
 
-        if (in_array('timelogs', user_modules())) {
-            $data[__('app.timer') . ' '] = ['data' => 'timer', 'name' => 'timer', 'exportable' => false, 'searchable' => false, 'sortable' => false, 'title' => __('app.timer'), 'class' => 'text-right'];
-        }
+//        if (in_array('timelogs', user_modules())) {
+//            $data[__('app.timer') . ' '] = ['data' => 'timer', 'name' => 'timer', 'exportable' => false, 'searchable' => false, 'sortable' => false, 'title' => __('app.timer'), 'class' => 'text-right'];
+//        }
 
         $data2 = [
 
@@ -636,9 +636,9 @@ class TasksDataTable extends BaseDataTable
             $data[__('app.startDate')] = ['data' => 'start_date', 'name' => 'start_date', 'title' => __('app.startDate')];
             $data[__('app.dueDate')] = ['data' => 'due_date', 'name' => 'due_date', 'title' => __('app.dueDate')];
 
-            if (in_array('timelogs', user_modules())) {
-                $data[__('modules.employees.hoursLogged')] = ['data' => 'timeLogged', 'name' => 'timeLogged', 'title' => __('modules.employees.hoursLogged')];
-            }
+//            if (in_array('timelogs', user_modules())) {
+//                $data[__('modules.employees.hoursLogged')] = ['data' => 'timeLogged', 'name' => 'timeLogged', 'title' => __('modules.employees.hoursLogged')];
+//            }
 
             $data[__('modules.tasks.assignTo')] = ['data' => 'users', 'name' => 'member.name', 'exportable' => false, 'title' => __('modules.tasks.assignTo')];
             $data[__('app.columnStatus')] = ['data' => 'board_column', 'name' => 'board_column', 'exportable' => false, 'searchable' => false, 'title' => __('app.columnStatus')];

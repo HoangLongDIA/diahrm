@@ -79,15 +79,15 @@
                 @if (in_array('leaves', user_modules()) && $sidebarUserPermissions['view_leave'] != 5 && $sidebarUserPermissions['view_leave'] != 'none')
                     <x-sub-menu-item :link="route('leaves.index')" :text="__('app.menu.leaves')" />
                 @endif
-                @if (in_array('attendance', user_modules()) && isset($sidebarUserPermissions['view_shift_roster']) && $sidebarUserPermissions['view_shift_roster'] != 5 && $sidebarUserPermissions['view_shift_roster'] != 'none')
-                    <x-sub-menu-item :link="route('shifts.index')" :text="__('app.menu.shiftRoster')" />
-                @endif
-                @if (in_array('attendance', user_modules()) && $sidebarUserPermissions['view_attendance'] != 5 && $sidebarUserPermissions['view_attendance'] != 'none')
-                    <x-sub-menu-item :link="route('attendances.index')" :text="__('app.menu.attendance')" />
-                @endif
-                @if (in_array('holidays', user_modules()) && $sidebarUserPermissions['view_holiday'] != 5 && $sidebarUserPermissions['view_holiday'] != 'none')
-                    <x-sub-menu-item :link="route('holidays.index')" :text="__('app.menu.holiday')" />
-                @endif
+{{--                @if (in_array('attendance', user_modules()) && isset($sidebarUserPermissions['view_shift_roster']) && $sidebarUserPermissions['view_shift_roster'] != 5 && $sidebarUserPermissions['view_shift_roster'] != 'none')--}}
+{{--                    <x-sub-menu-item :link="route('shifts.index')" :text="__('app.menu.shiftRoster')" />--}}
+{{--                @endif--}}
+{{--                @if (in_array('attendance', user_modules()) && $sidebarUserPermissions['view_attendance'] != 5 && $sidebarUserPermissions['view_attendance'] != 'none')--}}
+{{--                    <x-sub-menu-item :link="route('attendances.index')" :text="__('app.menu.attendance')" />--}}
+{{--                @endif--}}
+{{--                @if (in_array('holidays', user_modules()) && $sidebarUserPermissions['view_holiday'] != 5 && $sidebarUserPermissions['view_holiday'] != 'none')--}}
+{{--                    <x-sub-menu-item :link="route('holidays.index')" :text="__('app.menu.holiday')" />--}}
+{{--                @endif--}}
                 @if (isset($sidebarUserPermissions['view_designation']) && $sidebarUserPermissions['view_designation'] == 4 )
                     <x-sub-menu-item :link="route('designations.index')" :text="__('app.menu.designation')" />
                 @endif
@@ -126,9 +126,9 @@
                 @if (in_array('tasks', user_modules()) && $sidebarUserPermissions['view_tasks'] != 5 && $sidebarUserPermissions['view_tasks'] != 'none')
                     <x-sub-menu-item :link="route('tasks.index')" :text="__('app.menu.tasks')" />
                 @endif
-                @if (in_array('timelogs', user_modules()) && $sidebarUserPermissions['view_timelogs'] != 5 && $sidebarUserPermissions['view_timelogs'] != 'none')
-                    <x-sub-menu-item :link="route('timelogs.index')" :text="__('app.menu.timeLogs')" />
-                @endif
+{{--                @if (in_array('timelogs', user_modules()) && $sidebarUserPermissions['view_timelogs'] != 5 && $sidebarUserPermissions['view_timelogs'] != 'none')--}}
+{{--                    <x-sub-menu-item :link="route('timelogs.index')" :text="__('app.menu.timeLogs')" />--}}
+{{--                @endif--}}
                 {{-- @endif --}}
                 <!-- NAV ITEM - CUSTOM MODULES  -->
                 @foreach ($worksuitePlugins as $item)
@@ -269,25 +269,25 @@
     @endif
 
 <!-- Knowledge base -->
-    @if (in_array('knowledgebase', user_modules()) && isset($sidebarUserPermissions['view_knowledgebase']) && $sidebarUserPermissions['view_knowledgebase'] != 5)
-        <x-menu-item icon="note" :text="__('app.menu.knowledgebase')" :link="route('knowledgebase.index')">
-            <x-slot name="iconPath">
-                <g xmlns="http://www.w3.org/2000/svg" id="surface1">
-                    <path
-                        d="M 11.824219 0.21875 C 11.722656 0.0820312 11.5625 0 11.390625 0 L 2.277344 0 C 1.394531 0 0.675781 0.714844 0.675781 1.601562 L 0.675781 14.398438 C 0.675781 15.285156 1.394531 16 2.277344 16 L 13.71875 16 C 14.601562 16 15.320312 15.285156 15.320312 14.398438 L 15.320312 5.199219 C 15.320312 5.085938 15.285156 4.976562 15.21875 4.886719 Z M 11.121094 1.066406 L 14.253906 5.375 L 14.253906 14.398438 C 14.253906 14.695312 14.015625 14.933594 13.71875 14.933594 L 2.277344 14.933594 C 1.984375 14.933594 1.742188 14.695312 1.742188 14.398438 L 1.742188 1.601562 C 1.742188 1.304688 1.984375 1.066406 2.277344 1.066406 Z M 11.121094 1.066406 " />
-                    <path
-                        d="M 3.246094 4.460938 L 8 4.460938 C 8.292969 4.460938 8.53125 4.222656 8.53125 3.925781 C 8.53125 3.632812 8.292969 3.394531 8 3.394531 L 3.246094 3.394531 C 2.953125 3.394531 2.714844 3.632812 2.714844 3.925781 C 2.714844 4.222656 2.953125 4.460938 3.246094 4.460938 Z M 3.246094 4.460938 " />
-                    <path
-                        d="M 14.785156 5.429688 L 11.925781 5.429688 L 11.925781 0.535156 C 11.925781 0.238281 11.6875 0 11.390625 0 C 11.097656 0 10.859375 0.238281 10.859375 0.535156 L 10.859375 5.964844 C 10.859375 6.257812 11.097656 6.496094 11.390625 6.496094 L 14.785156 6.496094 C 15.082031 6.496094 15.320312 6.257812 15.320312 5.964844 C 15.320312 5.667969 15.082031 5.429688 14.785156 5.429688 Z M 14.785156 5.429688 " />
-                    <path
-                        d="M 3.246094 7.855469 L 8 7.855469 C 8.292969 7.855469 8.53125 7.617188 8.53125 7.320312 C 8.53125 7.027344 8.292969 6.789062 8 6.789062 L 3.246094 6.789062 C 2.953125 6.789062 2.714844 7.027344 2.714844 7.320312 C 2.714844 7.617188 2.953125 7.855469 3.246094 7.855469 Z M 3.246094 7.855469 " />
-                    <path
-                        d="M 3.246094 10.910156 L 10.035156 10.910156 C 10.328125 10.910156 10.566406 10.671875 10.566406 10.375 C 10.566406 10.082031 10.328125 9.84375 10.035156 9.84375 L 3.246094 9.84375 C 2.953125 9.84375 2.714844 10.082031 2.714844 10.375 C 2.714844 10.671875 2.953125 10.910156 3.246094 10.910156 Z M 3.246094 10.910156 " />
-                </g>
+{{--    @if (in_array('knowledgebase', user_modules()) && isset($sidebarUserPermissions['view_knowledgebase']) && $sidebarUserPermissions['view_knowledgebase'] != 5)--}}
+{{--        <x-menu-item icon="note" :text="__('app.menu.knowledgebase')" :link="route('knowledgebase.index')">--}}
+{{--            <x-slot name="iconPath">--}}
+{{--                <g xmlns="http://www.w3.org/2000/svg" id="surface1">--}}
+{{--                    <path--}}
+{{--                        d="M 11.824219 0.21875 C 11.722656 0.0820312 11.5625 0 11.390625 0 L 2.277344 0 C 1.394531 0 0.675781 0.714844 0.675781 1.601562 L 0.675781 14.398438 C 0.675781 15.285156 1.394531 16 2.277344 16 L 13.71875 16 C 14.601562 16 15.320312 15.285156 15.320312 14.398438 L 15.320312 5.199219 C 15.320312 5.085938 15.285156 4.976562 15.21875 4.886719 Z M 11.121094 1.066406 L 14.253906 5.375 L 14.253906 14.398438 C 14.253906 14.695312 14.015625 14.933594 13.71875 14.933594 L 2.277344 14.933594 C 1.984375 14.933594 1.742188 14.695312 1.742188 14.398438 L 1.742188 1.601562 C 1.742188 1.304688 1.984375 1.066406 2.277344 1.066406 Z M 11.121094 1.066406 " />--}}
+{{--                    <path--}}
+{{--                        d="M 3.246094 4.460938 L 8 4.460938 C 8.292969 4.460938 8.53125 4.222656 8.53125 3.925781 C 8.53125 3.632812 8.292969 3.394531 8 3.394531 L 3.246094 3.394531 C 2.953125 3.394531 2.714844 3.632812 2.714844 3.925781 C 2.714844 4.222656 2.953125 4.460938 3.246094 4.460938 Z M 3.246094 4.460938 " />--}}
+{{--                    <path--}}
+{{--                        d="M 14.785156 5.429688 L 11.925781 5.429688 L 11.925781 0.535156 C 11.925781 0.238281 11.6875 0 11.390625 0 C 11.097656 0 10.859375 0.238281 10.859375 0.535156 L 10.859375 5.964844 C 10.859375 6.257812 11.097656 6.496094 11.390625 6.496094 L 14.785156 6.496094 C 15.082031 6.496094 15.320312 6.257812 15.320312 5.964844 C 15.320312 5.667969 15.082031 5.429688 14.785156 5.429688 Z M 14.785156 5.429688 " />--}}
+{{--                    <path--}}
+{{--                        d="M 3.246094 7.855469 L 8 7.855469 C 8.292969 7.855469 8.53125 7.617188 8.53125 7.320312 C 8.53125 7.027344 8.292969 6.789062 8 6.789062 L 3.246094 6.789062 C 2.953125 6.789062 2.714844 7.027344 2.714844 7.320312 C 2.714844 7.617188 2.953125 7.855469 3.246094 7.855469 Z M 3.246094 7.855469 " />--}}
+{{--                    <path--}}
+{{--                        d="M 3.246094 10.910156 L 10.035156 10.910156 C 10.328125 10.910156 10.566406 10.671875 10.566406 10.375 C 10.566406 10.082031 10.328125 9.84375 10.035156 9.84375 L 3.246094 9.84375 C 2.953125 9.84375 2.714844 10.082031 2.714844 10.375 C 2.714844 10.671875 2.953125 10.910156 3.246094 10.910156 Z M 3.246094 10.910156 " />--}}
+{{--                </g>--}}
 
-            </x-slot>
-        </x-menu-item>
-    @endif
+{{--            </x-slot>--}}
+{{--        </x-menu-item>--}}
+{{--    @endif--}}
 <!-- Knowledge base -->
 
     <!-- NAV ITEM - NOTES -->
@@ -322,42 +322,42 @@
                     <x-sub-menu-item :link="route('task-report.index')" :text="__('app.menu.taskReport')" />
                 @endif
 
-                @if ($sidebarUserPermissions['view_time_log_report'] == 4 && $sidebarUserPermissions['view_time_log_report'] != 'none' && in_array('timelogs', user_modules()))
-                    <x-sub-menu-item :link="route('time-log-report.index')"
-                                     :text="__('app.menu.timeLogReport')" />
-                @endif
+{{--                @if ($sidebarUserPermissions['view_time_log_report'] == 4 && $sidebarUserPermissions['view_time_log_report'] != 'none' && in_array('timelogs', user_modules()))--}}
+{{--                    <x-sub-menu-item :link="route('time-log-report.index')"--}}
+{{--                                     :text="__('app.menu.timeLogReport')" />--}}
+{{--                @endif--}}
 
-                @if ($sidebarUserPermissions['view_finance_report'] != 5 && $sidebarUserPermissions['view_finance_report'] != 'none' && in_array('payments', user_modules()))
-                    <x-sub-menu-item :link="route('finance-report.index')"
-                                     :text="__('app.menu.financeReport')" />
-                @endif
+{{--                @if ($sidebarUserPermissions['view_finance_report'] != 5 && $sidebarUserPermissions['view_finance_report'] != 'none' && in_array('payments', user_modules()))--}}
+{{--                    <x-sub-menu-item :link="route('finance-report.index')"--}}
+{{--                                     :text="__('app.menu.financeReport')" />--}}
+{{--                @endif--}}
 
-                @if ($sidebarUserPermissions['view_income_expense_report'] == 4 && $sidebarUserPermissions['view_income_expense_report'] != 'none' && in_array('expenses', user_modules()))
-                    <x-sub-menu-item :link="route('income-expense-report.index')"
-                                     :text="__('app.menu.incomeVsExpenseReport')" />
-                @endif
+{{--                @if ($sidebarUserPermissions['view_income_expense_report'] == 4 && $sidebarUserPermissions['view_income_expense_report'] != 'none' && in_array('expenses', user_modules()))--}}
+{{--                    <x-sub-menu-item :link="route('income-expense-report.index')"--}}
+{{--                                     :text="__('app.menu.incomeVsExpenseReport')" />--}}
+{{--                @endif--}}
 
                 @if ($sidebarUserPermissions['view_leave_report'] != 5 && $sidebarUserPermissions['view_leave_report'] != 'none' && in_array('leaves', user_modules()))
                     <x-sub-menu-item :link="route('leave-report.index')"
                                      :text="__('app.menu.leaveReport')" />
                 @endif
 
-                @if ($sidebarUserPermissions['view_attendance_report'] == 4 && $sidebarUserPermissions['view_attendance_report'] != 'none' && in_array('attendance', user_modules()))
-                    <x-sub-menu-item :link="route('attendance-report.index')"
-                                     :text="__('app.menu.attendanceReport')" />
-                @endif
-                @if (isset($sidebarUserPermissions['view_expense_report']) && $sidebarUserPermissions['view_expense_report'] == 4 && $sidebarUserPermissions['view_expense_report'] != 'none' && in_array('expenses', user_modules()))
-                    <x-sub-menu-item :link="route('expense-report.index')"
-                                     :text="__('app.menu.expenseReport')" />
-                @endif
-                @if (isset($sidebarUserPermissions['view_lead_report']) && $sidebarUserPermissions['view_lead_report'] == 4 && $sidebarUserPermissions['view_lead_report'] != 'none' && in_array('leads', user_modules()))
-                    <x-sub-menu-item :link="route('lead-report.index')"
-                                     :text="__('app.menu.dealReport')" />
-                @endif
-                @if (isset($sidebarUserPermissions['view_sales_report']) && $sidebarUserPermissions['view_sales_report'] == 4 && $sidebarUserPermissions['view_sales_report'] != 'none' && in_array('invoices', user_modules()))
-                    <x-sub-menu-item :link="route('sales-report.index')"
-                                     :text="__('app.menu.salesReport')" />
-                @endif
+{{--                @if ($sidebarUserPermissions['view_attendance_report'] == 4 && $sidebarUserPermissions['view_attendance_report'] != 'none' && in_array('attendance', user_modules()))--}}
+{{--                    <x-sub-menu-item :link="route('attendance-report.index')"--}}
+{{--                                     :text="__('app.menu.attendanceReport')" />--}}
+{{--                @endif--}}
+{{--                @if (isset($sidebarUserPermissions['view_expense_report']) && $sidebarUserPermissions['view_expense_report'] == 4 && $sidebarUserPermissions['view_expense_report'] != 'none' && in_array('expenses', user_modules()))--}}
+{{--                    <x-sub-menu-item :link="route('expense-report.index')"--}}
+{{--                                     :text="__('app.menu.expenseReport')" />--}}
+{{--                @endif--}}
+{{--                @if (isset($sidebarUserPermissions['view_lead_report']) && $sidebarUserPermissions['view_lead_report'] == 4 && $sidebarUserPermissions['view_lead_report'] != 'none' && in_array('leads', user_modules()))--}}
+{{--                    <x-sub-menu-item :link="route('lead-report.index')"--}}
+{{--                                     :text="__('app.menu.dealReport')" />--}}
+{{--                @endif--}}
+{{--                @if (isset($sidebarUserPermissions['view_sales_report']) && $sidebarUserPermissions['view_sales_report'] == 4 && $sidebarUserPermissions['view_sales_report'] != 'none' && in_array('invoices', user_modules()))--}}
+{{--                    <x-sub-menu-item :link="route('sales-report.index')"--}}
+{{--                                     :text="__('app.menu.salesReport')" />--}}
+{{--                @endif--}}
             </div>
         </x-menu-item>
 @endif

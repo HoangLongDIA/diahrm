@@ -15,18 +15,18 @@
         </div>
 
         @if (in_array('admin', user_roles()) && $checkListCompleted < $checkListTotal && App::environment('codecanyon'))
-            <div class="ml-3 d-none d-lg-block d-md-block">
-                <span class="f-12 mb-1"><a href="{{ route('checklist') }}" class="text-lightest ">
-                        @lang('modules.accountSettings.setupProgress')</a>
-                    <span class="float-right">{{ $checkListCompleted }}/{{ $checkListTotal }}</span>
-                </span>
-                <div class="progress" style="height: 5px; width: 150px">
-                    <div class="progress-bar bg-primary" role="progressbar"
-                         style="width: {{ ($checkListCompleted / $checkListTotal) * 100 }}%;" aria-valuenow="25"
-                         aria-valuemin="0" aria-valuemax="100">&nbsp;
-                    </div>
-                </div>
-            </div>
+{{--            <div class="ml-3 d-none d-lg-block d-md-block">--}}
+{{--                <span class="f-12 mb-1"><a href="{{ route('checklist') }}" class="text-lightest ">--}}
+{{--                        @lang('modules.accountSettings.setupProgress')</a>--}}
+{{--                    <span class="float-right">{{ $checkListCompleted }}/{{ $checkListTotal }}</span>--}}
+{{--                </span>--}}
+{{--                <div class="progress" style="height: 5px; width: 150px">--}}
+{{--                    <div class="progress-bar bg-primary" role="progressbar"--}}
+{{--                         style="width: {{ ($checkListCompleted / $checkListTotal) * 100 }}%;" aria-valuenow="25"--}}
+{{--                         aria-valuemin="0" aria-valuemax="100">&nbsp;--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         @endif
 
     </div>
@@ -35,21 +35,21 @@
     <!-- NAVBAR RIGHT(SEARCH, ADD, NOTIFICATION, LOGOUT) START-->
     <div class="page-header-right float-right d-flex align-items-center justify-content-end">
 
-        <span id="timer-clock">
-            @if(isset($selfActiveTimer))
-                @include('sections.timer_clock', ['selfActiveTimer' => $selfActiveTimer])
-            @endif
-        </span>
+{{--        <span id="timer-clock">--}}
+{{--            @if(isset($selfActiveTimer))--}}
+{{--                @include('sections.timer_clock', ['selfActiveTimer' => $selfActiveTimer])--}}
+{{--            @endif--}}
+{{--        </span>--}}
 
         <ul>
             <!-- SEARCH START -->
-            <li data-toggle="tooltip" data-placement="top" title="{{__('app.search')}}" class="d-none d-sm-block">
-                <div class="d-flex align-items-center">
-                    <a href="javascript:;" class="d-block header-icon-box open-search">
-                        <i class="fa fa-search f-16 text-dark-grey"></i>
-                    </a>
-                </div>
-            </li>
+{{--            <li data-toggle="tooltip" data-placement="top" title="{{__('app.search')}}" class="d-none d-sm-block">--}}
+{{--                <div class="d-flex align-items-center">--}}
+{{--                    <a href="javascript:;" class="d-block header-icon-box open-search">--}}
+{{--                        <i class="fa fa-search f-16 text-dark-grey"></i>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            </li>--}}
             <!-- SEARCH END -->
             <!-- Sticky Note START -->
             <li data-toggle="tooltip" data-placement="top" title="{{__('app.menu.stickyNotes')}}" class="d-none d-sm-block">
@@ -63,31 +63,31 @@
 
         @if (!in_array('client', user_roles()))
 
-            @if (in_array('timelogs', user_modules()) && (add_timelogs_permission() == 'all' || add_timelogs_permission() == 'added' || manage_active_timelogs() == 'all'))
-                <!-- START TIMER -->
-                    <li data-toggle="tooltip" data-placement="top" title="{{__('modules.timeLogs.startTimer')}}">
-                        <div class="add_box dropdown">
-                            <a class="d-block dropdown-toggle header-icon-box" type="link" id="show-active-timer"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-clock f-16 text-dark-grey"></i>
-                                    <span
-                                        class="badge badge-primary active-timer-count position-absolute {{ ($activeTimerCount == 0) ? 'd-none' : '' }}">{{ $activeTimerCount }}</span>
-                            </a>
-                        @if ($activeTimerCount == 0)
-                            <!-- DROPDOWN - INFORMATION -->
-                                <div class="dropdown-menu dropdown-menu-right" id="active-timer-list"
-                                     aria-labelledby="dropdownMenuLink" tabindex="0">
-                                    <a class="dropdown-item text-primary f-w-500" href="javascript:;"
-                                       id="start-timer-modal">
-                                        <i class="fa fa-play mr-2"></i>
-                                        @lang("modules.timeLogs.startTimer")
-                                    </a>
-                                </div>
-                            @endif
-                        </div>
-                    </li>
-                    <!-- START TIMER END -->
-            @endif
+{{--            @if (in_array('timelogs', user_modules()) && (add_timelogs_permission() == 'all' || add_timelogs_permission() == 'added' || manage_active_timelogs() == 'all'))--}}
+{{--                <!-- START TIMER -->--}}
+{{--                    <li data-toggle="tooltip" data-placement="top" title="{{__('modules.timeLogs.startTimer')}}">--}}
+{{--                        <div class="add_box dropdown">--}}
+{{--                            <a class="d-block dropdown-toggle header-icon-box" type="link" id="show-active-timer"--}}
+{{--                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                <i class="fa fa-clock f-16 text-dark-grey"></i>--}}
+{{--                                    <span--}}
+{{--                                        class="badge badge-primary active-timer-count position-absolute {{ ($activeTimerCount == 0) ? 'd-none' : '' }}">{{ $activeTimerCount }}</span>--}}
+{{--                            </a>--}}
+{{--                        @if ($activeTimerCount == 0)--}}
+{{--                            <!-- DROPDOWN - INFORMATION -->--}}
+{{--                                <div class="dropdown-menu dropdown-menu-right" id="active-timer-list"--}}
+{{--                                     aria-labelledby="dropdownMenuLink" tabindex="0">--}}
+{{--                                    <a class="dropdown-item text-primary f-w-500" href="javascript:;"--}}
+{{--                                       id="start-timer-modal">--}}
+{{--                                        <i class="fa fa-play mr-2"></i>--}}
+{{--                                        @lang("modules.timeLogs.startTimer")--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
+{{--                    <!-- START TIMER END -->--}}
+{{--            @endif--}}
 
             <!-- ADD START -->
                 <li data-toggle="tooltip" data-placement="top" title="{{__('app.createNew')}}">
@@ -114,13 +114,13 @@
                                 </a>
                             @endif
 
-                            @if (in_array('clients', user_modules()) && (add_clients_permission() == 'all' || add_clients_permission() == 'added'))
-                                <a class="dropdown-item f-14 text-dark openRightModal"
-                                   href="{{ route('clients.create') }}">
-                                    <i class="fa fa-plus f-w-500 mr-2 f-11"></i>
-                                    @lang('app.addClient')
-                                </a>
-                            @endif
+{{--                            @if (in_array('clients', user_modules()) && (add_clients_permission() == 'all' || add_clients_permission() == 'added'))--}}
+{{--                                <a class="dropdown-item f-14 text-dark openRightModal"--}}
+{{--                                   href="{{ route('clients.create') }}">--}}
+{{--                                    <i class="fa fa-plus f-w-500 mr-2 f-11"></i>--}}
+{{--                                    @lang('app.addClient')--}}
+{{--                                </a>--}}
+{{--                            @endif--}}
 
                             @if (in_array('employees', user_modules()) && (add_employees_permission() == 'all' || add_employees_permission() == 'added'))
                                 <a class="dropdown-item f-14 text-dark openRightModal"
@@ -130,21 +130,21 @@
                                 </a>
                             @endif
 
-                            @if (in_array('payments', user_modules()) && (add_payments_permission() == 'all' || add_payments_permission() == 'added'))
-                                <a class="dropdown-item f-14 text-dark openRightModal"
-                                   href="{{ route('payments.create') }}">
-                                    <i class="fa fa-plus f-w-500 mr-2 f-11"></i>
-                                    @lang('modules.payments.addPayment')
-                                </a>
-                            @endif
+{{--                            @if (in_array('payments', user_modules()) && (add_payments_permission() == 'all' || add_payments_permission() == 'added'))--}}
+{{--                                <a class="dropdown-item f-14 text-dark openRightModal"--}}
+{{--                                   href="{{ route('payments.create') }}">--}}
+{{--                                    <i class="fa fa-plus f-w-500 mr-2 f-11"></i>--}}
+{{--                                    @lang('modules.payments.addPayment')--}}
+{{--                                </a>--}}
+{{--                            @endif--}}
 
-                            @if (in_array('tickets', user_modules()) && (add_tickets_permission() == 'all' || add_tickets_permission() == 'added'))
-                                <a class="dropdown-item f-14 text-dark openRightModal"
-                                   href="{{ route('tickets.create') }}">
-                                    <i class="fa fa-plus f-w-500 mr-2 f-11"></i>
-                                    @lang('modules.tickets.addTicket')
-                                </a>
-                            @endif
+{{--                            @if (in_array('tickets', user_modules()) && (add_tickets_permission() == 'all' || add_tickets_permission() == 'added'))--}}
+{{--                                <a class="dropdown-item f-14 text-dark openRightModal"--}}
+{{--                                   href="{{ route('tickets.create') }}">--}}
+{{--                                    <i class="fa fa-plus f-w-500 mr-2 f-11"></i>--}}
+{{--                                    @lang('modules.tickets.addTicket')--}}
+{{--                                </a>--}}
+{{--                            @endif--}}
                         </div>
                     </div>
                 </li>

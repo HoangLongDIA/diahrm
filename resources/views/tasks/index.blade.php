@@ -28,11 +28,12 @@ $viewUnassignedTasksPermission = user()->permission('view_unassigned_tasks');
             <p class="mb-0 pr-2 f-14 text-dark-grey d-flex align-items-center">@lang('app.status')</p>
             <div class="select-status">
                 <select class="form-control select-picker" name="status" id="status" data-live-search="true" data-size="8">
-                    <option value="not finished">@lang('modules.tasks.hideCompletedTask')</option>
+
                     <option {{ request('status') == 'all' ? 'selected' : '' }} value="all">@lang('app.all')</option>
                     @foreach ($taskBoardStatus as $status)
                         <option value="{{ $status->id }}">{{ $status->slug == 'completed' || $status->slug == 'incomplete' ? __('app.' . $status->slug) : $status->column_name }}</option>
                     @endforeach
+                    <option value="not finished">@lang('modules.tasks.hideCompletedTask')</option>
                 </select>
             </div>
         </div>

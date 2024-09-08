@@ -111,12 +111,15 @@ $createPublicProjectPermission = user()->permission('create_public_project');
 
                     <div class="col-md-12 col-lg-12">
                         <div class="form-group my-3">
-                            <x-forms.label class="my-3" fieldId="project_summary"
-                                :fieldLabel="__('modules.projects.projectSummary')">
-                            </x-forms.label>
-                            <div id="project_summary">{!! $project->project_summary !!}</div>
-                            <textarea name="project_summary" id="project_summary-text"
-                                class="d-none">{!! $project->project_summary !!}</textarea>
+{{--                            <x-forms.label class="my-3" fieldId="project_summary"--}}
+{{--                                :fieldLabel="__('modules.projects.projectSummary')">--}}
+{{--                            </x-forms.label>--}}
+{{--                            <div id="project_summary">{!! $project->project_summary !!}</div>--}}
+{{--                            <textarea name="project_summary" id="project_summary-text"--}}
+{{--                                class="d-none">{!! $project->project_summary !!}</textarea>--}}
+                            <x-forms.textarea class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.projectSummary')"
+                                              fieldName="project_summary" fieldId="project_summary-text" :fieldPlaceholder="__(' ')" :fieldValue="$project->project_summary">
+                            </x-forms.textarea>
                         </div>
                     </div>
                     @if ($editPermission == 'all')
@@ -419,11 +422,11 @@ $createPublicProjectPermission = user()->permission('create_public_project');
         });
         const atValues = @json($userData);
 
-        quillMention(atValues, '#project_summary');
+        //quillMention(atValues, '#project_summary');
 
         $('#save-project-form').click(function() {
-            var note = document.getElementById('project_summary').children[0].innerHTML;
-            document.getElementById('project_summary-text').value = note;
+            // var note = document.getElementById('project_summary').children[0].innerHTML;
+            // document.getElementById('project_summary-text').value = note;
 
             var user = $('#project_summary span[data-id]').map(function(){
                             return $(this).attr('data-id')
