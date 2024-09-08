@@ -25,7 +25,7 @@
                         fieldRequired="true">
                     </x-forms.label>
                     <x-forms.input-group>
-                        <select class="form-control multiple-users" multiple name="user_id[]" data-live-search="true" data-size="8">
+                        <select class="form-control multiple-users" multiple name="user_id[]" data-live-search="true" data-size="8" data-done-button="true" data-done-button-text="Chọn Xong">
                             @foreach ($employees as $item)
                                 <x-user-option :user="$item" :pill="true" />
                             @endforeach

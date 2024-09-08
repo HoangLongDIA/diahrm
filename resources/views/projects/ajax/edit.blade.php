@@ -94,11 +94,11 @@ $createPublicProjectPermission = user()->permission('create_public_project');
                         </div>
                     @endif
 
-                    <div class="col-md-4">
+{{--                    <div class="col-md-4">--}}
 
-                        <x-forms.input-group>
-                            <x-client-selection-dropdown :clients="$clients" fieldRequired="false"
-                                                         :selected="$project->client_id ?? null"/>
+{{--                        <x-forms.input-group>--}}
+{{--                            <x-client-selection-dropdown :clients="$clients" fieldRequired="false"--}}
+{{--                                                         :selected="$project->client_id ?? null"/>--}}
 {{--                            @if ($addClientPermission == 'all' || $addClientPermission == 'added')--}}
 {{--                                <x-slot name="append">--}}
 {{--                                    <button id="add-client" type="button"--}}
@@ -106,8 +106,8 @@ $createPublicProjectPermission = user()->permission('create_public_project');
 {{--                                        data-toggle="tooltip" data-original-title="{{__('modules.client.addNewClient') }}">@lang('app.add')</button>--}}
 {{--                                </x-slot>--}}
 {{--                            @endif--}}
-                        </x-forms.input-group>
-                    </div>
+{{--                        </x-forms.input-group>--}}
+{{--                    </div>--}}
 
                     <div class="col-md-12 col-lg-12">
                         <div class="form-group my-3">
@@ -119,7 +119,22 @@ $createPublicProjectPermission = user()->permission('create_public_project');
                                 class="d-none">{!! $project->project_summary !!}</textarea>
                         </div>
                     </div>
-
+                    @if ($editPermission == 'all')
+                        <div class="col-lg-3 col-md-6">
+                            <x-forms.select fieldId="added_by" :fieldLabel="__('app.added').' '.__('app.by')"
+                                            fieldName="added_by">
+                                <option value="">--</option>
+                                @foreach ($employees as $item)
+                                    <x-user-option :user="$item" :selected="$project->added_by == $item->id" />
+                                @endforeach
+                            </x-forms.select>
+                        </div>
+                    @endif
+                    <div class="col-lg-4 col-md-6">
+                        <x-forms.number class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.projectBudget')"
+                                        fieldName="project_budget" fieldId="project_budget" :fieldValue="$project->project_budget"
+                                        :fieldPlaceholder="__('placeholders.price')" />
+                    </div>
                     @if ($project->public == 1 && $createPublicProjectPermission == 'all')
                         <div class="col-sm-12">
                             <div class="form-group">
@@ -150,7 +165,7 @@ $createPublicProjectPermission = user()->permission('create_public_project');
                                 </x-forms.label>
                                 <x-forms.input-group>
                                     <select class="form-control multiple-users" multiple name="member_id[]"
-                                        id="selectEmployee" data-live-search="true" data-size="8">
+                                        id="selectEmployee" data-live-search="true" data-size="8" data-done-button="true" data-done-button-text="Thêm Vào">
                                         @foreach ($employees as $item)
                                             @php
                                                 $selected = '';
@@ -184,26 +199,26 @@ $createPublicProjectPermission = user()->permission('create_public_project');
                                     :fieldLabel="__('modules.projects.addMemberTitle')">
                                 </x-forms.label>
                                 <x-forms.input-group>
-                                    <select class="form-control multiple-users" multiple name="user_id[]"
-                                        id="selectEmployee" data-live-search="true" data-size="8">
-                                        @if ($employees != '')
+{{--                                    <select class="form-control multiple-users" multiple name="user_id[]"--}}
+{{--                                        id="selectEmployee" data-live-search="true" data-size="8">--}}
+{{--                                        @if ($employees != '')--}}
 
-                                            @foreach ($employees as $item)
-                                                <x-user-option
-                                                    :user="$item"
-                                                    :pill="true"
-                                                    :selected="request()->has('default_assign') && request('default_assign') == $item->id ||(isset($projectTemplateMembers) && in_array($item->id, $projectTemplateMembers))"
-                                                />
+{{--                                            @foreach ($employees as $item)--}}
+{{--                                                <x-user-option--}}
+{{--                                                    :user="$item"--}}
+{{--                                                    :pill="true"--}}
+{{--                                                    :selected="request()->has('default_assign') && request('default_assign') == $item->id ||(isset($projectTemplateMembers) && in_array($item->id, $projectTemplateMembers))"--}}
+{{--                                                />--}}
 
-                                            @endforeach
-                                        @endif
-                                    </select>
+{{--                                            @endforeach--}}
+{{--                                        @endif--}}
+{{--                                    </select>--}}
 
                                     @if ($addEmployeePermission == 'all' || $addEmployeePermission == 'added')
-                                        <x-slot name="append">
-                                            <button id="add-employee" type="button"
-                                                class="btn btn-outline-secondary border-grey">@lang('app.add')</button>
-                                        </x-slot>
+{{--                                        <x-slot name="append">--}}
+{{--                                            <button id="add-employee" type="button"--}}
+{{--                                                class="btn btn-outline-secondary border-grey">@lang('app.add')</button>--}}
+{{--                                        </x-slot>--}}
                                     @endif
                                 </x-forms.input-group>
                             </div>
@@ -250,11 +265,12 @@ $createPublicProjectPermission = user()->permission('create_public_project');
 
                 </div>
 
-                <h4 class="mb-0 p-20 f-21 font-weight-normal text-capitalize border-top-grey">
-                    @lang('modules.client.clientOtherDetails')</h4>
+{{--                <h4 class="d- mb-0 p-20 f-21 font-weight-normal text-capitalize border-top-grey">--}}
+{{--                    @lang('modules.client.clientOtherDetails')--}}
+{{--                </h4>--}}
 
                 <div class="row p-20">
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 d-none">
                         <x-forms.select fieldId="currency_id" :fieldLabel="__('modules.invoices.currency')"
                             fieldName="currency_id" search="true">
                             @foreach ($currencies as $currency)
@@ -265,87 +281,73 @@ $createPublicProjectPermission = user()->permission('create_public_project');
                         </x-forms.select>
                     </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <x-forms.number class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.projectBudget')"
-                            fieldName="project_budget" fieldId="project_budget" :fieldValue="$project->project_budget"
-                            :fieldPlaceholder="__('placeholders.price')" />
-                    </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <x-forms.number class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.hours_allocated')"
-                            fieldName="hours_allocated" fieldId="hours_allocated"
-                            :fieldValue="$project->hours_allocated" :fieldPlaceholder="__('placeholders.hourEstimate')" />
-                    </div>
 
-                    <div class="col-md-6 col-lg-4">
-                        <div class="form-group">
-                            <div class="d-flex mt-5">
-                                <x-forms.checkbox fieldId="manual_timelog"
-                                    :fieldLabel="__('modules.projects.manualTimelog')" :checked="($project->manual_timelog
-                                    == 'enable')" fieldName="manual_timelog" />
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="col-lg-4 col-md-6">--}}
+{{--                        <x-forms.number class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.hours_allocated')"--}}
+{{--                            fieldName="hours_allocated" fieldId="hours_allocated"--}}
+{{--                            :fieldValue="$project->hours_allocated" :fieldPlaceholder="__('placeholders.hourEstimate')" />--}}
+{{--                    </div>--}}
 
-                    <div class="col-md-6 col-lg-4" id="clientNotification">
-                        <div class="form-group">
-                            <div class="d-flex mt-5">
-                                <x-forms.checkbox fieldId="client_task_notification" :checked="($project->allow_client_notification
-                                == 'enable')"
-                                    :fieldLabel="__('modules.projects.clientTaskNotification')"
-                                    fieldName="client_task_notification" />
-                            </div>
-                        </div>
-                    </div>
+{{--                    <div class="col-md-6 col-lg-4">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <div class="d-flex mt-5">--}}
+{{--                                <x-forms.checkbox fieldId="manual_timelog"--}}
+{{--                                    :fieldLabel="__('modules.projects.manualTimelog')" :checked="($project->manual_timelog--}}
+{{--                                    == 'enable')" fieldName="manual_timelog" />--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
-                    @if ($editPermission == 'all')
-                        <div class="col-lg-3 col-md-6">
-                            <x-forms.select fieldId="added_by" :fieldLabel="__('app.added').' '.__('app.by')"
-                                fieldName="added_by">
-                                <option value="">--</option>
-                                @foreach ($employees as $item)
-                                    <x-user-option :user="$item" :selected="$project->added_by == $item->id" />
-                                @endforeach
-                            </x-forms.select>
-                        </div>
-                    @endif
+{{--                    <div class="col-md-6 col-lg-4" id="clientNotification">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <div class="d-flex mt-5">--}}
+{{--                                <x-forms.checkbox fieldId="client_task_notification" :checked="($project->allow_client_notification--}}
+{{--                                == 'enable')"--}}
+{{--                                    :fieldLabel="__('modules.projects.clientTaskNotification')"--}}
+{{--                                    fieldName="client_task_notification" />--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+
 
 
 
                 </div>
 
-                <div class="row p-20">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="form-group">
-                            <div class="d-flex mt-5">
-                                <x-forms.checkbox fieldId="miroboard_checkbox"
-                                    :fieldLabel="__('modules.projects.enableMiroboard')" fieldName="miroboard_checkbox"
-                                    :checked="$project ? $project->enable_miroboard : ''"/>
-                            </div>
-                        </div>
-                    </div>
-                    <input type = "hidden" name = "mention_user_ids" id = "mentionUserId" class ="mention_user_ids">
+{{--                <div class="row p-20">--}}
+{{--                    <div class="col-md-6 col-lg-3">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <div class="d-flex mt-5">--}}
+{{--                                <x-forms.checkbox fieldId="miroboard_checkbox"--}}
+{{--                                    :fieldLabel="__('modules.projects.enableMiroboard')" fieldName="miroboard_checkbox"--}}
+{{--                                    :checked="$project ? $project->enable_miroboard : ''"/>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <input type = "hidden" name = "mention_user_ids" id = "mentionUserId" class ="mention_user_ids">--}}
 
-                    <div class="col-md-6 col-lg-6 {{!is_null($project) && $project->enable_miroboard ? '' : 'd-none'}}" id="miroboard_detail">
-                        <div class="form-group my-3">
-                            <div class="row">
-                                <div class="col-md-6 mt-6">
-                                    <x-forms.text class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.miroBoardId')"
-                                        fieldName="miro_board_id" fieldRequired="true" fieldId="miro_board_id" :fieldValue="$project->miro_board_id"/>
-                                </div>
-                                <div class="col-md-6 col-lg-6">
-                                    <div class="form-group">
-                                        <div class="d-flex mt-5">
-                                    <x-forms.checkbox fieldId="client_access"
-                                        :fieldLabel="__('modules.projects.clientMiroAccess')" fieldName="client_access"
-                                        :checked="$project ? $project->client_access : ''"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                    <div class="col-md-6 col-lg-6 {{!is_null($project) && $project->enable_miroboard ? '' : 'd-none'}}" id="miroboard_detail">--}}
+{{--                        <div class="form-group my-3">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-6 mt-6">--}}
+{{--                                    <x-forms.text class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('modules.projects.miroBoardId')"--}}
+{{--                                        fieldName="miro_board_id" fieldRequired="true" fieldId="miro_board_id" :fieldValue="$project->miro_board_id"/>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-md-6 col-lg-6">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <div class="d-flex mt-5">--}}
+{{--                                    <x-forms.checkbox fieldId="client_access"--}}
+{{--                                        :fieldLabel="__('modules.projects.clientMiroAccess')" fieldName="client_access"--}}
+{{--                                        :checked="$project ? $project->client_access : ''"/>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
                 <x-forms.custom-field :fields="$fields" :model="$project"></x-forms.custom-field>
 
@@ -474,9 +476,9 @@ $createPublicProjectPermission = user()->permission('create_public_project');
             $('#add_members').addClass('d-none');
         });
 
-        $('#miroboard_checkbox').change(function() {
-            $('#miroboard_detail').toggleClass('d-none');
-        });
+        // $('#miroboard_checkbox').change(function() {
+        //     $('#miroboard_detail').toggleClass('d-none');
+        // });
 
         $('#add-client').click(function() {
             $(MODAL_XL).modal('show');

@@ -174,7 +174,7 @@
 
                                 <x-forms.input-group>
                                     <select class="form-control multiple-users" multiple name="user_id[]"
-                                            id="selectEmployee" data-live-search="true" data-size="8">
+                                            id="selectEmployee" data-live-search="true" data-size="8" data-done-button="true" data-done-button-text="Đã chọn xong">
                                         @foreach ($employees as $item)
                                             <x-user-option
                                                 :user="$item"
@@ -447,10 +447,10 @@
         $('#save-project-form').click(function () {
             // let note = document.getElementById('project_summary').children[0].innerHTML;
             // document.getElementById('project_summary-text').value = note;
-            var mention_user_id = $('#project_summary span[data-id]').map(function(){
-                            return $(this).attr('data-id')
-                        }).get();
-            $('#mentionUserId').val(mention_user_id.join(','));
+            // var mention_user_id = $('#project_summary span[data-id]').map(function(){
+            //                 return $(this).attr('data-id')
+            //             }).get();
+            // $('#mentionUserId').val(mention_user_id.join(','));
 
             // if (add_project_note_permission == 'all' || add_project_note_permission == 'added') {
             //
@@ -548,8 +548,8 @@
             redirect: true,
             success: function (data) {
                 var atValues = data.userData;
-                destory_editor('#project_summary');
-                quillMention(atValues, '#project_summary');
+                // destory_editor('#project_summary');
+                // quillMention(atValues, '#project_summary');
                 $('#selectEmployee').html(data.data);
                 $('#selectEmployee').selectpicker('refresh');
             }

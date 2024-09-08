@@ -30,11 +30,12 @@ $projectArchived = $project->trashed();
                     <div class="select-box py-2 px-0 mr-3">
                         <x-forms.label :fieldLabel="__('app.status')" fieldId="status" />
                         <select class="form-control select-picker" name="status" id="status">
-                            <option value="not finished">@lang('modules.tasks.hideCompletedTask')</option>
+
                             <option value="all">@lang('app.all')</option>
                             @foreach ($taskBoardStatus as $status)
                                 <option value="{{ $status->id }}">{{ $status->slug == 'completed' || $status->slug == 'incomplete' ? __('app.' . $status->slug) : $status->column_name }}</option>
                             @endforeach
+                            <option value="not finished">@lang('modules.tasks.hideCompletedTask')</option>
                         </select>
                     </div>
                     <!-- STATUS END -->

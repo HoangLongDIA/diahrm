@@ -132,62 +132,41 @@ $memberIds = $project->members->pluck('user_id')->toArray();
             <!-- PROJECT PROGRESS END -->
             <!-- CLIENT START -->
             <div class="col-md-6 mb-4">
-                @if (!is_null($project->client))
-                    <x-cards.data :title="__('app.client')"
-                        otherClasses="d-block d-xl-flex d-lg-block d-md-flex  justify-content-between align-items-center">
 
-                        <div class="p-client-detail">
-                            <div class="card border-0 ">
-                                <div class="card-horizontal">
+{{--                    <x-cards.data :title="__('app.client')"--}}
+{{--                        otherClasses="d-block d-xl-flex d-lg-block d-md-flex  justify-content-between align-items-center">--}}
 
-                                    <div class="card-img m-0">
-                                        <img class="" src=" {{ $project->client->image_url }}"
-                                            alt="{{ $project->client->name_salutation }}">
-                                    </div>
-                                    <div class="card-body border-0 p-0 ml-4 ml-xl-4 ml-lg-3 ml-md-3">
-                                        <h4 class="card-title f-15 font-weight-normal mb-0">
-                                            @if (!in_array('client', user_roles()))
-                                               <a href="{{ route('clients.show', $project->client_id) }}" class="text-dark">
-                                                    {{ $project->client->name_salutation }}
-                                                </a>
-                                            @else
-                                                {{ $project->client->name_salutation }}
-                                            @endif
-                                        </h4>
-                                        <p class="card-text f-14 text-lightest mb-0">
-                                            {{ $project->client->clientDetails->company_name }}
-                                        </p>
-                                        @if ($project->client->country_id)
-                                            <span
-                                                class="card-text f-12 text-lightest text-capitalize d-flex align-items-center">
-                                                <span
-                                                    class='flag-icon flag-icon-{{ strtolower($project->client->country->iso) }} mr-2'></span>
-                                                {{ $project->client->country->nicename }}
-                                            </span>
-                                        @endif
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        @if( (in_array('admin', user_roles()) && $messageSetting->allow_client_admin == 'yes') ||
-                        (in_array('employee', user_roles()) && $messageSetting->allow_client_employee == 'yes') )
-                        <div class="p-client-msg mt-4 mt-xl-0 mt-lg-4 mt-md-0">
-                            <button type="button" class="btn-secondary rounded f-15" id="new-chat"
-                                data-client-id="{{ $project->client->id }}"> <i class="fab fa-whatsapp mr-1"></i>
-                                @lang('app.message')</button>
-                        </div>
-                @endif
+{{--                        <div class="p-client-detail">--}}
+{{--                            <div class="card border-0 ">--}}
+{{--                                <div class="card-horizontal">--}}
 
 
-                </x-cards.data>
-            @else
+{{--                                    <div class="card-body border-0 p-0 ml-4 ml-xl-4 ml-lg-3 ml-md-3">--}}
+{{--                                       --}}
+{{--                                    </div>--}}
+
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+
+
+
+
+{{--                </x-cards.data>--}}
+
                 <x-cards.data
                     otherClasses="d-flex d-xl-flex d-lg-block d-md-flex  justify-content-between align-items-center">
-                    <x-cards.no-record icon="user" :message="__('messages.noClientAddedToProject')" />
+                    @if ($projectBudgetPermission == 'all')
+                        <div class="col">
+                            <x-cards.widget :title="__('modules.projects.projectBudget')"
+{{--                                            :value="((!is_null($project->project_budget) && $project->currency) ? currency_format($project->project_budget, $project->currency->id) : '0')"
+--}}
+:value="((!is_null($project->project_budget) && $project->currency) ? number_format($project->project_budget).' VND' : '0')"
+                                            icon="coins" />
+                        </div>
+                    @endif
                 </x-cards.data>
-                @endif
 
             </div>
             <!-- CLIENT END -->
@@ -197,7 +176,7 @@ $memberIds = $project->members->pluck('user_id')->toArray();
         <!-- TASK STATUS AND BUDGET START -->
         <div class="row mb-4">
             <!-- TASK STATUS START -->
-            <div class="col-lg-6 col-md-12">
+            <div class="col-lg-12 col-md-12">
                 <x-cards.data :title="__('app.menu.tasks')" padding="false">
                     <x-pie-chart id="task-chart" :labels="$taskChart['labels']" :values="$taskChart['values']"
                         :colors="$taskChart['colors']" height="220" width="250" />
@@ -205,51 +184,51 @@ $memberIds = $project->members->pluck('user_id')->toArray();
             </div>
             <!-- TASK STATUS END -->
             <!-- BUDGET VS SPENT START -->
-            <div class="col-lg-6 col-md-12">
-                <div class="row mb-4">
-                    <div class="col-sm-12">
-                        <h4 class="f-18 f-w-500 mb-4">@lang('app.statistics')</h4>
-                    </div>
-                    @if ($projectBudgetPermission == 'all')
-                        <div class="col">
-                            <x-cards.widget :title="__('modules.projects.projectBudget')"
-                                :value="((!is_null($project->project_budget) && $project->currency) ? currency_format($project->project_budget, $project->currency->id) : '0')"
-                                icon="coins" />
-                        </div>
-                    @endif
+{{--            <div class="col-lg-6 col-md-12">--}}
+{{--                <div class="row mb-4">--}}
+{{--                    <div class="col-sm-12">--}}
+{{--                        <h4 class="f-18 f-w-500 mb-4">@lang('app.statistics')</h4>--}}
+{{--                    </div>--}}
+{{--                    @if ($projectBudgetPermission == 'all')--}}
+{{--                        <div class="col">--}}
+{{--                            <x-cards.widget :title="__('modules.projects.projectBudget')"--}}
+{{--                                :value="((!is_null($project->project_budget) && $project->currency) ? currency_format($project->project_budget, $project->currency->id) : '0')"--}}
+{{--                                icon="coins" />--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
-                    @if ($viewProjectTimelogPermission == 'all')
-                        <div class="col">
-                            <x-cards.widget :title="__('modules.projects.hoursLogged')" :value="$hoursLogged"
-                                icon="clock" />
-                        </div>
-                    @endif
-                </div>
-                <div class="row">
-                    @if ($viewPaymentPermission == 'all')
-                        <div class="col">
-                            <x-cards.widget :title="__('app.earnings')"
-                                :value="(!is_null($project->currency) ? currency_format($earnings, $project->currency->id) : currency_format($earnings, company()->currency_id))"
-                                icon="coins" />
-                        </div>
-                    @endif
+{{--                    @if ($viewProjectTimelogPermission == 'all')--}}
+{{--                        <div class="col">--}}
+{{--                            <x-cards.widget :title="__('modules.projects.hoursLogged')" :value="$hoursLogged"--}}
+{{--                                icon="clock" />--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--                <div class="row">--}}
+{{--                    @if ($viewPaymentPermission == 'all')--}}
+{{--                        <div class="col">--}}
+{{--                            <x-cards.widget :title="__('app.earnings')"--}}
+{{--                                :value="(!is_null($project->currency) ? currency_format($earnings, $project->currency->id) : currency_format($earnings, company()->currency_id))"--}}
+{{--                                icon="coins" />--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
-                    @if ($viewExpensePermission == 'all')
-                        <div class="col">
-                            <x-cards.widget :title="__('modules.projects.expenses_total')"
-                                :value="(!is_null($project->currency) ? currency_format($expenses, $project->currency->id) : currency_format($expenses, company()->currency_id))"
-                                icon="coins" />
-                        </div>
-                    @endif
-                    @if ($viewPaymentPermission == 'all' && !in_array('client', user_roles()))
-                        <div class="col">
-                            <x-cards.widget :title="__('modules.projects.profit')"
-                                    :value="(!is_null($project->currency) ? currency_format($profit, $project->currency->id) : currency_format($profit, company()->currency_id))"
-                                    icon="coins" />
-                        </div>
-                    @endif
-                </div>
-            </div>
+{{--                    @if ($viewExpensePermission == 'all')--}}
+{{--                        <div class="col">--}}
+{{--                            <x-cards.widget :title="__('modules.projects.expenses_total')"--}}
+{{--                                :value="(!is_null($project->currency) ? currency_format($expenses, $project->currency->id) : currency_format($expenses, company()->currency_id))"--}}
+{{--                                icon="coins" />--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                    @if ($viewPaymentPermission == 'all' && !in_array('client', user_roles()))--}}
+{{--                        <div class="col">--}}
+{{--                            <x-cards.widget :title="__('modules.projects.profit')"--}}
+{{--                                    :value="(!is_null($project->currency) ? currency_format($profit, $project->currency->id) : currency_format($profit, company()->currency_id))"--}}
+{{--                                    icon="coins" />--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <!-- BUDGET VS SPENT END -->
         </div>
         <!-- TASK STATUS AND BUDGET END -->

@@ -299,31 +299,32 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
 
                             </x-cards.data>
                         @endif
-
-                        <x-cards.data class="mb-4" :title="__('app.licenseEmployee')"  >
-                            <x-cards.data-row :label="__('CMND/CCCD')"
-                                              :value="$employee->SoSLDCMND" />
-                            <x-cards.data-row :label="__('Ngày Cấp')"
-                                              :value="$employee->NgayCMND" />
-                            <x-cards.data-row :label="__('Nơi Cấp')"
-                                              :value="$employee->NoiCMND" />
-                            <x-cards.data-row :label="__('Nơi Sinh')"
-                                              :value="$employee->Noisinh" />
-                            <x-cards.data-row :label="__('Quê Quán')"
-                                              :value="$employee->QUEQUAN" />
-                            <x-cards.data-row :label="__('Xuất Thân')"
-                                              :value="$employee->Xuatthan" />
-                        </x-cards.data>
-                            <x-cards.data class="mb-4" :title="__('app.familyMember')"  >
-                                <x-cards.data-row :label="__('Họ Và Tên Cha')"
-                                                  :value="$employee->Hotencha" />
-                                <x-cards.data-row :label="__('Họ Và Tên Mẹ')"
-                                                  :value="$employee->Hotenme" />
-                                <x-cards.data-row :label="__('Họ Và tên Vợ/Chồng')"
-                                                  :value="$employee->HotenVC" />
-                                <x-cards.data-row :label="__('Số Con')"
-                                                  :value="$employee->SoCon" />
+                        @if ($showFullProfile)
+                            <x-cards.data class="mb-4" :title="__('app.licenseEmployee')"  >
+                                <x-cards.data-row :label="__('CMND/CCCD')"
+                                                  :value="$employee->SoSLDCMND" />
+                                <x-cards.data-row :label="__('Ngày Cấp')"
+                                                  :value="$employee->NgayCMND" />
+                                <x-cards.data-row :label="__('Nơi Cấp')"
+                                                  :value="$employee->NoiCMND" />
+                                <x-cards.data-row :label="__('Nơi Sinh')"
+                                                  :value="$employee->Noisinh" />
+                                <x-cards.data-row :label="__('Quê Quán')"
+                                                  :value="$employee->QUEQUAN" />
+                                <x-cards.data-row :label="__('Xuất Thân')"
+                                                  :value="$employee->Xuatthan" />
                             </x-cards.data>
+                                <x-cards.data class="mb-4" :title="__('app.familyMember')"  >
+                                    <x-cards.data-row :label="__('Họ Và Tên Cha')"
+                                                      :value="$employee->Hotencha" />
+                                    <x-cards.data-row :label="__('Họ Và Tên Mẹ')"
+                                                      :value="$employee->Hotenme" />
+                                    <x-cards.data-row :label="__('Họ Và tên Vợ/Chồng')"
+                                                      :value="$employee->HotenVC" />
+                                    <x-cards.data-row :label="__('Số Con')"
+                                                      :value="$employee->SoCon" />
+                                </x-cards.data>
+                        @endif
                         <x-cards.data class="mb-4">
                             <div class="d-flex justify-content-between">
                                     <div class="col-6">

@@ -47,19 +47,19 @@ $projectArchived = $project->trashed();
                         </li>
                     @endif
 
-                    @if ($viewFilesPermission == 'all' || ($viewFilesPermission == 'added' && user()->id == $project->added_by) || ($viewFilesPermission == 'owned' && user()->id == $project->client_id))
-                        <li>
-                            <x-tab :href="route('projects.show', $project->id).'?tab=files'" :text="__('modules.projects.files')"
-                            class="files" />
-                        </li>
-                    @endif
+{{--                    @if ($viewFilesPermission == 'all' || ($viewFilesPermission == 'added' && user()->id == $project->added_by) || ($viewFilesPermission == 'owned' && user()->id == $project->client_id))--}}
+{{--                        <li>--}}
+{{--                            <x-tab :href="route('projects.show', $project->id).'?tab=files'" :text="__('modules.projects.files')"--}}
+{{--                            class="files" />--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
 
-                    @if ($viewProjectMilestonePermission == 'all' || $viewProjectMilestonePermission == 'added' || ($viewProjectMilestonePermission == 'owned' && user()->id == $project->client_id))
-                        <li>
-                            <x-tab :href="route('projects.show', $project->id).'?tab=milestones'"
-                            :text="__('modules.projects.milestones')" class="milestones" />
-                        </li>
-                    @endif
+{{--                    @if ($viewProjectMilestonePermission == 'all' || $viewProjectMilestonePermission == 'added' || ($viewProjectMilestonePermission == 'owned' && user()->id == $project->client_id))--}}
+{{--                        <li>--}}
+{{--                            <x-tab :href="route('projects.show', $project->id).'?tab=milestones'"--}}
+{{--                            :text="__('modules.projects.milestones')" class="milestones" />--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
 
                     @if (in_array('tasks', user_modules()) && ($viewTasksPermission == 'all' || ($viewTasksPermission == 'added' && user()->id == $project->added_by) || ($viewTasksPermission == 'owned' && user()->id == $project->client_id)))
                         <li>
@@ -92,32 +92,32 @@ $projectArchived = $project->trashed();
                         </li>
                     @endif
 
-                    @if (in_array('timelogs', user_modules()) && ($viewProjectTimelogPermission == 'all' || ($viewProjectTimelogPermission == 'added' && user()->id == $project->added_by) || ($viewProjectTimelogPermission == 'owned' && user()->id == $project->client_id)))
-                        <li>
-                            <x-tab :href="route('projects.show', $project->id).'?tab=timelogs'" :text="__('app.menu.timeLogs')" class="timelogs" ajax="false" />
-                        </li>
-                    @endif
+{{--                    @if (in_array('timelogs', user_modules()) && ($viewProjectTimelogPermission == 'all' || ($viewProjectTimelogPermission == 'added' && user()->id == $project->added_by) || ($viewProjectTimelogPermission == 'owned' && user()->id == $project->client_id)))--}}
+{{--                        <li>--}}
+{{--                            <x-tab :href="route('projects.show', $project->id).'?tab=timelogs'" :text="__('app.menu.timeLogs')" class="timelogs" ajax="false" />--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
 
-                    @if (in_array('expenses', user_modules()) && ($viewExpensePermission == 'all' || ($viewExpensePermission == 'added' && user()->id == $project->added_by) || ($viewExpensePermission == 'owned' && user()->id == $project->client_id)))
-                        <li>
-                            <x-tab :href="route('projects.show', $project->id).'?tab=expenses'" :text="__('app.menu.expenses')" class="expenses" ajax="false" />
-                        </li>
-                    @endif
+{{--                    @if (in_array('expenses', user_modules()) && ($viewExpensePermission == 'all' || ($viewExpensePermission == 'added' && user()->id == $project->added_by) || ($viewExpensePermission == 'owned' && user()->id == $project->client_id)))--}}
+{{--                        <li>--}}
+{{--                            <x-tab :href="route('projects.show', $project->id).'?tab=expenses'" :text="__('app.menu.expenses')" class="expenses" ajax="false" />--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
 
-                    @if ($viewMiroboardPermission == 'all' && $project->enable_miroboard &&
-                    ((in_array('client', user_roles()) && $project->client_access && $project->client_id == user()->id)
-                    || !in_array('client', user_roles()))
-                    )
-                        <li>
-                            <x-tab :href="route('projects.show', $project->id).'?tab=miroboard'" :text="__('app.menu.miroboard')" class="miroboard" ajax="false" />
-                        </li>
-                    @endif
+{{--                    @if ($viewMiroboardPermission == 'all' && $project->enable_miroboard &&--}}
+{{--                    ((in_array('client', user_roles()) && $project->client_access && $project->client_id == user()->id)--}}
+{{--                    || !in_array('client', user_roles()))--}}
+{{--                    )--}}
+{{--                        <li>--}}
+{{--                            <x-tab :href="route('projects.show', $project->id).'?tab=miroboard'" :text="__('app.menu.miroboard')" class="miroboard" ajax="false" />--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
 
-                    @if (in_array('payments', user_modules()) && !is_null($project->client_id) && ($viewPaymentPermission == 'all' || ($viewPaymentPermission == 'added' && user()->id == $project->added_by) || ($viewPaymentPermission == 'owned' && user()->id == $project->client_id)))
-                        <li>
-                            <x-tab :href="route('projects.show', $project->id).'?tab=payments'" :text="__('app.menu.payments')" class="payments" ajax="false" />
-                        </li>
-                    @endif
+{{--                    @if (in_array('payments', user_modules()) && !is_null($project->client_id) && ($viewPaymentPermission == 'all' || ($viewPaymentPermission == 'added' && user()->id == $project->added_by) || ($viewPaymentPermission == 'owned' && user()->id == $project->client_id)))--}}
+{{--                        <li>--}}
+{{--                            <x-tab :href="route('projects.show', $project->id).'?tab=payments'" :text="__('app.menu.payments')" class="payments" ajax="false" />--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
 
                     @if ($viewDiscussionPermission == 'all' || ($viewDiscussionPermission == 'added' && user()->id == $project->added_by) || ($viewDiscussionPermission == 'owned' && user()->id == $project->client_id))
                         <li>
@@ -151,11 +151,11 @@ $projectArchived = $project->trashed();
                         </li>
                     @endif
 
-                    @if ($viewNotePermission != 'none' )
-                        <li>
-                            <x-tab :href="route('projects.show', $project->id).'?tab=tickets'" :text="__('app.menu.tickets')" class="tickets" ajax="false" />
-                        </li>
-                    @endif
+{{--                    @if ($viewNotePermission != 'none' )--}}
+{{--                        <li>--}}
+{{--                            <x-tab :href="route('projects.show', $project->id).'?tab=tickets'" :text="__('app.menu.tickets')" class="tickets" ajax="false" />--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
                 </ul>
             </nav>
         </div>
