@@ -774,7 +774,8 @@ class EmployeeController extends AccountBaseController
 
             return Reply::dataOnly(['views' => $this->view, 'status' => 'success', 'html' => $html, 'title' => $this->pageTitle]);
         }
-
+        $team = Team::where('id',$this->employee->employeeDetail->department_id)->first();
+        $this->teamName = (isset($team))? $team->team_name: 'DIA';
         $this->activeTab = $tab ?: 'profile';
 
         return view('employees.show', $this->data);

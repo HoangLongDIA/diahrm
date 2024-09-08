@@ -339,25 +339,30 @@ $viewAppreciationPermission = user()->permission('view_appreciation');
                                 @if ($employee->reportingTeam)
                                     <div class="col-6">
                                         <p class="f-14 text-dark-grey">@lang('modules.employees.reportingTeam')</p>
-                                        @if (count($employee->reportingTeam) > 0)
-                                            @if (count($employee->reportingTeam) > 1)
-                                                @foreach ($employee->reportingTeam as $item)
-                                                    <div class="taskEmployeeImg rounded-circle mr-1">
-                                                        <a href="{{ route('employees.show', $item->user->id) }}">
-                                                            <img data-toggle="tooltip" data-original-title="{{ $item->user->name }}"
-                                                                src="{{ $item->user->image_url }}">
-                                                        </a>
-                                                    </div>
-                                                @endforeach
+                                            @if(isset($teamName))
+                                                        {{ $teamName }}
                                             @else
-                                                @foreach ($employee->reportingTeam as $item)
-                                                    <x-employee :user="$item->user" />
-                                                @endforeach
-                                            @endif
+                                                         ----
+                                              @endif
+{{--                                        @if (count($employee->reportingTeam) > 0)--}}
+{{--                                            @if (count($employee->reportingTeam) > 1)--}}
+{{--                                                @foreach ($employee->reportingTeam as $item)--}}
+{{--                                                    <div class="taskEmployeeImg rounded-circle mr-1">--}}
+{{--                                                        <a href="{{ route('employees.show', $item->user->id) }}">--}}
+{{--                                                            <img data-toggle="tooltip" data-original-title="{{ $item->user->name }}"--}}
+{{--                                                                src="{{ $item->user->image_url }}">--}}
+{{--                                                        </a>--}}
+{{--                                                    </div>--}}
+{{--                                                @endforeach--}}
+{{--                                            @else--}}
+{{--                                                @foreach ($employee->reportingTeam as $item)--}}
+{{--                                                    <x-employee :user="$item->user" />--}}
+{{--                                                @endforeach--}}
+{{--                                            @endif--}}
 
-                                        @else
-                                            --
-                                        @endif
+{{--                                        @else--}}
+{{--                                            ----}}
+{{--                                        @endif--}}
                                     </div>
                                 @endif
                             </div>
