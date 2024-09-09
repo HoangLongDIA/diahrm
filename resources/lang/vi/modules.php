@@ -157,6 +157,7 @@ return [
     'clientName' => 'Tên khách hàng',
     'clientEmail' => 'Email khách hàng',
     'clientPhone' => 'Điện thoại khách hàng',
+      'clientLoginInfo' =>'Thông tin đăng nhập',
     'emailNote' => 'Khách hàng sẽ đăng nhập bằng email này và thông báo qua email sẽ được gửi đến email này.',
     'password' => 'Mật khẩu',
     'passwordNote' => 'Khách hàng sẽ đăng nhập bằng mật khẩu này.',

@@ -1,4 +1,4 @@
-<?php 
+<?php
 return [
   'knowledgeBase' => 'Cập nhật ảnh hồ sơ của bạn',
   'writeshortcode' => 'Dự án mã ngắn duy nhất',
@@ -11,7 +11,8 @@ return [
   'designation' => 'ví dụ. Trưởng nhóm',
   'department' => 'ví dụ. Nguồn nhân lực',
   'date' => 'Chọn ngày',
-  'address' => 'ví dụ. 132, Phố của tôi, Kingston, New York 12401',
+  'address' => 'ví dụ. Hòa Thuận Tây, Hải Châu, Đà Nẵng',
+  'tempAddress' => 'ví dụ. Hòa Thuận Tây, Hải Châu, Đà Nẵng',
   'skills' => 'ví dụ. giao tiếp, ReactJS',
   'project' => 'Viết tên dự án',
   'price' => 'ví dụ. 10000',

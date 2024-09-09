@@ -26,7 +26,7 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
                                     fieldRequired="true" :fieldPlaceholder="__('modules.employees.employeeIdInfo')" :popover="__('modules.employees.employeeIdHelp')">
                                 </x-forms.text>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <x-forms.select fieldId="salutation" fieldName="salutation"
                                     :fieldLabel="__('modules.client.salutation')">
                                     <option value="">--</option>
@@ -35,6 +35,7 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
                                     @endforeach
                                 </x-forms.select>
                             </div>
+
                             <div class="col-md-4">
                                 <x-forms.text fieldId="name" :fieldLabel="__('modules.employees.employeeName')"
                                     fieldName="name" :fieldValue="$employee->name" fieldRequired="true"
@@ -59,7 +60,7 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
                                     :fieldPlaceholder="__('placeholders.email')">
                                 </x-forms.text>
                             </div>
-                            <div class="col-md-4">
+                            {{--<div class="col-md-4">
                                 <x-forms.label class="mt-3" fieldId="password"
                                     :fieldLabel="__('app.password')">
                                 </x-forms.label>
@@ -80,8 +81,8 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
                                     </x-slot>
                                 </x-forms.input-group>
                                 <small class="form-text text-muted">@lang('modules.client.passwordUpdateNote')</small>
-                            </div>
-                            <div class="col-md-4">
+                            </div>--}}
+                            {{--<div class="col-md-4">
                                 <x-forms.label class="my-3" fieldId="designation"
                                     :fieldLabel="__('app.designation')" fieldRequired="true">
                                 </x-forms.label>
@@ -95,14 +96,14 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
                                         @endforeach
                                     </select>
 
-                                    {{-- @if ($addDesignationPermission == 'all' || $addDesignationPermission == 'added')
+                                    --}}{{-- @if ($addDesignationPermission == 'all' || $addDesignationPermission == 'added')
                                         <x-slot name="append">
                                             <button id="designation-setting-edit" type="button"
                                                 class="btn btn-outline-secondary border-grey">@lang('app.add')</button>
                                         </x-slot>
-                                    @endif --}}
+                                    @endif --}}{{--
                                 </x-forms.input-group>
-                            </div>
+                            </div>--}}
                             <div class="col-md-3">
                                 <x-forms.label class="my-3" fieldId="department"
                                     :fieldLabel="__('app.department')" fieldRequired="true">
@@ -223,48 +224,27 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
 
                     </div>
 
-                    @if (
-                    ((in_array('admin', $userRoles) && in_array('admin', user_roles()))
-                    || (!in_array('admin', $userRoles)))
-                    && $employee->id != user()->id
-                    && $changeEmployeeRolePermission == 'all'
-                    )
-                        <div class="col-md-4">
-                            <x-forms.select fieldId="role" :fieldLabel="__('app.role')" fieldName="role">
-                                @foreach ($roles as $role)
-                                    <option
-                                    @if (
-                                        (in_array($role->name, $userRoles) && $role->name == 'admin')
-                                        || (in_array($role->name, $userRoles) && !in_array('admin', $userRoles))
-                                    )
-                                     selected
-                                    @endif
-                                    value="{{ $role->id }}">{{ $role->display_name }}</option>
-                                @endforeach
-                            </x-forms.select>
-                        </div>
-                    @endif
 
-                    <div class="col-md-12">
+
+                    <div class="col-md-4">
                         <div class="form-group my-3">
                             <x-forms.textarea class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('app.address')"
                                 :fieldValue="$employee->employeeDetail->address" fieldName="address" fieldId="address"
-                                :fieldPlaceholder="__('placeholders.address')">
+                                :fieldPlaceholder="__('placeholders.address_vi')">
                             </x-forms.textarea>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="form-group my-3">
                             <x-forms.textarea class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('app.tempAddress')"
-                                              :fieldValue="$employee->tempAddress" fieldName="tempAddress" fieldId="tempAddress"
-                                              >
+                                              :fieldValue="$employee->tempAddress" fieldName="tempAddress" fieldId="tempAddress">
                             </x-forms.textarea>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="form-group my-3">
-                            <x-forms.textarea class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('Ghi Chú Hợp Đồng')"
-                                fieldName="about_me" fieldId="about_me" fieldPlaceholder="" :fieldValue="$employee->employeeDetail->about_me">
+                            <x-forms.textarea class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('app.contact_note')"
+                                fieldName="about_me" fieldPlaceholder="" :fieldValue="$employee->employeeDetail->about_me" fieldId="about_me">
                             </x-forms.textarea>
                         </div>
                     </div>
@@ -420,6 +400,84 @@ $changeEmployeeRolePermission = user()->permission('change_employee_role');
 
 
                 </div>
+                <h4 class="mb-0 p-20 f-21 font-weight-normal text-capitalize border-top-grey">
+                    @lang('modules.client.clientLoginInfo')</h4>
+                <div class="row p-20">
+                    {{--<div class="col-lg-5">--}}
+                    {{--<div class="row">--}}
+                        {{--Password--}}
+                        <div class="col-lg-3 col-md-3">
+                            <x-forms.label class="mt-3" fieldId="password"
+                                           :fieldLabel="__('app.password')">
+                            </x-forms.label>
+                            <x-forms.input-group>
+                                <input type="password" name="password" id="password" autocomplete="off"
+                                       class="form-control height-35 f-14">
+                                <x-slot name="preappend">
+                                    <button type="button" data-toggle="tooltip"
+                                            data-original-title="@lang('app.viewPassword')"
+                                            class="btn btn-outline-secondary border-grey height-35 toggle-password"><i
+                                            class="fa fa-eye"></i></button>
+                                </x-slot>
+                                <x-slot name="append">
+                                    <button id="random_password" type="button" data-toggle="tooltip"
+                                            data-original-title="@lang('modules.client.generateRandomPassword')"
+                                            class="btn btn-outline-secondary border-grey height-35"><i
+                                            class="fa fa-random"></i></button>
+                                </x-slot>
+                            </x-forms.input-group>
+                            <small class="form-text text-muted">@lang('modules.client.passwordUpdateNote')</small>
+                        </div>
+                        <!--designation-->
+                        <div class="col-lg-3 col-md-2">
+                            <x-forms.label class="my-3" fieldId="designation"
+                                           :fieldLabel="__('app.designation')" fieldRequired="true">
+                            </x-forms.label>
+                            <x-forms.input-group>
+                                <select class="form-control select-picker" name="designation"
+                                        id="employee_designation" data-live-search="true">
+                                    <option value="">--</option>
+                                    @foreach ($designations as $designation)
+                                        <option @if ($employee->employeeDetail->designation_id == $designation->id) selected @endif value="{{ $designation->id }}">
+                                            {{ $designation->name }}</option>
+                                    @endforeach
+                                </select>
+
+                                {{-- @if ($addDesignationPermission == 'all' || $addDesignationPermission == 'added')
+                                    <x-slot name="append">
+                                        <button id="designation-setting-edit" type="button"
+                                            class="btn btn-outline-secondary border-grey">@lang('app.add')</button>
+                                    </x-slot>
+                                @endif --}}
+                            </x-forms.input-group>
+                        </div>
+                        @if (
+                            ((in_array('admin', $userRoles) && in_array('admin', user_roles()))
+                            || (!in_array('admin', $userRoles)))
+                            && $employee->id != user()->id
+                            && $changeEmployeeRolePermission == 'all'
+                            )
+                            <div class="col-lg-3 col-md-2">
+                                <x-forms.select fieldId="role" :fieldLabel="__('app.role')" fieldName="role">
+                                    @foreach ($roles as $role)
+                                        <option
+                                            @if (
+                                                (in_array($role->name, $userRoles) && $role->name == 'admin')
+                                                || (in_array($role->name, $userRoles) && !in_array('admin', $userRoles))
+                                            )
+                                                selected
+                                            @endif
+                                            value="{{ $role->id }}">{{ $role->display_name }}</option>
+                                    @endforeach
+                                </x-forms.select>
+                            </div>
+                        @endif
+                    {{--</div>--}}
+                    {{--</div>--}}
+                </div>
+
+
+
                 <div class="row p-20 border-top-grey">
                     {{-- Users cannot change their own status --}}
                     @if ($employee->id != user()->id && $employee->id != 1)

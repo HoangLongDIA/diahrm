@@ -1,5 +1,5 @@
 @php
-$addDesignationPermission = user()->permission('add_designation');
+    $addDesignationPermission = user()->permission('add_designation');
 @endphp
 
 <link rel="stylesheet" href="{{ asset('vendor/css/tagify.css') }}">
@@ -14,10 +14,10 @@ $addDesignationPermission = user()->permission('add_designation');
                 <div class="p-20 row">
                     <div class="col-lg-9">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <x-forms.text fieldId="employee_id" :fieldLabel="__('modules.employees.employeeId')"
-                                    fieldName="employee_id" :fieldValue="((!$checkifExistEmployeeId) ? ($lastEmployeeID+1) : '')" fieldRequired="true"
-                                    :fieldPlaceholder="__('modules.employees.employeeIdInfo')" :popover="__('modules.employees.employeeIdHelp')">
+                                              fieldName="employee_id" :fieldValue="((!$checkifExistEmployeeId) ? ($lastEmployeeID+1) : '')" fieldRequired="true"
+                                              :fieldPlaceholder="__('modules.employees.employeeIdInfo')" :popover="__('modules.employees.employeeIdHelp')">
                                 </x-forms.text>
 
 
@@ -26,7 +26,7 @@ $addDesignationPermission = user()->permission('add_designation');
                             </div>
                             <div class="col-lg-1 col-md-2">
                                 <x-forms.select fieldId="salutation" fieldName="salutation"
-                                    :fieldLabel="__('modules.client.salutation')">
+                                                :fieldLabel="__('modules.client.salutation')">
                                     <option value="">--</option>
                                     @foreach ($salutations as $salutation)
                                         <option value="{{ $salutation->value }}">{{ $salutation->label() }}</option>
@@ -35,13 +35,13 @@ $addDesignationPermission = user()->permission('add_designation');
                             </div>
                             <div class="col-lg-4 col-md-7">
                                 <x-forms.text fieldId="name" :fieldLabel="__('modules.employees.employeeName')"
-                                    fieldName="name" fieldRequired="true" >
+                                              fieldName="name" fieldRequired="true" >
                                 </x-forms.text>
                             </div>
-                            <div class="col-lg-4 col-md-3">
-                               {{-- <x-forms.text fieldId="email" :fieldLabel="__('modules.employees.employeeEmail')"
-                                    fieldName="email" fieldRequired="true" :fieldPlaceholder="__('placeholders.email')">
-                                </x-forms.text>--}}
+                            <div class="col-lg-2 col-md-3">
+                                {{-- <x-forms.text fieldId="email" :fieldLabel="__('modules.employees.employeeEmail')"
+                                     fieldName="email" fieldRequired="true" :fieldPlaceholder="__('placeholders.email')">
+                                 </x-forms.text>--}}
                                 <x-forms.select fieldId="gender" :fieldLabel="__('modules.employees.gender')"
                                                 fieldName="gender">
                                     <option value="male">@lang('app.male')</option>
@@ -53,7 +53,7 @@ $addDesignationPermission = user()->permission('add_designation');
                                 <x-forms.datepicker fieldId="date_of_birth" :fieldLabel="__('modules.employees.dateOfBirth')"
                                                     fieldName="date_of_birth" :fieldPlaceholder="__('placeholders.date')" />
                             </div>
-                            <div class="col-lg-3 col-md-6">
+                            <div class="col-lg-2 col-md-6">
                                 <x-forms.select fieldId="marital_status" :fieldLabel="__('modules.employees.maritalStatus')"
                                                 fieldName="marital_status" :fieldPlaceholder="__('placeholders.date')">
                                     @foreach (\App\Enums\MaritalStatus::cases() as $status)
@@ -63,18 +63,18 @@ $addDesignationPermission = user()->permission('add_designation');
 
                             </div>
                             <div class="col-lg-2 col-md-3">
-                               {{-- <x-forms.label class="my-3" fieldId="category_id"
-                                    :fieldLabel="__('app.department')" fieldRequired="true">
-                                </x-forms.label>
-                                <x-forms.input-group>
-                                    <select class="form-control select-picker" name="department"
-                                        id="employee_department" data-live-search="true">
-                                        <option value="">--</option>
-                                        @foreach ($teams as $team)
-                                            <option value="{{ $team->id }}">{{ $team->team_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </x-forms.input-group>--}}
+                                {{-- <x-forms.label class="my-3" fieldId="category_id"
+                                     :fieldLabel="__('app.department')" fieldRequired="true">
+                                 </x-forms.label>
+                                 <x-forms.input-group>
+                                     <select class="form-control select-picker" name="department"
+                                         id="employee_department" data-live-search="true">
+                                         <option value="">--</option>
+                                         @foreach ($teams as $team)
+                                             <option value="{{ $team->id }}">{{ $team->team_name }}</option>
+                                         @endforeach
+                                     </select>
+                                 </x-forms.input-group>--}}
                                 <x-forms.select fieldId="country" :fieldLabel="__('app.country')" fieldName="country"
                                                 search="true">
                                     @foreach ($countries as $item)
@@ -86,7 +86,7 @@ $addDesignationPermission = user()->permission('add_designation');
                             </div>
                             <div class="col-lg-2 col-md-3">
                                 <x-forms.text fieldId="folk" :fieldLabel="__('app.folk')"
-                                               fieldName="folk" fieldRequired="true">
+                                              fieldName="folk" fieldRequired="true">
                                 </x-forms.text>
                             </div>
                             <div class="col-lg-2 col-md-3">
@@ -98,10 +98,10 @@ $addDesignationPermission = user()->permission('add_designation');
                     </div>
                     <div class="col-lg-3">
                         <x-forms.file allowedFileExtensions="png jpg jpeg svg bmp" class="mr-0 mr-lg-2 mr-md-2 cropper"
-                            :fieldLabel="__('modules.profile.profilePicture')" fieldName="image" fieldId="image"
-                            fieldHeight="119" :popover="__('messages.fileFormat.ImageFile')" />
+                                      :fieldLabel="__('modules.profile.profilePicture')" fieldName="image" fieldId="image"
+                                      fieldHeight="119" :popover="__('messages.fileFormat.ImageFile')" />
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    {{--<div class="col-lg-3 col-md-6">
 
                         <x-forms.label class="my-3" fieldId="category_id"
                                        :fieldLabel="__('app.department')" fieldRequired="true">
@@ -115,15 +115,15 @@ $addDesignationPermission = user()->permission('add_designation');
                                 @endforeach
                             </select>
                         </x-forms.input-group>
-                    </div>
+                    </div>--}}
                     <div class="col-lg-3 col-md-6">
                         <x-forms.label class="my-3" fieldId="mobile"
-                            :fieldLabel="__('app.mobile')"></x-forms.label>
+                                       :fieldLabel="__('app.mobile')"></x-forms.label>
                         <x-forms.input-group style="margin-top:-4px">
 
 
                             <x-forms.select fieldId="country_phonecode" fieldName="country_phonecode"
-                                search="true">
+                                            search="true">
 
                                 @foreach ($countries as $item)
                                     <option data-tokens="{{ $item->name }}"
@@ -134,29 +134,29 @@ $addDesignationPermission = user()->permission('add_designation');
                             </x-forms.select>
 
                             <input type="tel" class="form-control height-35 f-14" placeholder="@lang('placeholders.mobile')"
-                                name="mobile" id="mobile">
+                                   name="mobile" id="mobile">
                         </x-forms.input-group>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                      {{--  <x-forms.select fieldId="gender" :fieldLabel="__('modules.employees.gender')"
-                            fieldName="gender">
-                            <option value="male">@lang('app.male')</option>
-                            <option value="female">@lang('app.female')</option>
-                            <option value="others">@lang('app.others')</option>
-                        </x-forms.select>--}}
+                        {{--  <x-forms.select fieldId="gender" :fieldLabel="__('modules.employees.gender')"
+                              fieldName="gender">
+                              <option value="male">@lang('app.male')</option>
+                              <option value="female">@lang('app.female')</option>
+                              <option value="others">@lang('app.others')</option>
+                          </x-forms.select>--}}
                         <x-forms.text fieldId="email" :fieldLabel="__('modules.employees.employeeEmail')"
                                       fieldName="email" fieldRequired="true" >
                         </x-forms.text>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <x-forms.datepicker fieldId="joining_date" :fieldLabel="__('modules.employees.joiningDate')"
-                            fieldName="joining_date" :fieldPlaceholder="__('placeholders.date')" fieldRequired="true"
-                            :fieldValue="now(company()->timezone)->format(company()->date_format)" />
+                                            fieldName="joining_date" :fieldPlaceholder="__('placeholders.date')" fieldRequired="true"
+                                            :fieldValue="now(company()->timezone)->format(company()->date_format)" />
                     </div>
 
                     <div class="col-lg-3 col-md-6">
                         <x-forms.select fieldId="reporting_to" :fieldLabel="__('app.reportingTo')"
-                            fieldName="reporting_to" :fieldPlaceholder="__('placeholders.date')" search="true">
+                                        fieldName="reporting_to" :fieldPlaceholder="__('placeholders.date')" search="true">
                             <option value="">--</option>
                             @foreach ($employees as $item)
                                 <x-user-option :user="$item" />
@@ -165,27 +165,27 @@ $addDesignationPermission = user()->permission('add_designation');
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <x-forms.select fieldId="locale" :fieldLabel="__('app.language')"
-                            fieldName="locale" search="true">
+                                        fieldName="locale" search="true">
                             @foreach ($languages as $language)
                                 <option {{ user()->locale == $language->language_code ? 'selected' : '' }}
-                                data-content="<span class='flag-icon flag-icon-{{ ($language->flag_code == 'en') ? 'gb' : $language->flag_code }} flag-icon-squared'></span> {{ $language->language_name }}"
-                                value="{{ $language->language_code }}">{{ $language->language_name }}</option>
+                                        data-content="<span class='flag-icon flag-icon-{{ ($language->flag_code == 'en') ? 'gb' : $language->flag_code }} flag-icon-squared'></span> {{ $language->language_name }}"
+                                        value="{{ $language->language_code }}">{{ $language->language_name }}</option>
                             @endforeach
                         </x-forms.select>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    {{--<div class="col-lg-3 col-md-6">
                         <x-forms.select fieldId="role" :fieldLabel="__('app.role')" fieldName="role">
                             @foreach ($roles as $role)
                                 <option {{ ($role->name == 'employee') ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->display_name }}</option>
                             @endforeach
                         </x-forms.select>
-                    </div>
+                    </div>--}}
                     <div class="col-lg-3 col-md-6">
                         <x-forms.text fieldId="background" :fieldLabel="__('app.background')"
                                       fieldName="background" fieldRequired="true" :fieldPlaceholder="__('Gia đình công nhân viên chức')">
                         </x-forms.text>
                     </div>
-                    <div class="col-lg-4 col-md-6">
+                    {{--<div class="col-lg-4 col-md-6">
                         <x-forms.label class="mt-3" fieldId="password"
                                        :fieldLabel="__('app.password')" fieldRequired="true">
                         </x-forms.label>
@@ -207,8 +207,8 @@ $addDesignationPermission = user()->permission('add_designation');
                             </x-slot>
                         </x-forms.input-group>
                         <small class="form-text text-muted">@lang('placeholders.password')</small>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
+                    </div>--}}
+                    <div class="col-lg-2 col-md-6">
                         <x-forms.label class="my-3" fieldId="category_id"
                                        :fieldLabel="__('app.designation')" fieldRequired="true">
                         </x-forms.label>
@@ -238,9 +238,9 @@ $addDesignationPermission = user()->permission('add_designation');
                                     id="employee_educationLevel" data-live-search="true">
 
 
-                                    <option value="12:12">12/12</option>
-                                  <option value="10:10">10/10</option>
-                                  <option value="khac">khac</option>
+                                <option value="12:12">12/12</option>
+                                <option value="10:10">10/10</option>
+                                <option value="khac">khac</option>
 
                             </select>
 
@@ -258,28 +258,73 @@ $addDesignationPermission = user()->permission('add_designation');
                                       fieldName="primaryJob" fieldRequired="true" >
                         </x-forms.text>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="my-3 form-group">
                             <x-forms.textarea class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('app.address')"
-                                fieldName="address" fieldId="address" :fieldPlaceholder="__('Hoà Thuận Tây, Hải Châu, Tp Đà Nẵng')">
+                                              fieldName="address" fieldId="address" :fieldPlaceholder="__('placeholders.address_vi')">
                             </x-forms.textarea>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="my-3 form-group">
                             <x-forms.textarea class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('app.tempAddress')"
-                                              fieldName="tempAddress" fieldId="tempAddress" :fieldPlaceholder="__('Hoà Thuận Tây, Hải Châu, Tp Đà Nẵng')">
+                                              fieldName="tempAddress" fieldId="tempAddress" :fieldPlaceholder="__('placeholders.tempAddress_vi')">
                             </x-forms.textarea>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="my-3 form-group">
                             <x-forms.textarea class="mr-0 mr-lg-2 mr-md-2" :fieldLabel="__('app.about')"
-                                fieldName="about_me" fieldId="about_me" fieldPlaceholder="">
+                                              fieldName="about_me" fieldId="about_me" fieldPlaceholder="">
                             </x-forms.textarea>
                         </div>
                     </div>
+                    <div class="col-lg-4 col-md-6">
+                        <x-forms.label class="mt-3" fieldId="password"
+                                       :fieldLabel="__('app.password')" fieldRequired="true">
+                        </x-forms.label>
+                        <x-forms.input-group>
 
+                            <input type="password" name="password" id="password"
+                                   class="form-control height-35 f-14">
+                            <x-slot name="preappend">
+                                <button type="button" data-toggle="tooltip"
+                                        data-original-title="@lang('app.viewPassword')"
+                                        class="btn btn-outline-secondary border-grey height-35 toggle-password"><i
+                                        class="fa fa-eye"></i></button>
+                            </x-slot>
+                            <x-slot name="append">
+                                <button id="random_password" type="button" data-toggle="tooltip"
+                                        data-original-title="@lang('modules.client.generateRandomPassword')"
+                                        class="btn btn-outline-secondary border-grey height-35"><i
+                                        class="fa fa-random"></i></button>
+                            </x-slot>
+                        </x-forms.input-group>
+                        <small class="form-text text-muted">@lang('placeholders.password')</small>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+
+                        <x-forms.label class="my-3" fieldId="category_id"
+                                       :fieldLabel="__('app.department')" fieldRequired="true">
+                        </x-forms.label>
+                        <x-forms.input-group>
+                            <select class="form-control select-picker" name="department"
+                                    id="employee_department" data-live-search="true">
+                                <option value="">--</option>
+                                @foreach ($teams as $team)
+                                    <option value="{{ $team->id }}">{{ $team->team_name }}</option>
+                                @endforeach
+                            </select>
+                        </x-forms.input-group>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <x-forms.select fieldId="role" :fieldLabel="__('app.role')" fieldName="role">
+                            @foreach ($roles as $role)
+                                <option {{ ($role->name == 'employee') ? 'selected' : '' }} value="{{ $role->id }}">{{ $role->display_name }}</option>
+                            @endforeach
+                        </x-forms.select>
+                    </div>
                 </div>
 
                 <h4 class="p-20 mb-0 f-21 font-weight-normal text-capitalize border-top-grey">
@@ -288,26 +333,26 @@ $addDesignationPermission = user()->permission('add_designation');
                     <div class="col-lg-3 col-md-6">
                         <div class="my-3 form-group">
                             <label class="mb-12 f-14 text-dark-grey w-100"
-                                for="usr">@lang('modules.client.clientCanLogin')</label>
+                                   for="usr">@lang('modules.client.clientCanLogin')</label>
                             <div class="d-flex">
                                 <x-forms.radio fieldId="login-yes" :fieldLabel="__('app.yes')" fieldName="login"
-                                    fieldValue="enable" checked="true">
+                                               fieldValue="enable" checked="true">
                                 </x-forms.radio>
                                 <x-forms.radio fieldId="login-no" :fieldLabel="__('app.no')" fieldValue="disable"
-                                    fieldName="login"></x-forms.radio>
+                                               fieldName="login"></x-forms.radio>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="my-3 form-group">
                             <label class="mb-12 f-14 text-dark-grey w-100"
-                                for="usr">@lang('modules.emailSettings.emailNotifications')</label>
+                                   for="usr">@lang('modules.emailSettings.emailNotifications')</label>
                             <div class="d-flex">
                                 <x-forms.radio fieldId="notification-yes" :fieldLabel="__('app.yes')" fieldValue="yes"
-                                    fieldName="email_notifications" checked="true">
+                                               fieldName="email_notifications" checked="true">
                                 </x-forms.radio>
                                 <x-forms.radio fieldId="notification-no" :fieldLabel="__('app.no')" fieldValue="no"
-                                    fieldName="email_notifications">
+                                               fieldName="email_notifications">
                                 </x-forms.radio>
                             </div>
                         </div>
@@ -380,22 +425,22 @@ $addDesignationPermission = user()->permission('add_designation');
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-3">
                         <x-forms.text fieldId="tags" :fieldLabel="__('app.skills')" fieldName="tags"
-                            />
+                        />
                     </div>
 
                     @if (function_exists('sms_setting') && sms_setting()->telegram_status)
                         <div class="col-md-6">
                             <x-forms.number fieldName="telegram_user_id" fieldId="telegram_user_id"
-                                fieldLabel="<i class='fab fa-telegram'></i> {{ __('sms::modules.telegramUserId') }}"
-                                :popover="__('sms::modules.userIdInfo')" />
+                                            fieldLabel="<i class='fab fa-telegram'></i> {{ __('sms::modules.telegramUserId') }}"
+                                            :popover="__('sms::modules.userIdInfo')" />
                             <p class="text-bold text-danger">
                                 @lang('sms::modules.telegramBotNameInfo')
                             </p>
                             <p class="text-bold"><span id="telegram-link-text">https://t.me/{{ sms_setting()->telegram_bot_name }}</span>
                                 <a href="javascript:;" class="p-1 py-2 ml-1 rounded btn-copy btn-secondary f-12"
-                                    data-clipboard-target="#telegram-link-text">
+                                   data-clipboard-target="#telegram-link-text">
                                     <i class="mx-1 fa fa-copy"></i>@lang('app.copy')</a>
                                 <a href="https://t.me/{{ sms_setting()->telegram_bot_name }}" target="_blank" class="p-1 py-2 ml-1 rounded btn-secondary f-12">
                                     <i class="mx-1 fa fa-copy"></i>@lang('app.openInNewTab')</a>
@@ -404,25 +449,25 @@ $addDesignationPermission = user()->permission('add_designation');
                     @endif
                     <div class="col-lg-3 col-md-6">
                         <x-forms.datepicker fieldId="probation_end_date" :fieldLabel="__('modules.employees.probationEndDate')"
-                            fieldName="probation_end_date" :fieldPlaceholder="__('placeholders.date')"
-                            :popover="__('messages.probationEndDate')"/>
+                                            fieldName="probation_end_date" :fieldPlaceholder="__('placeholders.date')"
+                                            :popover="__('messages.probationEndDate')"/>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
                         <x-forms.datepicker fieldId="notice_period_start_date" :fieldLabel="__('modules.employees.noticePeriodStartDate')"
-                            fieldName="notice_period_start_date" :fieldPlaceholder="__('placeholders.date')"
-                            :popover="__('messages.noticePeriodStartDate')"/>
+                                            fieldName="notice_period_start_date" :fieldPlaceholder="__('placeholders.date')"
+                                            :popover="__('messages.noticePeriodStartDate')"/>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
                         <x-forms.datepicker fieldId="notice_period_end_date" :fieldLabel="__('modules.employees.noticePeriodEndDate')"
-                            fieldName="notice_period_end_date" :fieldPlaceholder="__('placeholders.date')"
-                            :popover="__('messages.noticePeriodEndDate')"/>
+                                            fieldName="notice_period_end_date" :fieldPlaceholder="__('placeholders.date')"
+                                            :popover="__('messages.noticePeriodEndDate')"/>
                     </div>
 
                     <div class="col-lg-3 col-md-6">
                         <x-forms.select fieldId="employment_type" :fieldLabel="__('modules.employees.employmentType')"
-                            fieldName="employment_type" :fieldPlaceholder="__('placeholders.date')">
+                                        fieldName="employment_type" :fieldPlaceholder="__('placeholders.date')">
                             <option value="">--</option>
                             <option value="full_time">@lang('app.fullTime')</option>
                             <option value="part_time">@lang('app.partTime')</option>
@@ -434,18 +479,18 @@ $addDesignationPermission = user()->permission('add_designation');
 
                     <div class="col-lg-3 col-md-6 d-none internship-date">
                         <x-forms.datepicker fieldId="internship_end_date" :fieldLabel="__('modules.employees.internshipEndDate')"
-                            fieldName="internship_end_date" :fieldPlaceholder="__('placeholders.date')"/>
+                                            fieldName="internship_end_date" :fieldPlaceholder="__('placeholders.date')"/>
                     </div>
                     <div class="col-lg-3 col-md-6 d-none contract-date">
                         <x-forms.datepicker fieldId="contract_end_date" :fieldLabel="__('modules.employees.contractEndDate')"
-                            fieldName="contract_end_date" :fieldPlaceholder="__('placeholders.date')"/>
+                                            fieldName="contract_end_date" :fieldPlaceholder="__('placeholders.date')"/>
                     </div>
 
 
 
                     <div class="col-lg-3 col-md-6 d-none marriage_date">
                         <x-forms.datepicker fieldId="marriage_anniversary_date" :fieldLabel="__('modules.employees.marriageAnniversaryDate')"
-                            fieldName="marriage_anniversary_date" :fieldPlaceholder="__('placeholders.date')"/>
+                                            fieldName="marriage_anniversary_date" :fieldPlaceholder="__('placeholders.date')"/>
                     </div>
 
                     <input type ="hidden" name="add_more" value="false" id="add_more" />
@@ -659,25 +704,25 @@ $addDesignationPermission = user()->permission('add_designation');
     })
 
     @if (function_exists('sms_setting') && sms_setting()->telegram_status)
-        var clipboard = new ClipboardJS('.btn-copy');
+    var clipboard = new ClipboardJS('.btn-copy');
 
-        clipboard.on('success', function(e) {
-            Swal.fire({
-                icon: 'success',
-                text: '@lang("app.urlCopied")',
-                toast: true,
-                position: 'top-end',
-                timer: 3000,
-                timerProgressBar: true,
-                showConfirmButton: false,
-                customClass: {
-                    confirmButton: 'btn btn-primary',
-                },
-                showClass: {
-                    popup: 'swal2-noanimation',
-                    backdrop: 'swal2-noanimation'
-                },
-            })
-        });
+    clipboard.on('success', function(e) {
+        Swal.fire({
+            icon: 'success',
+            text: '@lang("app.urlCopied")',
+            toast: true,
+            position: 'top-end',
+            timer: 3000,
+            timerProgressBar: true,
+            showConfirmButton: false,
+            customClass: {
+                confirmButton: 'btn btn-primary',
+            },
+            showClass: {
+                popup: 'swal2-noanimation',
+                backdrop: 'swal2-noanimation'
+            },
+        })
+    });
     @endif
 </script>

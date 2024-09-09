@@ -770,6 +770,7 @@ return array(
     'pinnedTask' => 'Pinned Task',
     'sorry' => 'Sorry',
     'about' => 'About',
+    'contact_note' => 'Ghi Chú Hợp Đồng',
     'todaysAttendance' => 'Today`s Attendance',
     'pinned' => 'Pinned',
     'invoiceRecurring' => 'Recurring Invoice',

@@ -158,6 +158,7 @@ return array(
         'clientName' => 'Client Name',
         'clientEmail' => 'Client Email',
         'clientPhone' => 'Client Phone',
+        'clientLoginInfo' =>'Info Login',
         'emailNote' => 'Client will login using this email and email notifications will be sent to this email.',
         'password' => 'Password',
         'passwordNote' => 'Client will login using this password.',

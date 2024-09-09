@@ -13,6 +13,8 @@ return array(
     'department' => 'e.g. Human Resource',
     'date' => 'Select Date',
     'address' => 'e.g. 132, My Street, Kingston, New York 12401',
+    'address_vi' => 'Hòa Thuận Tây, Hải Châu, Đà Nẵng',
+    'tempAddress_vi' => 'Hòa Thuận Tây, Hải Châu, Đà Nẵng',
     'skills' => 'e.g. communication, ReactJS',
     'project' => 'Write a project name',
     'price' => 'e.g. 10000',
